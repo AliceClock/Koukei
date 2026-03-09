@@ -1,0 +1,186 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>Koukei.UI</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>false</WinUISDKReferences>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <ValidateExecutableReferencesMatchSelfContained>false</ValidateExecutableReferencesMatchSelfContained>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controls\PlayerSeekBar.xaml" />
+    <None Remove="Pages\AudioLibraryPage.xaml" />
+    <None Remove="Pages\HomePage.xaml" />
+    <None Remove="Pages\MediaLibraryPage.xaml" />
+    <None Remove="Pages\PlaylistsPage.xaml" />
+    <None Remove="Pages\SettingsPage.xaml" />
+    <None Remove="Pages\VideoLibraryPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="..\THIRD-PARTY-NOTICES.md"
+             Link="THIRD-PARTY-NOTICES.md"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="$(NuGetPackageRoot)soundflow\1.4.1\SOUNDFLOW-THIRD-PARTY-NOTICES.txt"
+             Link="SOUNDFLOW-THIRD-PARTY-NOTICES.txt"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             Condition="Exists('$(NuGetPackageRoot)soundflow\1.4.1\SOUNDFLOW-THIRD-PARTY-NOTICES.txt')" />
+    <Content Include="$(NuGetPackageRoot)ffmpeg.lgpl\20251118.1.0\build\native\LICENSE.txt"
+             Link="FFMPEG-LICENSE.txt"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             Condition="Exists('$(NuGetPackageRoot)ffmpeg.lgpl\20251118.1.0\build\native\LICENSE.txt')" />
+    <Content Include="$(NuGetPackageRoot)ffmpeg.autogen.bindings.dynamicallyloaded\8.0.0.1\LICENSE.txt"
+             Link="FFMPEG-AUTOGEN-LICENSE.txt"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             Condition="Exists('$(NuGetPackageRoot)ffmpeg.autogen.bindings.dynamicallyloaded\8.0.0.1\LICENSE.txt')" />
+    <Content Include="$(KoukeiMpvHome)\**\*"
+             Link="mpv\win-x64\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             Condition="Exists('$(KoukeiMpvHome)\libmpv-2.dll')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <!--
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Behaviors" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.HeaderedControls" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.DeveloperTools" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.251219" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" Version="8.2.251219" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7705" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Koukei.Audio.Host\Koukei.Audio.Host.csproj"
+                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Koukei.Audio\Koukei.Audio.csproj" />
+    <ProjectReference Include="..\Koukei.Bus\Koukei.Bus.csproj" />
+    <ProjectReference Include="..\Koukei.Ffmpeg\Koukei.Ffmpeg.csproj" />
+    <ProjectReference Include="..\Koukei.Video\Koukei.Video.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyAudioHostToOutput"
+          AfterTargets="Build"
+          Condition="'$(DesignTimeBuild)' != 'true'">
+    <RemoveDir Directories="$(OutDir)AudioHost\mpv"
+               Condition="Exists('$(OutDir)AudioHost\mpv')" />
+    <Delete Files="$(OutDir)AudioHost\Koukei.Mpv.dll;$(OutDir)AudioHost\Koukei.Mpv.pdb" />
+    <ItemGroup>
+      <AudioHostOutput
+          Include="$(MSBuildProjectDirectory)\..\Koukei.Audio.Host\bin\$(Platform)\$(Configuration)\net8.0\win-$(Platform)\**\*"
+          Exclude="$(MSBuildProjectDirectory)\..\Koukei.Audio.Host\bin\$(Platform)\$(Configuration)\net8.0\win-$(Platform)\mpv\**\*;$(MSBuildProjectDirectory)\..\Koukei.Audio.Host\bin\$(Platform)\$(Configuration)\net8.0\win-$(Platform)\Koukei.Mpv.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AudioHostOutput)"
+          DestinationFiles="@(AudioHostOutput->'$(OutDir)AudioHost\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="IncludeAudioHostInPublish"
+          AfterTargets="ComputeFilesToPublish"
+          Condition="'$(DesignTimeBuild)' != 'true'">
+    <RemoveDir Directories="$(PublishDir)AudioHost\mpv"
+               Condition="Exists('$(PublishDir)AudioHost\mpv')" />
+    <Delete Files="$(PublishDir)AudioHost\Koukei.Mpv.dll;$(PublishDir)AudioHost\Koukei.Mpv.pdb" />
+    <ItemGroup>
+      <AudioHostPublishOutput
+          Include="$(MSBuildProjectDirectory)\..\Koukei.Audio.Host\bin\$(Platform)\$(Configuration)\net8.0\win-$(Platform)\**\*"
+          Exclude="$(MSBuildProjectDirectory)\..\Koukei.Audio.Host\bin\$(Platform)\$(Configuration)\net8.0\win-$(Platform)\mpv\**\*;$(MSBuildProjectDirectory)\..\Koukei.Audio.Host\bin\$(Platform)\$(Configuration)\net8.0\win-$(Platform)\Koukei.Mpv.*" />
+      <ResolvedFileToPublish Include="@(AudioHostPublishOutput)">
+        <RelativePath>AudioHost\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+  <ItemGroup>
+    <Page Update="Resources\DesignTokens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Resources\ControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Controls\PlayerSeekBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Pages\PlaylistsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="PlayerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AudioLibraryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Pages\MediaLibraryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Pages\VideoLibraryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\HomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <!--
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+
+  <!-- Publish Properties -->
+  <PropertyGroup>
+    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,2256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HomePage_PlayTestVideoButton.Text" xml:space="preserve">
+    <value>Play test video</value>
+  </data>
+  <data name="HomePage_RecentMediaText" xml:space="preserve">
+    <value>Recently used media</value>
+  </data>
+  <data name="HomePage_RecentItemsTitle.Text" xml:space="preserve">
+    <value>Recently opened items</value>
+  </data>
+  <data name="HomePage_RecentVideosTitle.Text" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="HomePage_RecentAudioTitle.Text" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="HomePage_RecentRefresh.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="HomePage_RecentEmptyTitle.Text" xml:space="preserve">
+    <value>No recently opened items</value>
+  </data>
+  <data name="HomePage_RecentEmptyDescription.Text" xml:space="preserve">
+    <value>Items you open from the media library will appear here.</value>
+  </data>
+  <data name="HomePage_RecentServiceUnavailable" xml:space="preserve">
+    <value>The media library is not available.</value>
+  </data>
+  <data name="HomePage_RecentFileMissing" xml:space="preserve">
+    <value>The selected file no longer exists.</value>
+  </data>
+  <data name="HomePage_RecentOpenRejected" xml:space="preserve">
+    <value>Windows could not open the selected file.</value>
+  </data>
+  <data name="HomePage_RecentLoadFailed" xml:space="preserve">
+    <value>Could not load recent items</value>
+  </data>
+  <data name="HomePage_RecentOpenFailed" xml:space="preserve">
+    <value>Could not open item</value>
+  </data>
+  <data name="HomePage_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="HomePage_QuickActions.Text" xml:space="preserve">
+    <value>Quick actions</value>
+  </data>
+  <data name="HomePage_OpenFilesButton.Text" xml:space="preserve">
+    <value>Open file(s)</value>
+  </data>
+  <data name="HomePage_OpenFolderButton.Text" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="HomePage_OpenFilesFailed" xml:space="preserve">
+    <value>Could not open files</value>
+  </data>
+  <data name="HomePage_OpenFolderFailed" xml:space="preserve">
+    <value>Could not open folder</value>
+  </data>
+  <data name="HomePage_NoPlayableMediaTitle" xml:space="preserve">
+    <value>No playable media</value>
+  </data>
+  <data name="HomePage_NoPlayableMediaDescription" xml:space="preserve">
+    <value>The selected folder does not contain supported audio or video files.</value>
+  </data>
+  <data name="HomePage_MixedMediaTitle" xml:space="preserve">
+    <value>Choose what to play</value>
+  </data>
+  <data name="HomePage_MixedMediaDescription" xml:space="preserve">
+    <value>The selection contains both video and audio files.</value>
+  </data>
+  <data name="HomePage_PlayVideos" xml:space="preserve">
+    <value>Play videos</value>
+  </data>
+  <data name="HomePage_PlayAudio" xml:space="preserve">
+    <value>Play audio</value>
+  </data>
+  <data name="HomePage_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="HomePage_FilePickerNoWindow" xml:space="preserve">
+    <value>The file picker could not find the main application window.</value>
+  </data>
+  <data name="HomePage_FilePickerInitializeFailed" xml:space="preserve">
+    <value>Failed to initialize the file picker: {0}</value>
+  </data>
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsPage_Appearance.Text" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox_System.Content" xml:space="preserve">
+    <value>Use system setting</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox_Dark.Content" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="SettingsPage_Data.Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="SettingsPage_ClearCacheButton.Content" xml:space="preserve">
+    <value>Clear cache</value>
+  </data>
+  <data name="SettingsPage_About.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_Message" xml:space="preserve">
+    <value>Restart Koukei to apply language changes</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_RestartButton" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_LaterButton" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_ClearButton" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SettingsPage_ClearedDialog_Title" xml:space="preserve">
+    <value>Cleared successfully</value>
+  </data>
+  <data name="SettingsPage_NoCacheDialog_Title" xml:space="preserve">
+    <value>No cache</value>
+  </data>
+  <data name="SettingsPage_NoCacheDialog_Message" xml:space="preserve">
+    <value>No cache files found</value>
+  </data>
+  <data name="SettingsPage_FailedToOpenDialog_Title" xml:space="preserve">
+    <value>Failed to open</value>
+  </data>
+  <data name="SettingsPage_Dialog_CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SettingsPage_AppTheme.Header" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="SettingsPage_AppTheme.Description" xml:space="preserve">
+    <value>Select which app theme to display</value>
+  </data>
+  <data name="SettingsPage_AppLanguage.Header" xml:space="preserve">
+    <value>App language</value>
+  </data>
+  <data name="SettingsPage_AppLanguage.Description" xml:space="preserve">
+    <value>Change app display language (app restart required)</value>
+  </data>
+  <data name="LanguageRestartInfo.Title" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="LanguageRestartInfo.Message" xml:space="preserve">
+    <value>Please restart the app to apply the new language setting.</value>
+  </data>
+  <data name="LanguageRestartInfoButton.Content" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="SettingsPage_DataLocation.Header" xml:space="preserve">
+    <value>Data location</value>
+  </data>
+  <data name="SettingsPage_ChangeDataLocationButton.Content" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="SettingsPage_DataMigratedDialog_Title" xml:space="preserve">
+    <value>Location changed</value>
+  </data>
+  <data name="SettingsPage_DataMigratedDialog_Message" xml:space="preserve">
+    <value>Data has been moved to: {0}</value>
+  </data>
+  <data name="SettingsPage_FailedToMigrateDialog_Title" xml:space="preserve">
+    <value>Failed to move data</value>
+  </data>
+  <data name="SettingsPage_DataCleanup.Header" xml:space="preserve">
+    <value>Data cleanup</value>
+  </data>
+  <data name="SettingsPage_ClearSettings.Header" xml:space="preserve">
+    <value>Reset settings</value>
+  </data>
+  <data name="SettingsPage_ClearSettings.Description" xml:space="preserve">
+    <value>Reset all settings to their default values</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_Title" xml:space="preserve">
+    <value>Reset settings</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_Message" xml:space="preserve">
+    <value>All settings will be reset to their default values. This action cannot be undone.</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_ConfirmButton" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_Play.Text" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="LibraryPage_Like" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="LibraryPage_Unlike" xml:space="preserve">
+    <value>Unlike</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LibraryPage_CommandBar_AddFilesButton.Text" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="LibraryPage_CommandBar_AddFolderButton.Text" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
+  <data name="LibraryPage_CommandBar_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search media...</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortCombBox.Content" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortCombBox_FileSize.Content" xml:space="preserve">
+    <value>File size</value>
+  </data>
+  <data name="LibraryPage_TotalSize.Text" xml:space="preserve">
+    <value>Total size: </value>
+  </data>
+  <data name="LibraryPage_EmptyStatePanel_Title.Text" xml:space="preserve">
+    <value>Your media library is empty</value>
+  </data>
+  <data name="LibraryPage_EmptyStatePanel_AddFilesButton.Content" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="LibraryPage_PropertiesButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="LibraryPage_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="LibraryPage_Status_Loaded" xml:space="preserve">
+    <value>Loaded {0} files</value>
+  </data>
+  <data name="LibraryPage_Status_Loading" xml:space="preserve">
+    <value>Loaded {0} of {1} files</value>
+  </data>
+  <data name="LibraryPage_Status_FailedToLoad" xml:space="preserve">
+    <value>Failed to load: {0}</value>
+  </data>
+  <data name="LibraryPage_Status_FailedToDelete" xml:space="preserve">
+    <value>Delete failed</value>
+  </data>
+  <data name="LibraryPage_Status_FoundFiles" xml:space="preserve">
+    <value>Found {0} media files</value>
+  </data>
+  <data name="LibraryPage_Status_ProcessingFiles" xml:space="preserve">
+    <value>Processing {0}/{1}: {2}</value>
+  </data>
+  <data name="LibraryPage_Status_Added" xml:space="preserve">
+    <value>Added {0} files, skipped {1} duplicates</value>
+  </data>
+  <data name="LibraryPage_Status_AddedWithFailures" xml:space="preserve">
+    <value>Added {0} files, skipped {1} duplicates, failed {2}</value>
+  </data>
+  <data name="LibraryPage_Status_ClearedRating" xml:space="preserve">
+    <value>Cleared rating for {0}</value>
+  </data>
+  <data name="LibraryPage_Status_Deleted" xml:space="preserve">
+    <value>Removed {0} items</value>
+  </data>
+  <data name="LibraryPage_Status_DeletedWithFailures" xml:space="preserve">
+    <value>Removed {0} items, {1} failed</value>
+  </data>
+  <data name="LibraryPage_FailedToAddFilesDialog_Title" xml:space="preserve">
+    <value>Failed to add files</value>
+  </data>
+  <data name="LibraryPage_FailedToAddFolderDialog_Title" xml:space="preserve">
+    <value>Failed to add folder</value>
+  </data>
+  <data name="LibraryPage_FailedToScanFolderDialog_Title" xml:space="preserve">
+    <value>Failed to scan folder</value>
+  </data>
+  <data name="LibraryPage_FilePickerNoWindow" xml:space="preserve">
+    <value>The file picker could not find the main application window.</value>
+  </data>
+  <data name="LibraryPage_FilePickerInitializeFailed" xml:space="preserve">
+    <value>Failed to initialize the file picker: {0}</value>
+  </data>
+  <data name="LibraryPage_AddedDialog_Title" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="LibraryPage_AddedDialog_Message" xml:space="preserve">
+    <value>Added {0} media files to the library</value>
+  </data>
+  <data name="LibraryPage_FailedToPlayDialog_Title" xml:space="preserve">
+    <value>Failed to play</value>
+  </data>
+  <data name="LibraryPage_PlayDialog_Title" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="LibraryPage_PlayDialog_Message" xml:space="preserve">
+    <value>Ready to play: {0}</value>
+  </data>
+  <data name="LibraryPage_FailedToLikeDialog_Title" xml:space="preserve">
+    <value>Failed to update favorite</value>
+  </data>
+  <data name="LibraryPage_FailedToRateDialog_Title" xml:space="preserve">
+    <value>Failed to update rating</value>
+  </data>
+  <data name="LibraryPage_FailedToClearRatingDialog_Title" xml:space="preserve">
+    <value>Failed to clear rating</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_Title" xml:space="preserve">
+    <value>Confirm delete</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LibraryPage_FailedToDeleteDialog_Title" xml:space="preserve">
+    <value>Failed to delete</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Title" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="LibraryPage_Dialog_CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PlaylistsPage_Rename.Text" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="PlaylistsPage_EditDescription.Text" xml:space="preserve">
+    <value>Edit description</value>
+  </data>
+  <data name="PlaylistsPage_Duplicate.Text" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="PlaylistsPage_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PlaylistsPage_RenameButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="PlaylistsPage_EditDescriptionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Edit description</value>
+  </data>
+  <data name="PlaylistsPage_DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PlaylistsPage_VideoCount.Text" xml:space="preserve">
+    <value>items</value>
+  </data>
+  <data name="PlaylistsPage_CreatePlaylistText.Text" xml:space="preserve">
+    <value>New playlist</value>
+  </data>
+  <data name="PlaylistsPage_CreatePlaylistButton.Content" xml:space="preserve">
+    <value>New playlist</value>
+  </data>
+  <data name="PlaylistsPage_Refresh.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="PlaylistsPage_SearchPlaceholder.PlaceholderText" xml:space="preserve">
+    <value>Search playlists...</value>
+  </data>
+  <data name="PlaylistsPage_SortByModified.Content" xml:space="preserve">
+    <value>Modified date</value>
+  </data>
+  <data name="PlaylistsPage_SortByCreated.Content" xml:space="preserve">
+    <value>Created date</value>
+  </data>
+  <data name="PlaylistsPage_SortByName.Content" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PlaylistsPage_SortByVideoCount.Content" xml:space="preserve">
+    <value>Item count</value>
+  </data>
+  <data name="PlaylistsPage_TotalCount.Text" xml:space="preserve">
+    <value>Total playlists: </value>
+  </data>
+  <data name="PlaylistsPage_EmptyTitle.Text" xml:space="preserve">
+    <value>No playlists yet</value>
+  </data>
+  <data name="PlaylistsPage_EmptyDescription.Text" xml:space="preserve">
+    <value>Click New playlist to create the first one.</value>
+  </data>
+  <data name="PlaylistsPage_LoadedPlaylists" xml:space="preserve">
+    <value>Loaded {0} playlists</value>
+  </data>
+  <data name="PlaylistsPage_NoDescription" xml:space="preserve">
+    <value>No description</value>
+  </data>
+  <data name="PlaylistsPage_ItemCountSingle" xml:space="preserve">
+    <value>{0} item</value>
+  </data>
+  <data name="PlaylistsPage_ItemCountPlural" xml:space="preserve">
+    <value>{0} items</value>
+  </data>
+  <data name="PlaylistsPage_FailedToLoadDialog_Title" xml:space="preserve">
+    <value>Failed to load playlists</value>
+  </data>
+  <data name="PlaylistsPage_FailedToCreateDialog_Title" xml:space="preserve">
+    <value>Failed to create playlist</value>
+  </data>
+  <data name="PlaylistsPage_FailedToUpdateDialog_Title" xml:space="preserve">
+    <value>Failed to update playlist</value>
+  </data>
+  <data name="PlaylistsPage_FailedToDeleteDialog_Title" xml:space="preserve">
+    <value>Failed to delete playlist</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_CreateTitle" xml:space="preserve">
+    <value>Create new playlist</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_CreateButton" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_NamePlaceholder" xml:space="preserve">
+    <value>Playlist name</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DescriptionPlaceholder" xml:space="preserve">
+    <value>Description (optional)</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_EditDescriptionTitle" xml:space="preserve">
+    <value>Edit description</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_EnterDescription" xml:space="preserve">
+    <value>Enter description...</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_RenameTitle" xml:space="preserve">
+    <value>Rename playlist</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_OKButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DeleteTitle" xml:space="preserve">
+    <value>Delete playlist</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DeleteMessage" xml:space="preserve">
+    <value>Delete playlist "{0}"? This cannot be undone.</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PlaylistDetailPage_Play.Text" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveUp.Text" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveDown.Text" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveToTop.Text" xml:space="preserve">
+    <value>Move to top</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveToBottom.Text" xml:space="preserve">
+    <value>Move to bottom</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveFromList.Text" xml:space="preserve">
+    <value>Remove from list</value>
+  </data>
+  <data name="PlaylistDetailPage_AddVideos.Text" xml:space="preserve">
+    <value>Add videos</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolder.Text" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearSelection.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove selected</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveUpButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveDownButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="PlaylistDetailPage_EditDescription.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Edit description</value>
+  </data>
+  <data name="PlaylistDetailPage_Rename.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="PlaylistDetailPage_DeletePlaylist.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Delete playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlaylistDetailPage_InfoButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="PlaylistDetailPage_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>More options</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="PlaylistDetailPage_AddToLibrary.Text" xml:space="preserve">
+    <value>Add to library</value>
+  </data>
+  <data name="PlaylistDetailPage_AddToPlaylist.Text" xml:space="preserve">
+    <value>Add to playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_VideoDetails.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="PlaylistDetailPage_NoOtherPlaylists" xml:space="preserve">
+    <value>No other playlists</value>
+  </data>
+  <data name="PlaylistDetailPage_VideosCount" xml:space="preserve">
+    <value>videos</value>
+  </data>
+  <data name="PlaylistDetailPage_TotalDuration" xml:space="preserve">
+    <value>Total duration:</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyTitle.Text" xml:space="preserve">
+    <value>No videos in this playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyDescription.Text" xml:space="preserve">
+    <value>Click Add videos to start adding items.</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyAddButton.Content" xml:space="preserve">
+    <value>Add videos</value>
+  </data>
+  <data name="PlaylistDetailPage_LoadedVideos" xml:space="preserve">
+    <value>Loaded {0} videos</value>
+  </data>
+  <data name="PlaylistDetailPage_ScanningFolder" xml:space="preserve">
+    <value>Scanning folder...</value>
+  </data>
+  <data name="PlaylistDetailPage_FoundFiles" xml:space="preserve">
+    <value>Found {0} video files</value>
+  </data>
+  <data name="PlaylistDetailPage_ProcessingFiles" xml:space="preserve">
+    <value>Processing {0}/{1}: {2}</value>
+  </data>
+  <data name="PlaylistDetailPage_AddedVideos" xml:space="preserve">
+    <value>Added {0} videos</value>
+  </data>
+  <data name="PlaylistDetailPage_Removed" xml:space="preserve">
+    <value>Removed {0} from the playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_RemovedVideos" xml:space="preserve">
+    <value>Removed {0} videos from the playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_AddedToLibrary" xml:space="preserve">
+    <value>Added {0} to the library</value>
+  </data>
+  <data name="PlaylistDetailPage_AddedToPlaylist" xml:space="preserve">
+    <value>Added {0} to playlist "{1}"</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_VideoDetailsTitle" xml:space="preserve">
+    <value>Video details</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailTitle" xml:space="preserve">
+    <value>Title: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailDuration" xml:space="preserve">
+    <value>Duration: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailResolution" xml:space="preserve">
+    <value>Resolution: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailFileSize" xml:space="preserve">
+    <value>File size: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailPath" xml:space="preserve">
+    <value>Path: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_TipTitle" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedTitle" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_NoVideoFiles" xml:space="preserve">
+    <value>No video files were found in the selected folder.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_AlreadyInLibrary" xml:space="preserve">
+    <value>This video is already in the library.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToAddToLibrary" xml:space="preserve">
+    <value>Failed to add video to library.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToAddToPlaylist" xml:space="preserve">
+    <value>Failed to add video to playlist.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToAddFolder" xml:space="preserve">
+    <value>Failed to add folder.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToScanFolder" xml:space="preserve">
+    <value>Failed to scan folder.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DeletePlaylistTitle" xml:space="preserve">
+    <value>Delete playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DeletePlaylistMessage" xml:space="preserve">
+    <value>Delete playlist "{0}"? This cannot be undone.</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_RenameTitle" xml:space="preserve">
+    <value>Rename playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_OKButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_EditDescriptionTitle" xml:space="preserve">
+    <value>Edit description</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_EnterDescription" xml:space="preserve">
+    <value>Enter description...</value>
+  </data>
+  <data name="SettingsPage_Version.Text" xml:space="preserve">
+    <value>Version 1.0.0</value>
+  </data>
+  <data name="MainWindow_Home.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="MainWindow_Library.Content" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="MainWindow_VideoLibrary.Content" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="MainWindow_AudioLibrary.Content" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="MainWindow_Playlists.Content" xml:space="preserve">
+    <value>Playlists</value>
+  </data>
+  <data name="MainWindow_PlaybackQueue.Content" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlaybackQueueSidebar_Title.Text" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlaybackQueueSidebar_Empty.Text" xml:space="preserve">
+    <value>The playback queue is empty</value>
+  </data>
+  <data name="PlaybackQueueSidebar_ClearButton.Content" xml:space="preserve">
+    <value>Clear queue</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_Properties.Text" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="LibraryPage_CommandBar_RefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_Title" xml:space="preserve">
+    <value>Title: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_Resolution" xml:space="preserve">
+    <value>Resolution: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_FileSize" xml:space="preserve">
+    <value>File Size: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_FileLocation" xml:space="preserve">
+    <value>File location: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_Duration" xml:space="preserve">
+    <value>Duration: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_AddedTime" xml:space="preserve">
+    <value>Added time: {0}</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortComboBox_AddedTime.Content" xml:space="preserve">
+    <value>Added Time</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortCombBox_Duration.Content" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="LibraryPage_SortButton_Label.Text" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="LibraryPage_SortField_Title.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="LibraryPage_SortField_AddedTime.Text" xml:space="preserve">
+    <value>Added time</value>
+  </data>
+  <data name="LibraryPage_SortField_Duration.Text" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="LibraryPage_SortField_FileSize.Text" xml:space="preserve">
+    <value>File size</value>
+  </data>
+  <data name="LibraryPage_SortDirection_Ascending.Text" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="LibraryPage_SortDirection_Descending.Text" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="SettingsPage_SourceCodeButton.Content" xml:space="preserve">
+    <value>GitHub repository</value>
+  </data>
+  <data name="SettingsPage_FailedToClearDialog_Title" xml:space="preserve">
+    <value>Failed to clear</value>
+  </data>
+  <data name="LibraryPage_FailedToLoadDialog_Title" xml:space="preserve">
+    <value>Failed to load</value>
+  </data>
+  <data name="LibraryPage_NoFilesDialog_Title" xml:space="preserve">
+    <value>No media items</value>
+  </data>
+  <data name="LibraryPage_NoFilesDialog_Message" xml:space="preserve">
+    <value>There are no media items in the selected folder</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_Title" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox_Light.Content" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_Title" xml:space="preserve">
+    <value>Clear cache</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_Message" xml:space="preserve">
+    <value>Are you sure you want to cleanup all cache files? </value>
+  </data>
+  <data name="SettingsPage_ClearedDialog_Message" xml:space="preserve">
+    <value>Cleared {0} cache files</value>
+  </data>
+  <data name="LibraryPage_TotalCounts.Text" xml:space="preserve">
+    <value>Total media: </value>
+  </data>
+  <data name="LibraryPage_TotalDuration.Text" xml:space="preserve">
+    <value>Total duration: </value>
+  </data>
+  <data name="SettingsPage_ClearCacheConfirm.Title" xml:space="preserve">
+    <value>Clear cache</value>
+  </data>
+  <data name="SettingsPage_ClearCacheConfirm.Message" xml:space="preserve">
+    <value>All cached files will be permanently deleted.</value>
+  </data>
+  <data name="SettingsPage_ClearCacheConfirmButton.Content" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsConfirm.Title" xml:space="preserve">
+    <value>Reset settings</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsConfirm.Message" xml:space="preserve">
+    <value>All settings will be reset to their default values. This action cannot be undone.</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsConfirmButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="LibraryPage_CommandBar_DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Delete selected</value>
+  </data>
+  <data name="PlayerTrack_CurrentAudioFormat" xml:space="preserve">
+    <value>Current audio: {0}</value>
+  </data>
+  <data name="PlayerTrack_CurrentSubtitleFormat" xml:space="preserve">
+    <value>Current subtitles: {0}</value>
+  </data>
+  <data name="PlayerTrack_NotSelected" xml:space="preserve">
+    <value>Not selected</value>
+  </data>
+  <data name="PlayerTrack_SubtitlesOff" xml:space="preserve">
+    <value>Subtitles off</value>
+  </data>
+  <data name="PlayerTrack_DisableSubtitles" xml:space="preserve">
+    <value>Turn off subtitles</value>
+  </data>
+  <data name="PlayerTrack_NoAudioTracks" xml:space="preserve">
+    <value>No audio tracks</value>
+  </data>
+  <data name="PlayerTrack_NoSubtitleTracks" xml:space="preserve">
+    <value>No subtitle tracks</value>
+  </data>
+  <data name="PlayerTrack_AudioFallbackFormat" xml:space="preserve">
+    <value>Audio track {0}</value>
+  </data>
+  <data name="PlayerTrack_SubtitleFallbackFormat" xml:space="preserve">
+    <value>Subtitle {0}</value>
+  </data>
+  <data name="PlayerTrack_AddAudioTrack" xml:space="preserve">
+    <value>Add audio track...</value>
+  </data>
+  <data name="PlayerTrack_AddSubtitleTrack" xml:space="preserve">
+    <value>Add subtitles...</value>
+  </data>
+  <data name="PlayerMediaInfo_Title" xml:space="preserve">
+    <value>Video information</value>
+  </data>
+  <data name="PlayerMediaInfo_ErrorTitle" xml:space="preserve">
+    <value>Unable to read video information</value>
+  </data>
+  <data name="MediaInfo_Name" xml:space="preserve">
+    <value>Name: {0}</value>
+  </data>
+  <data name="MediaInfo_Duration" xml:space="preserve">
+    <value>Duration: {0}</value>
+  </data>
+  <data name="MediaInfo_Resolution" xml:space="preserve">
+    <value>Resolution: {0}</value>
+  </data>
+  <data name="MediaInfo_ContainerFormat" xml:space="preserve">
+    <value>Container: {0}</value>
+  </data>
+  <data name="MediaInfo_ContainerDescription" xml:space="preserve">
+    <value>Format description: {0}</value>
+  </data>
+  <data name="MediaInfo_OverallBitRate" xml:space="preserve">
+    <value>Overall bit rate: {0}</value>
+  </data>
+  <data name="MediaInfo_Title" xml:space="preserve">
+    <value>Title: {0}</value>
+  </data>
+  <data name="MediaInfo_Artist" xml:space="preserve">
+    <value>Artist: {0}</value>
+  </data>
+  <data name="MediaInfo_Album" xml:space="preserve">
+    <value>Album: {0}</value>
+  </data>
+  <data name="MediaInfo_VideoCodec" xml:space="preserve">
+    <value>Video codec: {0}</value>
+  </data>
+  <data name="MediaInfo_FrameRate" xml:space="preserve">
+    <value>Frame rate: {0}</value>
+  </data>
+  <data name="MediaInfo_VideoBitRate" xml:space="preserve">
+    <value>Video bit rate: {0}</value>
+  </data>
+  <data name="MediaInfo_PixelFormat" xml:space="preserve">
+    <value>Pixel format: {0}</value>
+  </data>
+  <data name="MediaInfo_CodecProfile" xml:space="preserve">
+    <value>Profile: {0}</value>
+  </data>
+  <data name="MediaInfo_Rotation" xml:space="preserve">
+    <value>Rotation: {0}</value>
+  </data>
+  <data name="MediaInfo_StreamTitle" xml:space="preserve">
+    <value>Stream title: {0}</value>
+  </data>
+  <data name="MediaInfo_StreamLanguage" xml:space="preserve">
+    <value>Language: {0}</value>
+  </data>
+  <data name="MediaInfo_AudioCodec" xml:space="preserve">
+    <value>Audio codec: {0}</value>
+  </data>
+  <data name="MediaInfo_AudioDetails" xml:space="preserve">
+    <value>Audio: {0}</value>
+  </data>
+  <data name="MediaInfo_ChannelCount" xml:space="preserve">
+    <value>Channels: {0}</value>
+  </data>
+  <data name="MediaInfo_ChannelLayout" xml:space="preserve">
+    <value>Channel layout: {0}</value>
+  </data>
+  <data name="MediaInfo_SampleRate" xml:space="preserve">
+    <value>Sample rate: {0}</value>
+  </data>
+  <data name="MediaInfo_SampleFormat" xml:space="preserve">
+    <value>Sample format: {0}</value>
+  </data>
+  <data name="MediaInfo_BitsPerSample" xml:space="preserve">
+    <value>Bit depth: {0}</value>
+  </data>
+  <data name="MediaInfo_AudioBitRate" xml:space="preserve">
+    <value>Audio bit rate: {0}</value>
+  </data>
+  <data name="MediaInfo_TrackCounts" xml:space="preserve">
+    <value>Tracks: video {0} / audio {1} / subtitles {2}</value>
+  </data>
+  <data name="MediaInfo_FileSize" xml:space="preserve">
+    <value>File size: {0}</value>
+  </data>
+  <data name="MediaInfo_FilePath" xml:space="preserve">
+    <value>File location: {0}</value>
+  </data>
+  <data name="MediaInfo_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PlayerChapter_DefaultTitle" xml:space="preserve">
+    <value>Chapter {0}</value>
+  </data>
+  <data name="AudioPlayer_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="AudioPlayer_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="AudioPlayer_Mute" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="AudioPlayer_Unmute" xml:space="preserve">
+    <value>Unmute</value>
+  </data>
+  <data name="AudioPlayer_Expand" xml:space="preserve">
+    <value>Open player details</value>
+  </data>
+  <data name="AudioPlayer_Close" xml:space="preserve">
+    <value>Close audio player</value>
+  </data>
+  <data name="AudioPlayer_Speed" xml:space="preserve">
+    <value>Playback speed</value>
+  </data>
+  <data name="AudioPlayer_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="AudioPlayer_OpenVolume" xml:space="preserve">
+    <value>Open volume controls</value>
+  </data>
+  <data name="AudioPlayer_StateMuted" xml:space="preserve">
+    <value>Muted</value>
+  </data>
+  <data name="AudioPlayer_StateUnmuted" xml:space="preserve">
+    <value>Unmuted</value>
+  </data>
+  <data name="AudioPlayer_Shuffle" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
+  <data name="AudioPlayer_ShuffleEnable" xml:space="preserve">
+    <value>Turn shuffle on</value>
+  </data>
+  <data name="AudioPlayer_ShuffleDisable" xml:space="preserve">
+    <value>Turn shuffle off</value>
+  </data>
+  <data name="AudioPlayer_Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="AudioPlayer_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="AudioPlayer_Repeat" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="AudioPlayer_RepeatEnable" xml:space="preserve">
+    <value>Turn repeat all on</value>
+  </data>
+  <data name="AudioPlayer_RepeatOneEnable" xml:space="preserve">
+    <value>Switch to repeat one</value>
+  </data>
+  <data name="AudioPlayer_RepeatDisable" xml:space="preserve">
+    <value>Turn repeat off</value>
+  </data>
+  <data name="AudioPlayer_ShortcutPlayPause" xml:space="preserve">
+    <value>Space / Ctrl+P</value>
+  </data>
+  <data name="AudioPlayer_ShortcutPrevious" xml:space="preserve">
+    <value>Page Up / Ctrl+Left</value>
+  </data>
+  <data name="AudioPlayer_ShortcutNext" xml:space="preserve">
+    <value>Page Down / Ctrl+Right</value>
+  </data>
+  <data name="AudioPlayer_ShortcutSeek" xml:space="preserve">
+    <value>Left / Right</value>
+  </data>
+  <data name="AudioPlayer_ShortcutVolume" xml:space="preserve">
+    <value>Up / Down · M</value>
+  </data>
+  <data name="AudioPlayer_ShortcutMute" xml:space="preserve">
+    <value>M / Ctrl+M</value>
+  </data>
+  <data name="AudioPlayer_ShortcutShuffle" xml:space="preserve">
+    <value>S / Ctrl+Shift+S</value>
+  </data>
+  <data name="AudioPlayer_ShortcutRepeat" xml:space="preserve">
+    <value>R / Ctrl+Shift+R</value>
+  </data>
+  <data name="AudioPlayer_ShortcutCloseDetails" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="AudioPlayer_PlayPauseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play / pause (Space / Ctrl+P)</value>
+  </data>
+  <data name="AudioPlayer_PlayPauseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Play or pause</value>
+  </data>
+  <data name="AudioPlayer_ShuffleButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Shuffle (S / Ctrl+Shift+S)</value>
+  </data>
+  <data name="AudioPlayer_ShuffleButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
+  <data name="AudioPlayer_PreviousButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Previous (Page Up / Ctrl+Left)</value>
+  </data>
+  <data name="AudioPlayer_PreviousButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="AudioPlayer_NextButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Next (Page Down / Ctrl+Right)</value>
+  </data>
+  <data name="AudioPlayer_NextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="AudioPlayer_RepeatButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Repeat (R / Ctrl+Shift+R)</value>
+  </data>
+  <data name="AudioPlayer_RepeatButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="AudioPlayer_NowPlayingButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Open player details</value>
+  </data>
+  <data name="AudioPlayer_NowPlayingButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Open player details</value>
+  </data>
+  <data name="AudioPlayer_MuteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Open volume controls (Up / Down · M)</value>
+  </data>
+  <data name="AudioPlayer_MuteButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Open volume controls</value>
+  </data>
+  <data name="AudioPlayer_VolumeSlider.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="AudioPlayer_VolumeSlider.AutomationProperties.Name" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="AudioPlayer_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>More playback options</value>
+  </data>
+  <data name="AudioPlayer_MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>More playback options</value>
+  </data>
+  <data name="AudioPlayer_CloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close audio player</value>
+  </data>
+  <data name="AudioPlayer_CloseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Close audio player</value>
+  </data>
+  <data name="AudioPlayer_CollapseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close player details (Esc)</value>
+  </data>
+  <data name="AudioPlayer_CollapseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Close player details</value>
+  </data>
+  <data name="AudioPlayer_UnknownArtist" xml:space="preserve">
+    <value>Unknown artist</value>
+  </data>
+  <data name="AudioPlayer_UnknownAlbum" xml:space="preserve">
+    <value>Unknown album</value>
+  </data>
+  <data name="AudioPlayer_Collapse" xml:space="preserve">
+    <value>Close player details</value>
+  </data>
+  <data name="AudioPlayer_LyricsTitle.Text" xml:space="preserve">
+    <value>Lyrics</value>
+  </data>
+  <data name="AudioPlayer_LyricsLoading.Text" xml:space="preserve">
+    <value>Loading lyrics…</value>
+  </data>
+  <data name="AudioPlayer_LyricsEmptyTitle.Text" xml:space="preserve">
+    <value>No lyrics found</value>
+  </data>
+  <data name="AudioPlayer_LyricsEmptyDescription.Text" xml:space="preserve">
+    <value>Place a matching .lrc file beside the audio, or use a file with embedded lyrics.</value>
+  </data>
+  <data name="AudioPlayer_LyricsSourceSidecar" xml:space="preserve">
+    <value>LRC</value>
+  </data>
+  <data name="AudioPlayer_LyricsSourceEmbedded" xml:space="preserve">
+    <value>Embedded</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_VideoDetails" xml:space="preserve">
+    <value>Video stream</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_AudioDetails" xml:space="preserve">
+    <value>Audio stream</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_ContainerDetails" xml:space="preserve">
+    <value>Container information</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_MetadataDetails" xml:space="preserve">
+    <value>Media tags</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_FileDetails" xml:space="preserve">
+    <value>File information</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_TracksLabel" xml:space="preserve">
+    <value>Streams</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_TrackSummary" xml:space="preserve">
+    <value>Video {0} · Audio {1} · Subtitles {2}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_VideoKind" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_AudioKind" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="PlaylistsPage_Title.Text" xml:space="preserve">
+    <value>Playlists</value>
+  </data>
+  <data name="PlaylistsPage_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>More playlist actions</value>
+  </data>
+  <data name="PlaylistsPage_MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>More playlist actions</value>
+  </data>
+  <data name="PlaylistsPage_Refresh.AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh playlists</value>
+  </data>
+  <data name="PlaylistsPage_SearchPlaceholder.AutomationProperties.Name" xml:space="preserve">
+    <value>Search playlists</value>
+  </data>
+  <data name="PlaylistsPage_Loading.Text" xml:space="preserve">
+    <value>Loading playlists…</value>
+  </data>
+  <data name="PlaylistsPage_NoResultsTitle.Text" xml:space="preserve">
+    <value>No matching playlists</value>
+  </data>
+  <data name="PlaylistsPage_NoResultsDescription.Text" xml:space="preserve">
+    <value>Try another search or clear the current query.</value>
+  </data>
+  <data name="PlaylistsPage_ClearSearch.Content" xml:space="preserve">
+    <value>Clear search</value>
+  </data>
+  <data name="PlaylistsPage_RefreshFailed" xml:space="preserve">
+    <value>Could not refresh playlists</value>
+  </data>
+  <data name="PlaylistsPage_NameRequired" xml:space="preserve">
+    <value>Enter a playlist name.</value>
+  </data>
+  <data name="Common_RetryButton.Content" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="Common_RetryButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="HomePage_Title.Text" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HomePage_RecentRefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh recently opened items</value>
+  </data>
+  <data name="HomePage_RecentRefreshButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh recently opened items</value>
+  </data>
+  <data name="HomePage_QuickActionBusy.Text" xml:space="preserve">
+    <value>Preparing media…</value>
+  </data>
+  <data name="LibraryPage_AudioTitle" xml:space="preserve">
+    <value>Audio library</value>
+  </data>
+  <data name="LibraryPage_VideoTitle" xml:space="preserve">
+    <value>Video library</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_AddToQueue.Text" xml:space="preserve">
+    <value>Add to playback queue</value>
+  </data>
+  <data name="LibraryPage_PlaySelected.Label" xml:space="preserve">
+    <value>Play selected</value>
+  </data>
+  <data name="LibraryPage_PlaySelected.AutomationProperties.Name" xml:space="preserve">
+    <value>Play selected items</value>
+  </data>
+  <data name="LibraryPage_PlaySelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play selected items</value>
+  </data>
+  <data name="LibraryPage_QueueSelected.Label" xml:space="preserve">
+    <value>Add to queue</value>
+  </data>
+  <data name="LibraryPage_QueueSelected.AutomationProperties.Name" xml:space="preserve">
+    <value>Add selected items to playback queue</value>
+  </data>
+  <data name="LibraryPage_QueueSelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add selected items to playback queue</value>
+  </data>
+  <data name="LibraryPage_CommandBar_DeleteButton.Label" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LibraryPage_CommandBar_DeleteButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Delete selected items</value>
+  </data>
+  <data name="LibraryPage_CommandBar_ClearSelectionButton.Label" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="LibraryPage_CommandBar_ClearSelectionButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="LibraryPage_SelectedCount" xml:space="preserve">
+    <value>{0} selected</value>
+  </data>
+  <data name="LibraryPage_SelectedCounts.Text" xml:space="preserve">
+    <value>Selected: </value>
+  </data>
+  <data name="LibraryPage_NoResultsTitle.Text" xml:space="preserve">
+    <value>No matching media</value>
+  </data>
+  <data name="LibraryPage_NoResultsDescription.Text" xml:space="preserve">
+    <value>Try another search or clear the current query.</value>
+  </data>
+  <data name="LibraryPage_ClearSearch.Content" xml:space="preserve">
+    <value>Clear search</value>
+  </data>
+  <data name="LibraryPage_RefreshFailed" xml:space="preserve">
+    <value>Could not refresh the library</value>
+  </data>
+  <data name="LibraryPage_DisplayedCounts.Text" xml:space="preserve">
+    <value>Displayed: </value>
+  </data>
+  <data name="LibraryPage_DisplayedDuration.Text" xml:space="preserve">
+    <value>Displayed duration: </value>
+  </data>
+  <data name="LibraryPage_DisplayedSize.Text" xml:space="preserve">
+    <value>Displayed size: </value>
+  </data>
+  <data name="LibraryPage_DisplayedOfTotal" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_AddedTime" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_FileSize" xml:space="preserve">
+    <value>File size</value>
+  </data>
+  <data name="LibraryPage_Status_PlayingSelected" xml:space="preserve">
+    <value>Playing {0} selected items</value>
+  </data>
+  <data name="LibraryPage_PlaySelectedFailed" xml:space="preserve">
+    <value>Could not play the selected items</value>
+  </data>
+  <data name="LibraryPage_Status_Queued" xml:space="preserve">
+    <value>Added {0} items to the playback queue</value>
+  </data>
+  <data name="LibraryPage_QueueSelectedFailed" xml:space="preserve">
+    <value>Could not add items to the playback queue</value>
+  </data>
+  <data name="LibraryPage_KindVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="LibraryPage_KindAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="LibraryPage_KindImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="LibraryPage_KindMedia" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="LibraryPage_ServiceUnavailable" xml:space="preserve">
+    <value>The media library is not available.</value>
+  </data>
+  <data name="PlaybackQueueSidebar_ResizeHandle.AutomationProperties.Name" xml:space="preserve">
+    <value>Resize playback queue</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CloseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Close playback queue</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close playback queue</value>
+  </data>
+  <data name="PlaybackQueueSidebar_List.AutomationProperties.Name" xml:space="preserve">
+    <value>Playback queue items</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CurrentIndicator.AutomationProperties.Name" xml:space="preserve">
+    <value>Currently playing</value>
+  </data>
+  <data name="PlaybackQueueSidebar_PlayButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Play queue item</value>
+  </data>
+  <data name="PlaybackQueueSidebar_PlayButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlaybackQueueSidebar_RemoveButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Remove queue item</value>
+  </data>
+  <data name="PlaybackQueueSidebar_RemoveButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove from queue</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CountFormat" xml:space="preserve">
+    <value>{0} items</value>
+  </data>
+  <data name="AudioPlayer_More" xml:space="preserve">
+    <value>More playback options</value>
+  </data>
+  <data name="AudioPlayer_Seek" xml:space="preserve">
+    <value>Playback position</value>
+  </data>
+  <data name="AudioPlayer_StateOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="AudioPlayer_StateOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="AudioPlayer_RepeatStateAll" xml:space="preserve">
+    <value>Repeat all</value>
+  </data>
+  <data name="AudioPlayer_RepeatStateOne" xml:space="preserve">
+    <value>Repeat one</value>
+  </data>
+  <data name="AudioPlayer_PreviousMenuItem.Text" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="AudioPlayer_NextMenuItem.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="AudioPlayer_ShuffleMenuItem.Text" xml:space="preserve">
+    <value>Turn shuffle on</value>
+  </data>
+  <data name="AudioPlayer_RepeatMenuItem.Text" xml:space="preserve">
+    <value>Turn repeat all on</value>
+  </data>
+  <data name="PlayerWindow_Brand.Text" xml:space="preserve">
+    <value>Koukei Player</value>
+  </data>
+  <data name="PlayerWindow_DefaultTitle" xml:space="preserve">
+    <value>Koukei Player</value>
+  </data>
+  <data name="PlayerWindow_Ready.Text" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="PlayerWindow_ContextPlayPause.Text" xml:space="preserve">
+    <value>Play / pause</value>
+  </data>
+  <data name="PlayerWindow_ContextFullscreen.Text" xml:space="preserve">
+    <value>Fullscreen</value>
+  </data>
+  <data name="PlayerWindow_ContextClose.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PlayerWindow_SeekBar.AutomationProperties.Name" xml:space="preserve">
+    <value>Playback position</value>
+  </data>
+  <data name="PlayerWindow_PlaylistButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlayerWindow_PlaylistButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlayerWindow_PlaylistTitle.Text" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlayerWindow_PlaylistList.AutomationProperties.Name" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlayerWindow_CurrentQueueItemIndicator.AutomationProperties.Name" xml:space="preserve">
+    <value>Currently playing</value>
+  </data>
+  <data name="PlayerWindow_RemoveQueueItemButton.Content" xml:space="preserve">
+    <value>Remove selected</value>
+  </data>
+  <data name="PlayerWindow_RemoveQueueItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove selected item from the playback queue</value>
+  </data>
+  <data name="PlayerWindow_RemoveQueueItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Remove selected queue item</value>
+  </data>
+  <data name="PlayerWindow_AudioTrackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Audio tracks</value>
+  </data>
+  <data name="PlayerWindow_AudioTrackButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Audio tracks</value>
+  </data>
+  <data name="PlayerWindow_SubtitleTrackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Subtitles</value>
+  </data>
+  <data name="PlayerWindow_SubtitleTrackButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Subtitles</value>
+  </data>
+  <data name="PlayerWindow_MediaInfoButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Playback information</value>
+  </data>
+  <data name="PlayerWindow_MediaInfoButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Playback information</value>
+  </data>
+  <data name="PlayerWindow_MuteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PlayerWindow_MuteButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PlayerWindow_PreviousButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Previous item</value>
+  </data>
+  <data name="PlayerWindow_PreviousButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Previous item</value>
+  </data>
+  <data name="PlayerWindow_RewindButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Rewind</value>
+  </data>
+  <data name="PlayerWindow_RewindButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Rewind</value>
+  </data>
+  <data name="PlayerWindow_PlayPauseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play / pause</value>
+  </data>
+  <data name="PlayerWindow_PlayPauseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Play / pause</value>
+  </data>
+  <data name="PlayerWindow_ForwardButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="PlayerWindow_ForwardButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="PlayerWindow_NextButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Next item</value>
+  </data>
+  <data name="PlayerWindow_NextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Next item</value>
+  </data>
+  <data name="PlayerWindow_ShuffleButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
+  <data name="PlayerWindow_ShuffleButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
+  <data name="PlayerWindow_RepeatButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="PlayerWindow_RepeatButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="PlayerWindow_SpeedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Playback speed</value>
+  </data>
+  <data name="PlayerWindow_SpeedButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Playback speed</value>
+  </data>
+  <data name="PlayerWindow_ScreenshotButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Take screenshot</value>
+  </data>
+  <data name="PlayerWindow_ScreenshotButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Take screenshot</value>
+  </data>
+  <data name="PlayerWindow_PictureInPictureButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Picture in picture</value>
+  </data>
+  <data name="PlayerWindow_PictureInPictureButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Picture in picture</value>
+  </data>
+  <data name="PlayerWindow_FullScreenButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Fullscreen</value>
+  </data>
+  <data name="PlayerWindow_FullScreenButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Fullscreen</value>
+  </data>
+  <data name="PlayerWindow_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>More playback options</value>
+  </data>
+  <data name="PlayerWindow_MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>More playback options</value>
+  </data>
+  <data name="PlayerWindow_MorePlaylist.Text" xml:space="preserve">
+    <value>Playback queue</value>
+  </data>
+  <data name="PlayerWindow_MoreAudioTrack.Text" xml:space="preserve">
+    <value>Audio tracks</value>
+  </data>
+  <data name="PlayerWindow_MoreSubtitleTrack.Text" xml:space="preserve">
+    <value>Subtitles</value>
+  </data>
+  <data name="PlayerWindow_MoreMediaInfo.Text" xml:space="preserve">
+    <value>Playback information</value>
+  </data>
+  <data name="PlayerWindow_MorePrevious.Text" xml:space="preserve">
+    <value>Previous item</value>
+  </data>
+  <data name="PlayerWindow_MoreRewind.Text" xml:space="preserve">
+    <value>Rewind</value>
+  </data>
+  <data name="PlayerWindow_MoreForward.Text" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="PlayerWindow_MoreNext.Text" xml:space="preserve">
+    <value>Next item</value>
+  </data>
+  <data name="PlayerWindow_MoreShuffle.Text" xml:space="preserve">
+    <value>Turn shuffle on</value>
+  </data>
+  <data name="PlayerWindow_MoreRepeat.Text" xml:space="preserve">
+    <value>Turn repeat all on</value>
+  </data>
+  <data name="PlayerWindow_MoreSpeed.Text" xml:space="preserve">
+    <value>Playback speed</value>
+  </data>
+  <data name="PlayerWindow_MoreScreenshot.Text" xml:space="preserve">
+    <value>Take screenshot</value>
+  </data>
+  <data name="PlayerWindow_MorePictureInPicture.Text" xml:space="preserve">
+    <value>Picture in picture</value>
+  </data>
+  <data name="PlayerWindow_MoreFullScreen.Text" xml:space="preserve">
+    <value>Fullscreen</value>
+  </data>
+  <data name="PlayerWindow_MinimizeButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="PlayerWindow_MinimizeButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Minimize window</value>
+  </data>
+  <data name="PlayerWindow_MaximizeButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="PlayerWindow_MaximizeButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Maximize window</value>
+  </data>
+  <data name="PlayerWindow_CloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PlayerWindow_CloseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Close player window</value>
+  </data>
+  <data name="PlayerWindow_LoadingRing.AutomationProperties.Name" xml:space="preserve">
+    <value>Loading media</value>
+  </data>
+  <data name="PlayerWindow_Seek" xml:space="preserve">
+    <value>Playback position</value>
+  </data>
+  <data name="PlayerWindow_More" xml:space="preserve">
+    <value>More playback options</value>
+  </data>
+  <data name="PlayerWindow_OpenVolume" xml:space="preserve">
+    <value>Open volume controls</value>
+  </data>
+  <data name="PlayerWindow_StateMuted" xml:space="preserve">
+    <value>Muted</value>
+  </data>
+  <data name="PlayerWindow_StateUnmuted" xml:space="preserve">
+    <value>Unmuted</value>
+  </data>
+  <data name="PlayerWindow_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlayerWindow_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="PlayerWindow_StatePaused" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="PlayerWindow_PauseOverlay.AutomationProperties.Name" xml:space="preserve">
+    <value>Video paused</value>
+  </data>
+  <data name="PlayerWindow_StatePlaying" xml:space="preserve">
+    <value>Playing</value>
+  </data>
+  <data name="PlayerWindow_Shuffle" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
+  <data name="PlayerWindow_ShuffleEnable" xml:space="preserve">
+    <value>Turn shuffle on</value>
+  </data>
+  <data name="PlayerWindow_ShuffleDisable" xml:space="preserve">
+    <value>Turn shuffle off</value>
+  </data>
+  <data name="PlayerWindow_Repeat" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="PlayerWindow_RepeatEnable" xml:space="preserve">
+    <value>Turn repeat all on</value>
+  </data>
+  <data name="PlayerWindow_RepeatOneEnable" xml:space="preserve">
+    <value>Switch to repeat one</value>
+  </data>
+  <data name="PlayerWindow_RepeatDisable" xml:space="preserve">
+    <value>Turn repeat off</value>
+  </data>
+  <data name="PlayerWindow_StateOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="PlayerWindow_StateOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="PlayerWindow_RepeatStateAll" xml:space="preserve">
+    <value>Repeat all</value>
+  </data>
+  <data name="PlayerWindow_RepeatStateOne" xml:space="preserve">
+    <value>Repeat one</value>
+  </data>
+  <data name="PlayerWindow_Mute" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="PlayerWindow_Unmute" xml:space="preserve">
+    <value>Unmute</value>
+  </data>
+  <data name="PlayerWindow_SpeedFormat" xml:space="preserve">
+    <value>Speed ({0:0.0}x)</value>
+  </data>
+  <data name="PlayerWindow_RewindFormat" xml:space="preserve">
+    <value>Rewind {0:0} seconds</value>
+  </data>
+  <data name="PlayerWindow_ForwardFormat" xml:space="preserve">
+    <value>Forward {0:0} seconds</value>
+  </data>
+  <data name="PlayerWindow_EnterFullScreen" xml:space="preserve">
+    <value>Enter fullscreen</value>
+  </data>
+  <data name="PlayerWindow_ExitFullScreen" xml:space="preserve">
+    <value>Exit fullscreen</value>
+  </data>
+  <data name="PlayerWindow_EnterPictureInPicture" xml:space="preserve">
+    <value>Enter picture in picture</value>
+  </data>
+  <data name="PlayerWindow_ExitPictureInPicture" xml:space="preserve">
+    <value>Exit picture in picture</value>
+  </data>
+  <data name="PlayerWindow_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="PlayerWindow_Maximize" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="PlayerWindow_Surface.AutomationProperties.Name" xml:space="preserve">
+    <value>Video playback area</value>
+  </data>
+  <data name="PlayerWindow_VolumeSlider.AutomationProperties.Name" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="LibraryPage_UnknownFile" xml:space="preserve">
+    <value>Unknown file</value>
+  </data>
+  <data name="PlaylistsPage_StatePresenter.RetryText" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="PlaylistsPage_LoadingState" xml:space="preserve">
+    <value>Loading playlists</value>
+  </data>
+  <data name="SettingsPage_Scaffold.Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_RefreshMetadata.Text" xml:space="preserve">
+    <value>Refresh metadata</value>
+  </data>
+  <data name="LibraryPage_RefreshSelectedMetadata.Label" xml:space="preserve">
+    <value>Refresh metadata</value>
+  </data>
+  <data name="LibraryPage_RefreshSelectedMetadata.AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh metadata for selected items</value>
+  </data>
+  <data name="LibraryPage_RefreshSelectedMetadata.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh metadata for selected items</value>
+  </data>
+  <data name="LibraryPage_Status_MetadataRefreshed" xml:space="preserve">
+    <value>Refreshed metadata for {0} item(s)</value>
+  </data>
+  <data name="LibraryPage_Status_MetadataRefreshFailed" xml:space="preserve">
+    <value>Could not refresh media metadata</value>
+  </data>
+  <data name="PlaylistsPage_PlayButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play this playlist</value>
+  </data>
+  <data name="PlaylistsPage_PlayButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Play this playlist</value>
+  </data>
+  <data name="PlaylistsPage_QueueButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add to playback queue</value>
+  </data>
+  <data name="PlaylistsPage_QueueButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Add this playlist to the playback queue</value>
+  </data>
+  <data name="PlaylistsPage_PreparingPlayback" xml:space="preserve">
+    <value>Preparing "{0}"...</value>
+  </data>
+  <data name="PlaylistsPage_PlaylistNotFound" xml:space="preserve">
+    <value>The playlist could not be found.</value>
+  </data>
+  <data name="PlaylistsPage_NoPlayableItems" xml:space="preserve">
+    <value>The playlist has no playable items.</value>
+  </data>
+  <data name="PlaylistsPage_PlayingPlaylist" xml:space="preserve">
+    <value>Playing {1} items from "{0}"</value>
+  </data>
+  <data name="PlaylistsPage_QueuedPlaylist" xml:space="preserve">
+    <value>Added {1} items from "{0}" to the playback queue</value>
+  </data>
+  <data name="PlaylistsPage_FailedToPlayDialog_Title" xml:space="preserve">
+    <value>Could not play playlist</value>
+  </data>
+  <data name="PlaylistsPage_FailedToQueueDialog_Title" xml:space="preserve">
+    <value>Could not add to playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayItem.Text" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveItem.Text" xml:space="preserve">
+    <value>Remove from playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Play item</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove from playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Remove item from playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_UnavailableItem.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Media file is unavailable</value>
+  </data>
+  <data name="PlaylistDetailPage_UnavailableItem.AutomationProperties.Name" xml:space="preserve">
+    <value>Media file is unavailable</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAll.Label" xml:space="preserve">
+    <value>Play all</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAll.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play all available items</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAll.AutomationProperties.Name" xml:space="preserve">
+    <value>Play all available items</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAll.Label" xml:space="preserve">
+    <value>Add all to queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAll.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add all available items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAll.AutomationProperties.Name" xml:space="preserve">
+    <value>Add all available items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_Refresh.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="PlaylistDetailPage_Refresh.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_Refresh.AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_Clear.Label" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="PlaylistDetailPage_Clear.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Clear playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_Clear.AutomationProperties.Name" xml:space="preserve">
+    <value>Clear playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_StatePresenter.RetryText" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="PlaylistDetailPage_InvalidPlaylist" xml:space="preserve">
+    <value>The playlist could not be opened.</value>
+  </data>
+  <data name="PlaylistDetailPage_NotFound" xml:space="preserve">
+    <value>The playlist no longer exists.</value>
+  </data>
+  <data name="PlaylistDetailPage_Loading" xml:space="preserve">
+    <value>Loading playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_LoadFailed" xml:space="preserve">
+    <value>Could not load playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyTitleMessage" xml:space="preserve">
+    <value>This playlist is empty</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyDescriptionMessage" xml:space="preserve">
+    <value>Use Add files or Add folder to add audio and video.</value>
+  </data>
+  <data name="PlaylistDetailPage_Status" xml:space="preserve">
+    <value>{0} items, {1} available</value>
+  </data>
+  <data name="PlaylistDetailPage_Playing" xml:space="preserve">
+    <value>Playing {0} items</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayFailed" xml:space="preserve">
+    <value>Could not play the playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_Queued" xml:space="preserve">
+    <value>Added {0} items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueFailed" xml:space="preserve">
+    <value>Could not add the playlist to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveFailed" xml:space="preserve">
+    <value>Could not remove the item</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearDialogTitle" xml:space="preserve">
+    <value>Clear playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearDialogMessage" xml:space="preserve">
+    <value>Remove every item from this playlist?</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearButtonText" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearFailed" xml:space="preserve">
+    <value>Could not clear the playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_ReorderFailed" xml:space="preserve">
+    <value>Could not reorder the playlist</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_AddToSavedPlaylist.Text" xml:space="preserve">
+    <value>Add to playlist</value>
+  </data>
+  <data name="LibraryPage_AddSelectedToSavedPlaylist.Label" xml:space="preserve">
+    <value>Add to playlist</value>
+  </data>
+  <data name="LibraryPage_AddSelectedToSavedPlaylist.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add selected items to a playlist</value>
+  </data>
+  <data name="LibraryPage_AddSelectedToSavedPlaylist.AutomationProperties.Name" xml:space="preserve">
+    <value>Add selected items to a playlist</value>
+  </data>
+  <data name="LibraryPage_Status_AddedToSavedPlaylist" xml:space="preserve">
+    <value>Added {0} items to "{1}"; {2} already present</value>
+  </data>
+  <data name="LibraryPage_AddToSavedPlaylistFailed" xml:space="preserve">
+    <value>Could not add items to the playlist</value>
+  </data>
+  <data name="PlaylistPicker_ChooseHeader" xml:space="preserve">
+    <value>Playlist</value>
+  </data>
+  <data name="PlaylistPicker_Title" xml:space="preserve">
+    <value>Add to playlist</value>
+  </data>
+  <data name="PlaylistPicker_AddButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="PlaylistPicker_NewButton" xml:space="preserve">
+    <value>New playlist</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SaveButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Save queue to playlist</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SaveButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Save queue to playlist</value>
+  </data>
+  <data name="PlaybackQueueSidebar_NoLibraryItems" xml:space="preserve">
+    <value>The queue has no media-library items to save.</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SavedToPlaylist" xml:space="preserve">
+    <value>Added {0} items to "{1}"; {2} already present</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SaveFailed" xml:space="preserve">
+    <value>Could not save the queue: {0}</value>
+  </data>
+  <data name="PlaylistsPage_Open.Text" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItem.Text" xml:space="preserve">
+    <value>Add to playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add to playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Add item to playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueuedItem" xml:space="preserve">
+    <value>Added "{0}" to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItemFailed" xml:space="preserve">
+    <value>Could not add the item to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_RefreshFailed" xml:space="preserve">
+    <value>Could not refresh the playlist</value>
+  </data>
+  <data name="PlaylistsPage_Status" xml:space="preserve">
+    <value>{0} shown, {1} total</value>
+  </data>
+  <data name="PlaylistDetailPage_BackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Back to playlists</value>
+  </data>
+  <data name="PlaylistDetailPage_BackButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Back to playlists</value>
+  </data>
+  <data name="PlaylistDetailPage_AddItems.Label" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="PlaylistDetailPage_AddItems.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add files or a folder</value>
+  </data>
+  <data name="PlaylistDetailPage_AddItems.AutomationProperties.Name" xml:space="preserve">
+    <value>Add files or a folder</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFiles.Text" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFilesFailed" xml:space="preserve">
+    <value>Could not add files to the playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolderFailed" xml:space="preserve">
+    <value>Could not add the folder to the playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_NoFilesTitle" xml:space="preserve">
+    <value>No media files</value>
+  </data>
+  <data name="PlaylistDetailPage_NoFilesMessage" xml:space="preserve">
+    <value>No supported audio or video files were found.</value>
+  </data>
+  <data name="PlaylistDetailPage_ImportProgress" xml:space="preserve">
+    <value>Processing {0}/{1}: {2}</value>
+  </data>
+  <data name="PlaylistDetailPage_ImportResult" xml:space="preserve">
+    <value>Added {0} items; {1} already present; imported {2}; failed {3}</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFilesButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add media files</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFilesButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Add media files to playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolderButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add a media folder</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolderButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Add a media folder to playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_RefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_RefreshButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_TotalCounts.Text" xml:space="preserve">
+    <value>Items </value>
+  </data>
+  <data name="PlaylistDetailPage_SelectedCounts.Text" xml:space="preserve">
+    <value>Selected </value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelected.Label" xml:space="preserve">
+    <value>Play selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelected.AutomationProperties.Name" xml:space="preserve">
+    <value>Play selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelected.Label" xml:space="preserve">
+    <value>Add selected items to queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add selected items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelected.AutomationProperties.Name" xml:space="preserve">
+    <value>Add selected items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelected.Label" xml:space="preserve">
+    <value>Remove selected</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelected.AutomationProperties.Name" xml:space="preserve">
+    <value>Remove selected items from playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearSelection.Label" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearSelection.AutomationProperties.Name" xml:space="preserve">
+    <value>Clear selection</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayingSelected" xml:space="preserve">
+    <value>Playing {0} selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelectedFailed" xml:space="preserve">
+    <value>Could not play the selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_QueuedSelected" xml:space="preserve">
+    <value>Added {0} selected items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelectedFailed" xml:space="preserve">
+    <value>Could not add the selected items to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_RemovedSelected" xml:space="preserve">
+    <value>Removed {0} selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelectedFailed" xml:space="preserve">
+    <value>Could not remove the selected items</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAllButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Play every available item in this playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAllButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Play all items in playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAllText.Text" xml:space="preserve">
+    <value>Play all items</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAllButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Add every available item to the playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAllButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Add all items to playback queue</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAllText.Text" xml:space="preserve">
+    <value>Add all to queue</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Clear playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Clear playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search this playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_SearchBox.AutomationProperties.Name" xml:space="preserve">
+    <value>Search this playlist</value>
+  </data>
+  <data name="PlaylistDetailPage_SortButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sort playlist items</value>
+  </data>
+  <data name="PlaylistDetailPage_SortButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Sort playlist items</value>
+  </data>
+  <data name="PlaylistDetailPage_SortField_PlaylistOrder.Text" xml:space="preserve">
+    <value>Playlist order</value>
+  </data>
+  <data name="PlaylistDetailPage_SortField_Kind.Text" xml:space="preserve">
+    <value>Media type</value>
+  </data>
+  <data name="PlaylistDetailPage_SortCurrent_PlaylistOrder" xml:space="preserve">
+    <value>Playlist order</value>
+  </data>
+  <data name="PlaylistDetailPage_SortCurrent_Kind" xml:space="preserve">
+    <value>Media type</value>
+  </data>
+  <data name="PlaylistDetailPage_NoResultsTitle" xml:space="preserve">
+    <value>No matching items</value>
+  </data>
+  <data name="PlaylistDetailPage_NoResultsDescription" xml:space="preserve">
+    <value>Try another title, artist, album, file name, or media type.</value>
+  </data>
+  <data name="PlaylistsPage_SortButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sort playlists</value>
+  </data>
+  <data name="PlaylistsPage_SortButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Sort playlists</value>
+  </data>
+  <data name="PlaylistsPage_SortField_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PlaylistsPage_SortField_Modified.Text" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="PlaylistsPage_SortField_Created.Text" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="PlaylistsPage_SortField_ItemCount.Text" xml:space="preserve">
+    <value>Item count</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_Modified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_ItemCount" xml:space="preserve">
+    <value>Item count</value>
+  </data>
+  <data name="PlaylistsPage_SelectItemCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Select playlist</value>
+  </data>
+  <data name="PlaylistsPage_SelectItemCheckBox.AutomationProperties.Name" xml:space="preserve">
+    <value>Select playlist</value>
+  </data>
+  <data name="PlaylistsPage_StatusWithSelection" xml:space="preserve">
+    <value>{0} shown, {1} total, {2} selected</value>
+  </data>
+  <data name="PlaylistDetailPage_SelectItemCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Select item</value>
+  </data>
+  <data name="PlaylistDetailPage_SelectItemCheckBox.AutomationProperties.Name" xml:space="preserve">
+    <value>Select playlist item</value>
+  </data>
+  <data name="Common_PageStatus_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Common_PageStatus_Refreshing" xml:space="preserve">
+    <value>Refreshing...</value>
+  </data>
+  <data name="Common_PageStatus_Scanning" xml:space="preserve">
+    <value>Scanning folder...</value>
+  </data>
+  <data name="Common_PageStatus_Working" xml:space="preserve">
+    <value>Working...</value>
+  </data>
+  <data name="Common_PageStatus_LoadFailed" xml:space="preserve">
+    <value>Failed to load</value>
+  </data>
+  <data name="Common_PageStatus_Empty" xml:space="preserve">
+    <value>0 items</value>
+  </data>
+  <data name="Common_PageStatus_Summary" xml:space="preserve">
+    <value>{0} shown / {1} total</value>
+  </data>
+  <data name="Common_PageStatus_SummaryWithSelection" xml:space="preserve">
+    <value>{0} shown / {1} total · {2} selected</value>
+  </data>
+  <data name="PlaylistDetailPage_StatusSummary" xml:space="preserve">
+    <value>{0} shown / {1} total · {2} playable</value>
+  </data>
+  <data name="PlaylistDetailPage_StatusSummaryWithSelection" xml:space="preserve">
+    <value>{0} shown / {1} total · {2} playable · {3} selected</value>
+  </data>
+  <data name="PlaylistsPage_StatusCreated" xml:space="preserve">
+    <value>Created "{0}"</value>
+  </data>
+  <data name="PlaylistsPage_StatusUpdated" xml:space="preserve">
+    <value>Updated "{0}"</value>
+  </data>
+  <data name="PlaylistsPage_StatusDeleted" xml:space="preserve">
+    <value>Deleted "{0}"</value>
+  </data>
+  <data name="PlaylistDetailPage_RemovedItem" xml:space="preserve">
+    <value>Removed "{0}"</value>
+  </data>
+  <data name="PlaylistDetailPage_Cleared" xml:space="preserve">
+    <value>Playlist cleared</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_SingleMessage" xml:space="preserve">
+    <value>Remove "{0}" from the library?</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_MultipleMessage" xml:space="preserve">
+    <value>Remove {0} items from the library?</value>
+  </data>
+</root>

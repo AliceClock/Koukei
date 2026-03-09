@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Koukei.UI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Koukei.UI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Koukei.UI.Pages.MediaLibraryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Koukei.UI.Controls"
+    xmlns:helpers="using:Koukei.UI.Helpers"
+    xmlns:local="using:Koukei.UI.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource KoukeiPageBackgroundBrush}"
+    KeyboardAcceleratorPlacementMode="Hidden">
+
+    <UserControl.KeyboardAccelerators>
+        <KeyboardAccelerator Key="A" Modifiers="Control" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="F" Modifiers="Control" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="O" Modifiers="Control" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="O" Modifiers="Control,Shift" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="F5" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="Enter" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="Enter" Modifiers="Menu" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="Delete" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+        <KeyboardAccelerator Key="Escape" Invoked="MediaLibraryKeyboardAccelerator_Invoked" />
+    </UserControl.KeyboardAccelerators>
+
+    <UserControl.Resources>
+        <StaticResource x:Key="CheckBoxBackgroundUncheckedPointerOver" ResourceKey="ButtonBackgroundPointerOver" />
+        <StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="ButtonBackgroundPointerOver" />
+        <StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="ButtonBackgroundPointerOver" />
+
+        <DataTemplate x:Key="GridItemTemplate" x:DataType="local:MediaItemViewModel">
+            <Border
+                MinHeight="256"
+                Padding="8,4"
+                HorizontalAlignment="Stretch"
+                AutomationProperties.Name="{x:Bind Title, Mode=OneWay}"
+                PointerEntered="MediaItem_PointerEntered"
+                PointerExited="MediaItem_PointerExited"
+                Style="{StaticResource KoukeiMediaCardStyle}"
+                Tag="{x:Bind}">
+                <Border.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_Play" Click="PlayMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE768;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_AddToQueue" Click="AddToPlaylistMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon><FontIcon Glyph="&#xE710;" /></MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_AddToSavedPlaylist" Click="AddToSavedPlaylistMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon><FontIcon Glyph="&#xE8FD;" /></MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem Text="{x:Bind LikeText, Mode=OneWay}" Click="LikeMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xEB51;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_RefreshMetadata" Click="RefreshMetadataMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE72C;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_Delete" Click="DeleteMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE74D;" Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_Properties" Click="PropertiesMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE946;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </Border.ContextFlyout>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        Grid.Row="0"
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
+                        <Grid>
+                            <Image
+                                Opacity="{x:Bind ThumbnailOpacity, Mode=OneWay}"
+                                Source="{x:Bind ThumbnailSource, Mode=OneWay}"
+                                Stretch="UniformToFill">
+                                <Image.OpacityTransition>
+                                    <ScalarTransition Duration="0:0:0.12" />
+                                </Image.OpacityTransition>
+                            </Image>
+
+                            <FontIcon
+                                Glyph="{x:Bind PlaceholderGlyph, Mode=OneWay}"
+                                FontSize="48"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                Visibility="{x:Bind NoThumbnailVisibility, Mode=OneWay}" />
+
+                            <CheckBox
+                                Margin="8"
+                                MinWidth="0"
+                                MinHeight="0"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="{ThemeResource ControlOnImageFillColorDefaultBrush}"
+                                IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                                IsHitTestVisible="{x:Bind IsCheckBoxVisible, Mode=OneWay}"
+                                IsTabStop="{x:Bind IsCheckBoxVisible, Mode=OneWay}"
+                                Opacity="{x:Bind CheckBoxOpacity, Mode=OneWay}" />
+
+                            <Border
+                                Margin="8"
+                                Padding="8,4"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Background="{ThemeResource ControlOnImageFillColorDefaultBrush}"
+                                CornerRadius="{StaticResource KoukeiCornerRadiusSmall}"
+                                Visibility="{x:Bind ResolutionVisibility, Mode=OneWay}">
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{ThemeResource MediaLibraryGridDurationForegroundBrush}"
+                                    Text="{x:Bind Resolution, Mode=OneWay}" />
+                            </Border>
+
+                            <Border
+                                Margin="8"
+                                Padding="8,4"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Background="{ThemeResource ControlOnImageFillColorDefaultBrush}"
+                                CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{ThemeResource MediaLibraryGridDurationForegroundBrush}"
+                                    Text="{x:Bind FormattedDuration, Mode=OneWay}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Grid.Row="1" Margin="4,4,4,0">
+                        <TextBlock
+                            MaxLines="2"
+                            FontWeight="SemiBold"
+                            Text="{x:Bind Title, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis"
+                            TextWrapping="Wrap"
+                            helpers:LongTextToolTip.FullText="{x:Bind TitleToolTipText, Mode=OneWay}" />
+                        <Grid MinHeight="40" Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <RatingControl
+                                Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                IsClearEnabled="True"
+                                Tag="{x:Bind}"
+                                Value="{x:Bind RatingValue, Mode=OneWay}"
+                                Visibility="{x:Bind RatingVisibility, Mode=OneWay}"
+                                ValueChanged="RatingControl_ValueChanged" />
+
+                            <Button
+                                Grid.Column="1"
+                                Width="40"
+                                Height="40"
+                                Padding="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Click="LikeButton_Click"
+                                CornerRadius="{StaticResource KoukeiCornerRadiusSmall}"
+                                Tag="{x:Bind}"
+                                ToolTipService.ToolTip="{x:Bind LikeText, Mode=OneWay}">
+                                <FontIcon
+                                    Glyph="{x:Bind LikeIconGlyph, Mode=OneWay}"
+                                    FontSize="16"
+                                    Foreground="{x:Bind LikeForegroundBrush, Mode=OneWay}" />
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ListItemTemplate" x:DataType="local:MediaItemViewModel">
+            <Grid
+                MinHeight="84"
+                Padding="8"
+                Background="Transparent"
+                AutomationProperties.Name="{x:Bind Title, Mode=OneWay}"
+                PointerEntered="MediaItem_PointerEntered"
+                PointerExited="MediaItem_PointerExited"
+                Tag="{x:Bind}">
+                <Grid.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_Play" Click="PlayMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE768;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_AddToQueue" Click="AddToPlaylistMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon><FontIcon Glyph="&#xE710;" /></MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_AddToSavedPlaylist" Click="AddToSavedPlaylistMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon><FontIcon Glyph="&#xE8FD;" /></MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem Text="{x:Bind LikeText, Mode=OneWay}" Click="LikeMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xEB51;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_RefreshMetadata" Click="RefreshMetadataMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE72C;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_Delete" Click="DeleteMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE74D;" Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem x:Uid="LibraryPage_MenuFlyout_Properties" Click="PropertiesMenuFlyoutItem_Click" Tag="{x:Bind}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE946;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </Grid.ContextFlyout>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox
+                    Grid.Column="0"
+                    MinWidth="0"
+                    MinHeight="0"
+                    Padding="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                    IsHitTestVisible="{x:Bind IsCheckBoxVisible, Mode=OneWay}"
+                    IsTabStop="{x:Bind IsCheckBoxVisible, Mode=OneWay}"
+                    Opacity="{x:Bind CheckBoxOpacity, Mode=OneWay}" />
+
+                <Border
+                    Grid.Column="1"
+                    Width="{x:Bind ListThumbnailWidth, Mode=OneWay}"
+                    Height="68"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
+                    <Grid>
+                        <Image
+                            Opacity="{x:Bind ThumbnailOpacity, Mode=OneWay}"
+                            Source="{x:Bind ThumbnailSource, Mode=OneWay}"
+                            Stretch="UniformToFill">
+                            <Image.OpacityTransition>
+                                <ScalarTransition Duration="0:0:0.12" />
+                            </Image.OpacityTransition>
+                        </Image>
+                        <FontIcon
+                            Glyph="{x:Bind PlaceholderGlyph, Mode=OneWay}"
+                            FontSize="32"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Visibility="{x:Bind NoThumbnailVisibility, Mode=OneWay}" />
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Column="2" Margin="12,0" VerticalAlignment="Center">
+                    <TextBlock
+                        FontWeight="SemiBold"
+                        Text="{x:Bind Title, Mode=OneWay}"
+                        TextTrimming="CharacterEllipsis"
+                        helpers:LongTextToolTip.FullText="{x:Bind TitleToolTipText, Mode=OneWay}" />
+                    <StackPanel Margin="0,4,0,0" Orientation="Horizontal" Spacing="12">
+                        <TextBlock
+                            MaxWidth="220"
+                            FontSize="12"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{x:Bind ArtistDisplay, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis"
+                            ToolTipService.ToolTip="{x:Bind ArtistDisplay, Mode=OneWay}"
+                            Visibility="{x:Bind AudioMetadataVisibility, Mode=OneWay}" />
+                        <TextBlock
+                            MaxWidth="220"
+                            FontSize="12"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{x:Bind AlbumDisplay, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis"
+                            ToolTipService.ToolTip="{x:Bind AlbumDisplay, Mode=OneWay}"
+                            Visibility="{x:Bind AlbumMetadataVisibility, Mode=OneWay}" />
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{x:Bind FormattedDuration, Mode=OneWay}" />
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{x:Bind Resolution, Mode=OneWay}"
+                            Visibility="{x:Bind ResolutionVisibility, Mode=OneWay}" />
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{x:Bind FormattedFileSize, Mode=OneWay}"
+                            Visibility="{x:Bind ExtendedMetadataVisibility, Mode=OneWay}" />
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Text="{x:Bind KindLabel, Mode=OneWay}"
+                            Visibility="{x:Bind ExtendedKindLabelVisibility, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <RatingControl
+                        Margin="0,0,8,0"
+                        IsClearEnabled="True"
+                        Tag="{x:Bind}"
+                        Value="{x:Bind RatingValue, Mode=OneWay}"
+                        Visibility="{x:Bind RatingVisibility, Mode=OneWay}"
+                        ValueChanged="RatingControl_ValueChanged" />
+                    <Button
+                        Width="40"
+                        Height="40"
+                        Padding="0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Click="LikeButton_Click"
+                        Tag="{x:Bind}"
+                        ToolTipService.ToolTip="{x:Bind LikeText, Mode=OneWay}">
+                        <FontIcon
+                            Glyph="{x:Bind LikeIconGlyph, Mode=OneWay}"
+                            FontSize="16"
+                            Foreground="{x:Bind LikeForegroundBrush, Mode=OneWay}" />
+                    </Button>
+                    <Button
+                        x:Uid="LibraryPage_PropertiesButton"
+                        Width="40"
+                        Height="40"
+                        Padding="0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Click="PropertiesButton_Click"
+                        Tag="{x:Bind}"
+                        Visibility="{x:Bind SecondaryActionVisibility, Mode=OneWay}">
+                        <FontIcon FontSize="16" Glyph="&#xE946;" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid x:Name="RootLayout" SizeChanged="RootLayout_SizeChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            x:Name="LibraryHeader"
+            Grid.Row="0"
+            Padding="24,20,24,0"
+            Spacing="{StaticResource KoukeiPageBlockSpacing}">
+            <TextBlock x:Name="LibraryTitleText" Style="{StaticResource KoukeiPageTitleTextStyle}" />
+
+            <Grid x:Name="CommandArea" RowSpacing="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel x:Name="PrimaryCommands" Orientation="Horizontal" Spacing="8">
+                    <Button
+                        x:Name="AddFilesButton"
+                        MinHeight="40"
+                        Click="AddFilesButton_Click"
+                        Style="{StaticResource KoukeiAccentButtonStyle}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xE8A5;" />
+                            <TextBlock x:Uid="LibraryPage_CommandBar_AddFilesButton" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="AddFolderButton" MinHeight="40" Click="AddFolderButton_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xE838;" />
+                            <TextBlock x:Uid="LibraryPage_CommandBar_AddFolderButton" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        x:Name="RefreshButton"
+                        x:Uid="LibraryPage_CommandBar_RefreshButton"
+                        Click="RefreshButton_Click"
+                        Style="{StaticResource KoukeiIconButtonStyle}">
+                        <FontIcon FontSize="16" Glyph="&#xE72C;" />
+                    </Button>
+                </StackPanel>
+
+                <Grid
+                    x:Name="SearchAndSortPanel"
+                    Grid.Column="1"
+                    ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <AutoSuggestBox
+                        x:Name="SearchBox"
+                        x:Uid="LibraryPage_CommandBar_SearchBox"
+                        Width="300"
+                        MinHeight="40"
+                        VerticalContentAlignment="Center"
+                        QueryIcon="Find"
+                        TextChanged="SearchBox_TextChanged" />
+
+                    <Button
+                        x:Name="SortButton"
+                        Grid.Column="1"
+                        MinHeight="40"
+                        Padding="10,0"
+                        VerticalAlignment="Center">
+                        <Button.Flyout>
+                            <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                <RadioMenuFlyoutItem x:Uid="LibraryPage_SortField_Title" GroupName="LibrarySortField" Tag="Title" Click="SortMenuItem_Click" />
+                                <RadioMenuFlyoutItem x:Uid="LibraryPage_SortField_AddedTime" GroupName="LibrarySortField" IsChecked="True" Tag="AddedTime" Click="SortMenuItem_Click" />
+                                <RadioMenuFlyoutItem x:Uid="LibraryPage_SortField_Duration" GroupName="LibrarySortField" Tag="Duration" Click="SortMenuItem_Click" />
+                                <RadioMenuFlyoutItem x:Uid="LibraryPage_SortField_FileSize" GroupName="LibrarySortField" Tag="FileSize" Click="SortMenuItem_Click" />
+                                <MenuFlyoutSeparator />
+                                <RadioMenuFlyoutItem x:Uid="LibraryPage_SortDirection_Ascending" GroupName="LibrarySortDirection" Tag="Ascending" Click="SortMenuItem_Click" />
+                                <RadioMenuFlyoutItem x:Uid="LibraryPage_SortDirection_Descending" GroupName="LibrarySortDirection" IsChecked="True" Tag="Descending" Click="SortMenuItem_Click" />
+                            </MenuFlyout>
+                        </Button.Flyout>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xE8CB;" />
+                            <TextBlock x:Name="SortButtonLabel" x:Uid="LibraryPage_SortButton_Label" VerticalAlignment="Center" />
+                            <FontIcon x:Name="SortDirectionIcon" FontSize="10" Glyph="&#xE70D;" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <InfoBar
+                x:Name="ImportInfoBar"
+                IsClosable="False"
+                IsOpen="False"
+                Severity="Informational">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <ProgressRing
+                        x:Name="ImportProgressRing"
+                        Width="20"
+                        Height="20"
+                        IsActive="False" />
+                    <TextBlock
+                        x:Name="ImportStatusTextBlock"
+                        VerticalAlignment="Center"
+                        AutomationProperties.LiveSetting="Polite"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap" />
+                </StackPanel>
+            </InfoBar>
+
+            <InfoBar
+                x:Name="RefreshErrorInfoBar"
+                IsClosable="True"
+                IsOpen="False"
+                IsTabStop="True"
+                Severity="Error">
+                <InfoBar.ActionButton>
+                    <Button
+                        x:Uid="Common_RetryButton"
+                        MinHeight="40"
+                        Click="RefreshButton_Click" />
+                </InfoBar.ActionButton>
+            </InfoBar>
+        </StackPanel>
+
+        <Grid x:Name="ContentRegion" Grid.Row="1" Padding="24,0,24,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid
+                x:Name="StatisticsBar"
+                Grid.Row="0"
+                MinHeight="56"
+                Margin="0,0,0,8"
+                Padding="0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    x:Name="StatisticsPanel"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="{StaticResource KoukeiPageBlockSpacing}">
+                    <TextBlock>
+                        <Run x:Uid="LibraryPage_TotalCounts" />
+                        <Run x:Name="TotalCountText" FontWeight="Bold" Text="0" />
+                    </TextBlock>
+                    <TextBlock AutomationProperties.LiveSetting="Polite">
+                        <Run x:Uid="LibraryPage_SelectedCounts" />
+                        <Run x:Name="SelectedCountText" FontWeight="Bold" Text="0" />
+                    </TextBlock>
+                </StackPanel>
+
+                <controls:ResponsiveCommandBar
+                    x:Name="SelectionActionBar"
+                    Grid.Column="1"
+                    MinHeight="48"
+                    Margin="12,0,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    IsDynamicOverflowEnabled="True"
+                    Visibility="Collapsed">
+                    <controls:ResponsiveCommandBar.Resources>
+                        <Thickness x:Key="AppBarButtonInnerBorderMargin">4</Thickness>
+                    </controls:ResponsiveCommandBar.Resources>
+                    <AppBarButton
+                        x:Uid="LibraryPage_PlaySelected"
+                        Click="PlaySelectedButton_Click"
+                        Icon="Play"
+                        Style="{StaticResource KoukeiCommandBarIconButtonStyle}" />
+                    <AppBarButton
+                        x:Uid="LibraryPage_QueueSelected"
+                        Click="QueueSelectedButton_Click"
+                        Icon="Add"
+                        Style="{StaticResource KoukeiCommandBarIconButtonStyle}" />
+                    <AppBarButton
+                        x:Uid="LibraryPage_AddSelectedToSavedPlaylist"
+                        Click="AddSelectedToSavedPlaylistButton_Click"
+                        Style="{StaticResource KoukeiCommandBarIconButtonStyle}">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE8FD;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton
+                        x:Name="RefreshSelectedMetadataButton"
+                        x:Uid="LibraryPage_RefreshSelectedMetadata"
+                        Click="RefreshSelectedMetadataButton_Click"
+                        Icon="Refresh"
+                        Style="{StaticResource KoukeiCommandBarIconButtonStyle}" />
+                    <AppBarButton
+                        x:Uid="LibraryPage_CommandBar_DeleteButton"
+                        Click="DeleteButton_Click"
+                        Icon="Delete"
+                        Style="{StaticResource KoukeiCommandBarIconButtonStyle}" />
+                    <AppBarButton
+                        x:Uid="LibraryPage_CommandBar_ClearSelectionButton"
+                        Click="ClearSelectionButton_Click"
+                        Icon="Clear"
+                        Style="{StaticResource KoukeiCommandBarIconButtonStyle}" />
+                </controls:ResponsiveCommandBar>
+            </Grid>
+
+            <GridView
+                x:Name="MediaGrid"
+                Grid.Row="1"
+                IsItemClickEnabled="False"
+                IsMultiSelectCheckBoxEnabled="True"
+                ItemTemplate="{StaticResource GridItemTemplate}"
+                ItemsSource="{x:Bind MediaItems, Mode=OneWay}"
+                ContainerContentChanging="MediaView_ContainerContentChanging"
+                SelectionChanged="MediaGrid_SelectionChanged"
+                SelectionMode="Extended"
+                DoubleTapped="MediaGrid_DoubleTapped"
+                Loaded="MediaGrid_Loaded"
+                SizeChanged="MediaGrid_SizeChanged"
+                Visibility="{x:Bind IsGridView, Mode=OneWay}">
+                <GridView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </TransitionCollection>
+                </GridView.ItemContainerTransitions>
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemContainerStyle>
+                    <Style
+                        TargetType="GridViewItem"
+                        BasedOn="{StaticResource KoukeiMediaCardItemContainerStyle}">
+                        <Setter Property="Margin" Value="0,0,12,12" />
+                        <Setter Property="MinWidth" Value="0" />
+                    </Style>
+                </GridView.ItemContainerStyle>
+            </GridView>
+
+            <ListView
+                x:Name="MediaList"
+                Grid.Row="1"
+                Background="Transparent"
+                IsItemClickEnabled="False"
+                IsMultiSelectCheckBoxEnabled="True"
+                ItemTemplate="{StaticResource ListItemTemplate}"
+                ItemsSource="{x:Bind MediaItems, Mode=OneWay}"
+                ContainerContentChanging="MediaView_ContainerContentChanging"
+                SelectionChanged="MediaList_SelectionChanged"
+                SelectionMode="Extended"
+                DoubleTapped="MediaList_DoubleTapped"
+                Visibility="{x:Bind IsListView, Mode=OneWay}">
+                <ListView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </TransitionCollection>
+                </ListView.ItemContainerTransitions>
+            </ListView>
+
+            <ProgressBar
+                x:Name="LoadingProgress"
+                Grid.Row="1"
+                VerticalAlignment="Top"
+                IsIndeterminate="True"
+                Visibility="Collapsed" />
+
+            <Grid
+                x:Name="InitialLoadingOverlay"
+                Grid.Row="1"
+                Background="Transparent"
+                IsHitTestVisible="True"
+                Visibility="Collapsed">
+                <ProgressRing
+                    x:Name="InitialLoadingRing"
+                    Width="48"
+                    Height="48"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsActive="False" />
+            </Grid>
+
+            <StackPanel
+                x:Name="EmptyStatePanel"
+                Grid.Row="1"
+                MaxWidth="520"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="12"
+                Visibility="Collapsed">
+                <FontIcon
+                    FontSize="64"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Glyph="&#xE8B2;" />
+                <StackPanel Spacing="16">
+                    <TextBlock
+                    x:Uid="LibraryPage_EmptyStatePanel_Title"
+                        AutomationProperties.LiveSetting="Polite"
+                        Style="{StaticResource KoukeiSectionTitleTextStyle}" />
+                    <Button
+                        x:Uid="LibraryPage_EmptyStatePanel_AddFilesButton"
+                        Click="AddFilesButton_Click"
+                        Style="{StaticResource KoukeiAccentButtonStyle}" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                x:Name="NoResultsPanel"
+                Grid.Row="1"
+                MaxWidth="520"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="12"
+                Visibility="Collapsed">
+                <FontIcon FontSize="48" Glyph="&#xE721;" />
+                <TextBlock
+                    x:Uid="LibraryPage_NoResultsTitle"
+                    AutomationProperties.LiveSetting="Polite"
+                    Style="{StaticResource KoukeiSectionTitleTextStyle}" />
+                <TextBlock
+                    x:Uid="LibraryPage_NoResultsDescription"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    Style="{StaticResource KoukeiMetadataTextStyle}" />
+                <Button x:Uid="LibraryPage_ClearSearch" MinHeight="40" Click="ClearSearchButton_Click" />
+            </StackPanel>
+
+            <StackPanel
+                x:Name="InitialErrorPanel"
+                Grid.Row="1"
+                MaxWidth="520"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="12"
+                Visibility="Collapsed">
+                <FontIcon FontSize="48" Glyph="&#xE783;" />
+                <TextBlock
+                    x:Name="InitialErrorTitle"
+                    AutomationProperties.LiveSetting="Polite"
+                    Style="{StaticResource KoukeiSectionTitleTextStyle}" />
+                <TextBlock
+                    x:Name="InitialErrorDescription"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    Style="{StaticResource KoukeiMetadataTextStyle}" />
+                <Button
+                    x:Uid="Common_RetryButton"
+                    MinHeight="40"
+                    Click="RefreshButton_Click"
+                    Style="{StaticResource KoukeiAccentButtonStyle}" />
+            </StackPanel>
+        </Grid>
+
+        <controls:PageStatusBar
+            x:Name="FooterStatusBar"
+            Grid.Row="2"
+            Style="{StaticResource KoukeiPageStatusBarStyle}" />
+    </Grid>
+</UserControl>

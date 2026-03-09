@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\NativeRuntimeLocator.cs"
+             Link="Native\NativeRuntimeLocator.cs" />
+    <PackageReference Include="FFmpeg.AutoGen.Bindings.DynamicallyLoaded" Version="8.0.0.1" />
+    <PackageReference Include="FFmpeg.LGPL"
+                      Version="20251118.1.0"
+                      ExcludeAssets="runtime"
+                      GeneratePathProperty="true"
+                      PrivateAssets="all" />
+    <None Include="$(PkgFFmpeg_LGPL)\runtimes\win-x64\native\*.dll"
+          Link="ffmpeg\win-x64\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

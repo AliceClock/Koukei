@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Koukei.Ffmpeg\Koukei.Ffmpeg.csproj" />
+    <ProjectReference Include="..\Koukei.Mpv\Koukei.Mpv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="runtimes\**\mpv\**\*" />
+    <None Include="runtimes\win-x64\mpv\**\*"
+          Link="mpv\win-x64\%(RecursiveDir)%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

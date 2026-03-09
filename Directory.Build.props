@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <KoukeiNativeRoot Condition="'$(KoukeiNativeRoot)' == ''">$(MSBuildThisFileDirectory)native</KoukeiNativeRoot>
+    <KoukeiMpvHome Condition="'$(KoukeiMpvHome)' == '' and '$(KOUKEI_MPV_HOME)' != ''">$(KOUKEI_MPV_HOME)</KoukeiMpvHome>
+    <KoukeiMpvHome Condition="'$(KoukeiMpvHome)' == ''">$(KoukeiNativeRoot)\mpv\win-x64</KoukeiMpvHome>
+  </PropertyGroup>
+</Project>

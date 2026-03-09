@@ -1,0 +1,2256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HomePage_PlayTestVideoButton.Text" xml:space="preserve">
+    <value>播放测试视频</value>
+  </data>
+  <data name="HomePage_RecentMediaText" xml:space="preserve">
+    <value>最近使用的媒体</value>
+  </data>
+  <data name="HomePage_RecentItemsTitle.Text" xml:space="preserve">
+    <value>最近打开的项目</value>
+  </data>
+  <data name="HomePage_RecentVideosTitle.Text" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="HomePage_RecentAudioTitle.Text" xml:space="preserve">
+    <value>音频</value>
+  </data>
+  <data name="HomePage_RecentRefresh.Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="HomePage_RecentEmptyTitle.Text" xml:space="preserve">
+    <value>还没有最近打开的项目</value>
+  </data>
+  <data name="HomePage_RecentEmptyDescription.Text" xml:space="preserve">
+    <value>从媒体库打开内容后，它会显示在这里。</value>
+  </data>
+  <data name="HomePage_RecentServiceUnavailable" xml:space="preserve">
+    <value>媒体库当前不可用。</value>
+  </data>
+  <data name="HomePage_RecentFileMissing" xml:space="preserve">
+    <value>所选文件已不存在。</value>
+  </data>
+  <data name="HomePage_RecentOpenRejected" xml:space="preserve">
+    <value>Windows 无法打开所选文件。</value>
+  </data>
+  <data name="HomePage_RecentLoadFailed" xml:space="preserve">
+    <value>无法加载最近打开的项目</value>
+  </data>
+  <data name="HomePage_RecentOpenFailed" xml:space="preserve">
+    <value>无法打开项目</value>
+  </data>
+  <data name="HomePage_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="HomePage_QuickActions.Text" xml:space="preserve">
+    <value>快速操作</value>
+  </data>
+  <data name="HomePage_OpenFilesButton.Text" xml:space="preserve">
+    <value>打开文件</value>
+  </data>
+  <data name="HomePage_OpenFolderButton.Text" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="HomePage_OpenFilesFailed" xml:space="preserve">
+    <value>无法打开文件</value>
+  </data>
+  <data name="HomePage_OpenFolderFailed" xml:space="preserve">
+    <value>无法打开文件夹</value>
+  </data>
+  <data name="HomePage_NoPlayableMediaTitle" xml:space="preserve">
+    <value>没有可播放的媒体</value>
+  </data>
+  <data name="HomePage_NoPlayableMediaDescription" xml:space="preserve">
+    <value>所选文件夹不包含支持的音频或视频文件。</value>
+  </data>
+  <data name="HomePage_MixedMediaTitle" xml:space="preserve">
+    <value>选择要播放的内容</value>
+  </data>
+  <data name="HomePage_MixedMediaDescription" xml:space="preserve">
+    <value>所选内容同时包含视频和音频文件。</value>
+  </data>
+  <data name="HomePage_PlayVideos" xml:space="preserve">
+    <value>播放视频</value>
+  </data>
+  <data name="HomePage_PlayAudio" xml:space="preserve">
+    <value>播放音频</value>
+  </data>
+  <data name="HomePage_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="HomePage_FilePickerNoWindow" xml:space="preserve">
+    <value>文件选择器无法找到应用程序主窗口。</value>
+  </data>
+  <data name="HomePage_FilePickerInitializeFailed" xml:space="preserve">
+    <value>初始化文件选择器失败：{0}</value>
+  </data>
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SettingsPage_Appearance.Text" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox_System.Content" xml:space="preserve">
+    <value>使用系统设置</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="SettingsPage_Data.Text" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="SettingsPage_ClearCacheButton.Content" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="SettingsPage_About.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_Message" xml:space="preserve">
+    <value>重启Koukei以应用语言更改</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_RestartButton" xml:space="preserve">
+    <value>重启</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_LaterButton" xml:space="preserve">
+    <value>稍后</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_ClearButton" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="SettingsPage_ClearedDialog_Title" xml:space="preserve">
+    <value>清除成功</value>
+  </data>
+  <data name="SettingsPage_NoCacheDialog_Title" xml:space="preserve">
+    <value>无缓存</value>
+  </data>
+  <data name="SettingsPage_NoCacheDialog_Message" xml:space="preserve">
+    <value>未找到缓存文件</value>
+  </data>
+  <data name="SettingsPage_FailedToOpenDialog_Title" xml:space="preserve">
+    <value>打开失败</value>
+  </data>
+  <data name="SettingsPage_Dialog_CloseButton" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="SettingsPage_AppTheme.Header" xml:space="preserve">
+    <value>应用主题</value>
+  </data>
+  <data name="SettingsPage_AppTheme.Description" xml:space="preserve">
+    <value>选择应用显示的主题</value>
+  </data>
+  <data name="SettingsPage_AppLanguage.Header" xml:space="preserve">
+    <value>应用语言</value>
+  </data>
+  <data name="SettingsPage_AppLanguage.Description" xml:space="preserve">
+    <value>更改应用显示语言（需要重启应用）</value>
+  </data>
+  <data name="LanguageRestartInfo.Title" xml:space="preserve">
+    <value>需要重启</value>
+  </data>
+  <data name="LanguageRestartInfo.Message" xml:space="preserve">
+    <value>请重启应用以应用新的语言设置。</value>
+  </data>
+  <data name="LanguageRestartInfoButton.Content" xml:space="preserve">
+    <value>立即重启</value>
+  </data>
+  <data name="SettingsPage_DataLocation.Header" xml:space="preserve">
+    <value>数据位置</value>
+  </data>
+  <data name="SettingsPage_ChangeDataLocationButton.Content" xml:space="preserve">
+    <value>更改</value>
+  </data>
+  <data name="SettingsPage_DataMigratedDialog_Title" xml:space="preserve">
+    <value>位置已更改</value>
+  </data>
+  <data name="SettingsPage_DataMigratedDialog_Message" xml:space="preserve">
+    <value>数据已移动到：{0}</value>
+  </data>
+  <data name="SettingsPage_FailedToMigrateDialog_Title" xml:space="preserve">
+    <value>数据迁移失败</value>
+  </data>
+  <data name="SettingsPage_DataCleanup.Header" xml:space="preserve">
+    <value>数据清理</value>
+  </data>
+  <data name="SettingsPage_ClearSettings.Header" xml:space="preserve">
+    <value>重置设置</value>
+  </data>
+  <data name="SettingsPage_ClearSettings.Description" xml:space="preserve">
+    <value>将所有设置重置为默认值</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsButton.Content" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_Title" xml:space="preserve">
+    <value>重置设置</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_Message" xml:space="preserve">
+    <value>所有设置将被重置为默认值，此操作无法撤销。</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_ConfirmButton" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsDialog_CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_Play.Text" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="LibraryPage_Like" xml:space="preserve">
+    <value>喜爱</value>
+  </data>
+  <data name="LibraryPage_Unlike" xml:space="preserve">
+    <value>取消喜爱</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_Delete.Text" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="LibraryPage_CommandBar_AddFilesButton.Text" xml:space="preserve">
+    <value>添加文件</value>
+  </data>
+  <data name="LibraryPage_CommandBar_AddFolderButton.Text" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="LibraryPage_CommandBar_ClearSelectionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>清除选中</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜索媒体...</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortCombBox.Content" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortCombBox_FileSize.Content" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="LibraryPage_TotalSize.Text" xml:space="preserve">
+    <value>总大小: </value>
+  </data>
+  <data name="LibraryPage_EmptyStatePanel_Title.Text" xml:space="preserve">
+    <value>媒体库为空</value>
+  </data>
+  <data name="LibraryPage_EmptyStatePanel_AddFilesButton.Content" xml:space="preserve">
+    <value>添加文件</value>
+  </data>
+  <data name="LibraryPage_PropertiesButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="LibraryPage_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="LibraryPage_Status_Loaded" xml:space="preserve">
+    <value>已加载 {0} 个文件</value>
+  </data>
+  <data name="LibraryPage_Status_Loading" xml:space="preserve">
+    <value>已加载 {0} / {1} 个文件</value>
+  </data>
+  <data name="LibraryPage_Status_FailedToLoad" xml:space="preserve">
+    <value>加载失败: {0}</value>
+  </data>
+  <data name="LibraryPage_Status_FailedToDelete" xml:space="preserve">
+    <value>删除失败</value>
+  </data>
+  <data name="LibraryPage_Status_FoundFiles" xml:space="preserve">
+    <value>找到 {0} 个视频文件</value>
+  </data>
+  <data name="LibraryPage_Status_ProcessingFiles" xml:space="preserve">
+    <value>正在处理 {0}/{1}: {2}</value>
+  </data>
+  <data name="LibraryPage_Status_Added" xml:space="preserve">
+    <value>成功添加 {0} 个文件，跳过 {1} 个重复</value>
+  </data>
+  <data name="LibraryPage_Status_AddedWithFailures" xml:space="preserve">
+    <value>成功添加 {0} 个文件，跳过 {1} 个重复，{2} 个失败</value>
+  </data>
+  <data name="LibraryPage_Status_ClearedRating" xml:space="preserve">
+    <value>已清除 {0} 的评分</value>
+  </data>
+  <data name="LibraryPage_Status_Deleted" xml:space="preserve">
+    <value>成功移除 {0} 个条目</value>
+  </data>
+  <data name="LibraryPage_Status_DeletedWithFailures" xml:space="preserve">
+    <value>成功移除 {0} 个条目，{1} 个失败</value>
+  </data>
+  <data name="LibraryPage_FailedToAddFilesDialog_Title" xml:space="preserve">
+    <value>添加文件失败</value>
+  </data>
+  <data name="LibraryPage_FailedToAddFolderDialog_Title" xml:space="preserve">
+    <value>添加文件夹失败</value>
+  </data>
+  <data name="LibraryPage_FailedToScanFolderDialog_Title" xml:space="preserve">
+    <value>扫描文件夹失败</value>
+  </data>
+  <data name="LibraryPage_FilePickerNoWindow" xml:space="preserve">
+    <value>文件选择器无法找到主窗口。</value>
+  </data>
+  <data name="LibraryPage_FilePickerInitializeFailed" xml:space="preserve">
+    <value>初始化文件选择器失败：{0}</value>
+  </data>
+  <data name="LibraryPage_AddedDialog_Title" xml:space="preserve">
+    <value>添加成功</value>
+  </data>
+  <data name="LibraryPage_AddedDialog_Message" xml:space="preserve">
+    <value>成功添加 {0} 个视频到媒体库</value>
+  </data>
+  <data name="LibraryPage_FailedToPlayDialog_Title" xml:space="preserve">
+    <value>播放失败</value>
+  </data>
+  <data name="LibraryPage_PlayDialog_Title" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="LibraryPage_PlayDialog_Message" xml:space="preserve">
+    <value>即将播放: {0}</value>
+  </data>
+  <data name="LibraryPage_FailedToLikeDialog_Title" xml:space="preserve">
+    <value>喜爱失败</value>
+  </data>
+  <data name="LibraryPage_FailedToRateDialog_Title" xml:space="preserve">
+    <value>评分失败</value>
+  </data>
+  <data name="LibraryPage_FailedToClearRatingDialog_Title" xml:space="preserve">
+    <value>清除评分失败</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_Title" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_DeleteButton" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="LibraryPage_FailedToDeleteDialog_Title" xml:space="preserve">
+    <value>删除失败</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Title" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="LibraryPage_Dialog_CloseButton" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="PlaylistsPage_Rename.Text" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="PlaylistsPage_EditDescription.Text" xml:space="preserve">
+    <value>编辑描述</value>
+  </data>
+  <data name="PlaylistsPage_Duplicate.Text" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="PlaylistsPage_Delete.Text" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="PlaylistsPage_RenameButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="PlaylistsPage_EditDescriptionButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>编辑描述</value>
+  </data>
+  <data name="PlaylistsPage_DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="PlaylistsPage_VideoCount.Text" xml:space="preserve">
+    <value>个项目</value>
+  </data>
+  <data name="PlaylistsPage_CreatePlaylistText.Text" xml:space="preserve">
+    <value>新建播放列表</value>
+  </data>
+  <data name="PlaylistsPage_CreatePlaylistButton.Content" xml:space="preserve">
+    <value>新建播放列表</value>
+  </data>
+  <data name="PlaylistsPage_Refresh.ToolTipService.ToolTip" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="PlaylistsPage_SearchPlaceholder.PlaceholderText" xml:space="preserve">
+    <value>搜索播放列表...</value>
+  </data>
+  <data name="PlaylistsPage_SortByModified.Content" xml:space="preserve">
+    <value>修改时间</value>
+  </data>
+  <data name="PlaylistsPage_SortByCreated.Content" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="PlaylistsPage_SortByName.Content" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="PlaylistsPage_SortByVideoCount.Content" xml:space="preserve">
+    <value>项目数量</value>
+  </data>
+  <data name="PlaylistsPage_TotalCount.Text" xml:space="preserve">
+    <value>播放列表总数: </value>
+  </data>
+  <data name="PlaylistsPage_EmptyTitle.Text" xml:space="preserve">
+    <value>暂无播放列表</value>
+  </data>
+  <data name="PlaylistsPage_EmptyDescription.Text" xml:space="preserve">
+    <value>点击新建按钮创建第一个播放列表</value>
+  </data>
+  <data name="PlaylistsPage_LoadedPlaylists" xml:space="preserve">
+    <value>已加载 {0} 个播放列表</value>
+  </data>
+  <data name="PlaylistsPage_NoDescription" xml:space="preserve">
+    <value>无描述</value>
+  </data>
+  <data name="PlaylistsPage_ItemCountSingle" xml:space="preserve">
+    <value>{0} 个项目</value>
+  </data>
+  <data name="PlaylistsPage_ItemCountPlural" xml:space="preserve">
+    <value>{0} 个项目</value>
+  </data>
+  <data name="PlaylistsPage_FailedToLoadDialog_Title" xml:space="preserve">
+    <value>加载播放列表失败</value>
+  </data>
+  <data name="PlaylistsPage_FailedToCreateDialog_Title" xml:space="preserve">
+    <value>创建播放列表失败</value>
+  </data>
+  <data name="PlaylistsPage_FailedToUpdateDialog_Title" xml:space="preserve">
+    <value>更新播放列表失败</value>
+  </data>
+  <data name="PlaylistsPage_FailedToDeleteDialog_Title" xml:space="preserve">
+    <value>删除播放列表失败</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_CreateTitle" xml:space="preserve">
+    <value>创建新播放列表</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_CreateButton" xml:space="preserve">
+    <value>创建</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_NamePlaceholder" xml:space="preserve">
+    <value>播放列表名称</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DescriptionPlaceholder" xml:space="preserve">
+    <value>描述（可选）</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_EditDescriptionTitle" xml:space="preserve">
+    <value>编辑描述</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_SaveButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_EnterDescription" xml:space="preserve">
+    <value>输入描述...</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_RenameTitle" xml:space="preserve">
+    <value>重命名播放列表</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_OKButton" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DeleteTitle" xml:space="preserve">
+    <value>删除播放列表</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DeleteMessage" xml:space="preserve">
+    <value>确定要删除播放列表"{0}"吗？此操作无法撤销。</value>
+  </data>
+  <data name="PlaylistsPage_Dialog_DeleteButton" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="PlaylistDetailPage_Play.Text" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveUp.Text" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveDown.Text" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveToTop.Text" xml:space="preserve">
+    <value>移到顶部</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveToBottom.Text" xml:space="preserve">
+    <value>移到底部</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveFromList.Text" xml:space="preserve">
+    <value>从列表移除</value>
+  </data>
+  <data name="PlaylistDetailPage_AddVideos.Text" xml:space="preserve">
+    <value>添加视频</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolder.Text" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearSelection.ToolTipService.ToolTip" xml:space="preserve">
+    <value>清除选中</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>移除选中</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveUpButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>上移</value>
+  </data>
+  <data name="PlaylistDetailPage_MoveDownButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="PlaylistDetailPage_EditDescription.ToolTipService.ToolTip" xml:space="preserve">
+    <value>编辑描述</value>
+  </data>
+  <data name="PlaylistDetailPage_Rename.ToolTipService.ToolTip" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="PlaylistDetailPage_DeletePlaylist.ToolTipService.ToolTip" xml:space="preserve">
+    <value>删除播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="PlaylistDetailPage_InfoButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="PlaylistDetailPage_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>更多选项</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="PlaylistDetailPage_AddToLibrary.Text" xml:space="preserve">
+    <value>添加到库</value>
+  </data>
+  <data name="PlaylistDetailPage_AddToPlaylist.Text" xml:space="preserve">
+    <value>添加到播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_VideoDetails.Text" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="PlaylistDetailPage_NoOtherPlaylists" xml:space="preserve">
+    <value>没有其他播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_VideosCount" xml:space="preserve">
+    <value>个视频</value>
+  </data>
+  <data name="PlaylistDetailPage_TotalDuration" xml:space="preserve">
+    <value>总时长:</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyTitle.Text" xml:space="preserve">
+    <value>播放列表中暂无视频</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyDescription.Text" xml:space="preserve">
+    <value>点击添加视频按钮开始添加</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyAddButton.Content" xml:space="preserve">
+    <value>添加视频</value>
+  </data>
+  <data name="PlaylistDetailPage_LoadedVideos" xml:space="preserve">
+    <value>已加载 {0} 个视频</value>
+  </data>
+  <data name="PlaylistDetailPage_ScanningFolder" xml:space="preserve">
+    <value>正在扫描文件夹...</value>
+  </data>
+  <data name="PlaylistDetailPage_FoundFiles" xml:space="preserve">
+    <value>找到 {0} 个视频文件</value>
+  </data>
+  <data name="PlaylistDetailPage_ProcessingFiles" xml:space="preserve">
+    <value>正在处理 {0}/{1}: {2}</value>
+  </data>
+  <data name="PlaylistDetailPage_AddedVideos" xml:space="preserve">
+    <value>已添加 {0} 个视频</value>
+  </data>
+  <data name="PlaylistDetailPage_Removed" xml:space="preserve">
+    <value>已从播放列表移除 {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_RemovedVideos" xml:space="preserve">
+    <value>已从播放列表移除 {0} 个视频</value>
+  </data>
+  <data name="PlaylistDetailPage_AddedToLibrary" xml:space="preserve">
+    <value>已将 {0} 添加到库</value>
+  </data>
+  <data name="PlaylistDetailPage_AddedToPlaylist" xml:space="preserve">
+    <value>已将 {0} 添加到播放列表“{1}”</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_VideoDetailsTitle" xml:space="preserve">
+    <value>视频详情</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailTitle" xml:space="preserve">
+    <value>标题: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailDuration" xml:space="preserve">
+    <value>时长: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailResolution" xml:space="preserve">
+    <value>分辨率: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailFileSize" xml:space="preserve">
+    <value>文件大小: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DetailPath" xml:space="preserve">
+    <value>路径: {0}</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_CloseButton" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_TipTitle" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedTitle" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_NoVideoFiles" xml:space="preserve">
+    <value>在选定的文件夹中未找到视频文件</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_AlreadyInLibrary" xml:space="preserve">
+    <value>该视频已在库中</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToAddToLibrary" xml:space="preserve">
+    <value>添加视频到库失败</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToAddToPlaylist" xml:space="preserve">
+    <value>添加视频到播放列表失败</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToAddFolder" xml:space="preserve">
+    <value>添加文件夹失败</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_FailedToScanFolder" xml:space="preserve">
+    <value>扫描文件夹失败</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DeletePlaylistTitle" xml:space="preserve">
+    <value>删除播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DeletePlaylistMessage" xml:space="preserve">
+    <value>确定要删除播放列表"{0}"吗？此操作无法撤销。</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_DeleteButton" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_RenameTitle" xml:space="preserve">
+    <value>重命名播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_OKButton" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_EditDescriptionTitle" xml:space="preserve">
+    <value>编辑描述</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_SaveButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="PlaylistDetailPage_Dialog_EnterDescription" xml:space="preserve">
+    <value>输入描述...</value>
+  </data>
+  <data name="SettingsPage_Version.Text" xml:space="preserve">
+    <value>版本 1.0.0</value>
+  </data>
+  <data name="MainWindow_Home.Content" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="MainWindow_Library.Content" xml:space="preserve">
+    <value>媒体库</value>
+  </data>
+  <data name="MainWindow_VideoLibrary.Content" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="MainWindow_AudioLibrary.Content" xml:space="preserve">
+    <value>音频</value>
+  </data>
+  <data name="MainWindow_Playlists.Content" xml:space="preserve">
+    <value>播放列表</value>
+  </data>
+  <data name="MainWindow_PlaybackQueue.Content" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlaybackQueueSidebar_Title.Text" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlaybackQueueSidebar_Empty.Text" xml:space="preserve">
+    <value>当前播放队列为空</value>
+  </data>
+  <data name="PlaybackQueueSidebar_ClearButton.Content" xml:space="preserve">
+    <value>清空队列</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_Properties.Text" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  <data name="LibraryPage_CommandBar_RefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_Title" xml:space="preserve">
+    <value>标题: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_Resolution" xml:space="preserve">
+    <value>分辨率: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_FileSize" xml:space="preserve">
+    <value>文件大小: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_FileLocation" xml:space="preserve">
+    <value>文件位置: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_Duration" xml:space="preserve">
+    <value>时长: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_AddedTime" xml:space="preserve">
+    <value>添加时间: {0}</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortComboBox_AddedTime.Content" xml:space="preserve">
+    <value>添加时间</value>
+  </data>
+  <data name="LibraryPage_CommandBar_SortCombBox_Duration.Content" xml:space="preserve">
+    <value>时长</value>
+  </data>
+  <data name="LibraryPage_SortButton_Label.Text" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="LibraryPage_SortField_Title.Text" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="LibraryPage_SortField_AddedTime.Text" xml:space="preserve">
+    <value>添加时间</value>
+  </data>
+  <data name="LibraryPage_SortField_Duration.Text" xml:space="preserve">
+    <value>时长</value>
+  </data>
+  <data name="LibraryPage_SortField_FileSize.Text" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="LibraryPage_SortDirection_Ascending.Text" xml:space="preserve">
+    <value>正序</value>
+  </data>
+  <data name="LibraryPage_SortDirection_Descending.Text" xml:space="preserve">
+    <value>倒序</value>
+  </data>
+  <data name="SettingsPage_SourceCodeButton.Content" xml:space="preserve">
+    <value>GitHub仓库</value>
+  </data>
+  <data name="SettingsPage_FailedToClearDialog_Title" xml:space="preserve">
+    <value>清除失败</value>
+  </data>
+  <data name="LibraryPage_FailedToLoadDialog_Title" xml:space="preserve">
+    <value>加载失败</value>
+  </data>
+  <data name="LibraryPage_NoFilesDialog_Title" xml:space="preserve">
+    <value>无媒体</value>
+  </data>
+  <data name="LibraryPage_NoFilesDialog_Message" xml:space="preserve">
+    <value>此文件夹中未找到媒体</value>
+  </data>
+  <data name="SettingsPage_RestartDialog_Title" xml:space="preserve">
+    <value>需要重启</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox_Light.Content" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_Title" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="SettingsPage_ClearCacheDialog_Message" xml:space="preserve">
+    <value>确定要清理所有缓存文件吗？</value>
+  </data>
+  <data name="SettingsPage_ClearedDialog_Message" xml:space="preserve">
+    <value>已清除 {0} 个缓存文件</value>
+  </data>
+  <data name="LibraryPage_TotalCounts.Text" xml:space="preserve">
+    <value>媒体总数：</value>
+  </data>
+  <data name="LibraryPage_TotalDuration.Text" xml:space="preserve">
+    <value>总时长: </value>
+  </data>
+  <data name="SettingsPage_ClearCacheConfirm.Title" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="SettingsPage_ClearCacheConfirm.Message" xml:space="preserve">
+    <value>所有缓存文件将被永久删除。</value>
+  </data>
+  <data name="SettingsPage_ClearCacheConfirmButton.Content" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsConfirm.Title" xml:space="preserve">
+    <value>重置设置</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsConfirm.Message" xml:space="preserve">
+    <value>所有设置将被重置为默认值，此操作无法撤销。</value>
+  </data>
+  <data name="SettingsPage_ClearSettingsConfirmButton.Content" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="LibraryPage_CommandBar_DeleteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>删除选中</value>
+  </data>
+  <data name="PlayerTrack_CurrentAudioFormat" xml:space="preserve">
+    <value>当前音轨：{0}</value>
+  </data>
+  <data name="PlayerTrack_CurrentSubtitleFormat" xml:space="preserve">
+    <value>当前字幕：{0}</value>
+  </data>
+  <data name="PlayerTrack_NotSelected" xml:space="preserve">
+    <value>未选择</value>
+  </data>
+  <data name="PlayerTrack_SubtitlesOff" xml:space="preserve">
+    <value>字幕已关闭</value>
+  </data>
+  <data name="PlayerTrack_DisableSubtitles" xml:space="preserve">
+    <value>关闭字幕</value>
+  </data>
+  <data name="PlayerTrack_NoAudioTracks" xml:space="preserve">
+    <value>没有可用音轨</value>
+  </data>
+  <data name="PlayerTrack_NoSubtitleTracks" xml:space="preserve">
+    <value>没有可用字幕</value>
+  </data>
+  <data name="PlayerTrack_AudioFallbackFormat" xml:space="preserve">
+    <value>音轨 {0}</value>
+  </data>
+  <data name="PlayerTrack_SubtitleFallbackFormat" xml:space="preserve">
+    <value>字幕 {0}</value>
+  </data>
+  <data name="PlayerTrack_AddAudioTrack" xml:space="preserve">
+    <value>添加音轨...</value>
+  </data>
+  <data name="PlayerTrack_AddSubtitleTrack" xml:space="preserve">
+    <value>添加字幕...</value>
+  </data>
+  <data name="PlayerMediaInfo_Title" xml:space="preserve">
+    <value>视频信息</value>
+  </data>
+  <data name="PlayerMediaInfo_ErrorTitle" xml:space="preserve">
+    <value>无法读取视频信息</value>
+  </data>
+  <data name="MediaInfo_Name" xml:space="preserve">
+    <value>名称：{0}</value>
+  </data>
+  <data name="MediaInfo_Duration" xml:space="preserve">
+    <value>时长：{0}</value>
+  </data>
+  <data name="MediaInfo_Resolution" xml:space="preserve">
+    <value>分辨率：{0}</value>
+  </data>
+  <data name="MediaInfo_ContainerFormat" xml:space="preserve">
+    <value>封装格式：{0}</value>
+  </data>
+  <data name="MediaInfo_ContainerDescription" xml:space="preserve">
+    <value>格式说明：{0}</value>
+  </data>
+  <data name="MediaInfo_OverallBitRate" xml:space="preserve">
+    <value>总码率：{0}</value>
+  </data>
+  <data name="MediaInfo_Title" xml:space="preserve">
+    <value>标题：{0}</value>
+  </data>
+  <data name="MediaInfo_Artist" xml:space="preserve">
+    <value>艺术家：{0}</value>
+  </data>
+  <data name="MediaInfo_Album" xml:space="preserve">
+    <value>专辑：{0}</value>
+  </data>
+  <data name="MediaInfo_VideoCodec" xml:space="preserve">
+    <value>视频编码：{0}</value>
+  </data>
+  <data name="MediaInfo_FrameRate" xml:space="preserve">
+    <value>帧率：{0}</value>
+  </data>
+  <data name="MediaInfo_VideoBitRate" xml:space="preserve">
+    <value>视频码率：{0}</value>
+  </data>
+  <data name="MediaInfo_PixelFormat" xml:space="preserve">
+    <value>像素格式：{0}</value>
+  </data>
+  <data name="MediaInfo_CodecProfile" xml:space="preserve">
+    <value>编码配置：{0}</value>
+  </data>
+  <data name="MediaInfo_Rotation" xml:space="preserve">
+    <value>旋转：{0}</value>
+  </data>
+  <data name="MediaInfo_StreamTitle" xml:space="preserve">
+    <value>流标题：{0}</value>
+  </data>
+  <data name="MediaInfo_StreamLanguage" xml:space="preserve">
+    <value>语言：{0}</value>
+  </data>
+  <data name="MediaInfo_AudioCodec" xml:space="preserve">
+    <value>音频编码：{0}</value>
+  </data>
+  <data name="MediaInfo_AudioDetails" xml:space="preserve">
+    <value>音频参数：{0}</value>
+  </data>
+  <data name="MediaInfo_ChannelCount" xml:space="preserve">
+    <value>声道数：{0}</value>
+  </data>
+  <data name="MediaInfo_ChannelLayout" xml:space="preserve">
+    <value>声道布局：{0}</value>
+  </data>
+  <data name="MediaInfo_SampleRate" xml:space="preserve">
+    <value>采样率：{0}</value>
+  </data>
+  <data name="MediaInfo_SampleFormat" xml:space="preserve">
+    <value>采样格式：{0}</value>
+  </data>
+  <data name="MediaInfo_BitsPerSample" xml:space="preserve">
+    <value>位深：{0}</value>
+  </data>
+  <data name="MediaInfo_AudioBitRate" xml:space="preserve">
+    <value>音频码率：{0}</value>
+  </data>
+  <data name="MediaInfo_TrackCounts" xml:space="preserve">
+    <value>轨道：视频 {0} / 音频 {1} / 字幕 {2}</value>
+  </data>
+  <data name="MediaInfo_FileSize" xml:space="preserve">
+    <value>文件大小：{0}</value>
+  </data>
+  <data name="MediaInfo_FilePath" xml:space="preserve">
+    <value>文件位置：{0}</value>
+  </data>
+  <data name="MediaInfo_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="PlayerChapter_DefaultTitle" xml:space="preserve">
+    <value>章节 {0}</value>
+  </data>
+  <data name="AudioPlayer_Play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="AudioPlayer_Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="AudioPlayer_Mute" xml:space="preserve">
+    <value>静音</value>
+  </data>
+  <data name="AudioPlayer_Unmute" xml:space="preserve">
+    <value>取消静音</value>
+  </data>
+  <data name="AudioPlayer_Expand" xml:space="preserve">
+    <value>打开播放详情</value>
+  </data>
+  <data name="AudioPlayer_Close" xml:space="preserve">
+    <value>关闭音频播放器</value>
+  </data>
+  <data name="AudioPlayer_Speed" xml:space="preserve">
+    <value>播放速度</value>
+  </data>
+  <data name="AudioPlayer_Volume" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="AudioPlayer_OpenVolume" xml:space="preserve">
+    <value>打开音量控制</value>
+  </data>
+  <data name="AudioPlayer_StateMuted" xml:space="preserve">
+    <value>已静音</value>
+  </data>
+  <data name="AudioPlayer_StateUnmuted" xml:space="preserve">
+    <value>未静音</value>
+  </data>
+  <data name="AudioPlayer_Shuffle" xml:space="preserve">
+    <value>随机播放</value>
+  </data>
+  <data name="AudioPlayer_ShuffleEnable" xml:space="preserve">
+    <value>开启随机播放</value>
+  </data>
+  <data name="AudioPlayer_ShuffleDisable" xml:space="preserve">
+    <value>关闭随机播放</value>
+  </data>
+  <data name="AudioPlayer_Previous" xml:space="preserve">
+    <value>上一首</value>
+  </data>
+  <data name="AudioPlayer_Next" xml:space="preserve">
+    <value>下一首</value>
+  </data>
+  <data name="AudioPlayer_Repeat" xml:space="preserve">
+    <value>循环播放</value>
+  </data>
+  <data name="AudioPlayer_RepeatEnable" xml:space="preserve">
+    <value>开启列表循环</value>
+  </data>
+  <data name="AudioPlayer_RepeatOneEnable" xml:space="preserve">
+    <value>切换为单曲循环</value>
+  </data>
+  <data name="AudioPlayer_RepeatDisable" xml:space="preserve">
+    <value>关闭循环播放</value>
+  </data>
+  <data name="AudioPlayer_ShortcutPlayPause" xml:space="preserve">
+    <value>空格 / Ctrl+P</value>
+  </data>
+  <data name="AudioPlayer_ShortcutPrevious" xml:space="preserve">
+    <value>Page Up / Ctrl+左方向键</value>
+  </data>
+  <data name="AudioPlayer_ShortcutNext" xml:space="preserve">
+    <value>Page Down / Ctrl+右方向键</value>
+  </data>
+  <data name="AudioPlayer_ShortcutSeek" xml:space="preserve">
+    <value>左方向键 / 右方向键</value>
+  </data>
+  <data name="AudioPlayer_ShortcutVolume" xml:space="preserve">
+    <value>上方向键 / 下方向键 · M</value>
+  </data>
+  <data name="AudioPlayer_ShortcutMute" xml:space="preserve">
+    <value>M / Ctrl+M</value>
+  </data>
+  <data name="AudioPlayer_ShortcutShuffle" xml:space="preserve">
+    <value>S / Ctrl+Shift+S</value>
+  </data>
+  <data name="AudioPlayer_ShortcutRepeat" xml:space="preserve">
+    <value>R / Ctrl+Shift+R</value>
+  </data>
+  <data name="AudioPlayer_ShortcutCloseDetails" xml:space="preserve">
+    <value>Esc</value>
+  </data>
+  <data name="AudioPlayer_PlayPauseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放 / 暂停（空格 / Ctrl+P）</value>
+  </data>
+  <data name="AudioPlayer_PlayPauseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放或暂停</value>
+  </data>
+  <data name="AudioPlayer_ShuffleButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>随机播放（S / Ctrl+Shift+S）</value>
+  </data>
+  <data name="AudioPlayer_ShuffleButton.AutomationProperties.Name" xml:space="preserve">
+    <value>随机播放</value>
+  </data>
+  <data name="AudioPlayer_PreviousButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>上一首（Page Up / Ctrl+左方向键）</value>
+  </data>
+  <data name="AudioPlayer_PreviousButton.AutomationProperties.Name" xml:space="preserve">
+    <value>上一首</value>
+  </data>
+  <data name="AudioPlayer_NextButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>下一首（Page Down / Ctrl+右方向键）</value>
+  </data>
+  <data name="AudioPlayer_NextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>下一首</value>
+  </data>
+  <data name="AudioPlayer_RepeatButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>循环播放（R / Ctrl+Shift+R）</value>
+  </data>
+  <data name="AudioPlayer_RepeatButton.AutomationProperties.Name" xml:space="preserve">
+    <value>循环播放</value>
+  </data>
+  <data name="AudioPlayer_NowPlayingButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>打开播放详情</value>
+  </data>
+  <data name="AudioPlayer_NowPlayingButton.AutomationProperties.Name" xml:space="preserve">
+    <value>打开播放详情</value>
+  </data>
+  <data name="AudioPlayer_MuteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>打开音量控制（上/下方向键 · M）</value>
+  </data>
+  <data name="AudioPlayer_MuteButton.AutomationProperties.Name" xml:space="preserve">
+    <value>打开音量控制</value>
+  </data>
+  <data name="AudioPlayer_VolumeSlider.ToolTipService.ToolTip" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="AudioPlayer_VolumeSlider.AutomationProperties.Name" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="AudioPlayer_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>更多播放选项</value>
+  </data>
+  <data name="AudioPlayer_MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>更多播放选项</value>
+  </data>
+  <data name="AudioPlayer_CloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>关闭音频播放器</value>
+  </data>
+  <data name="AudioPlayer_CloseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>关闭音频播放器</value>
+  </data>
+  <data name="AudioPlayer_CollapseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>关闭播放详情（Esc）</value>
+  </data>
+  <data name="AudioPlayer_CollapseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>关闭播放详情</value>
+  </data>
+  <data name="AudioPlayer_UnknownArtist" xml:space="preserve">
+    <value>未知艺术家</value>
+  </data>
+  <data name="AudioPlayer_UnknownAlbum" xml:space="preserve">
+    <value>未知专辑</value>
+  </data>
+  <data name="AudioPlayer_Collapse" xml:space="preserve">
+    <value>收起播放详情</value>
+  </data>
+  <data name="AudioPlayer_LyricsTitle.Text" xml:space="preserve">
+    <value>歌词</value>
+  </data>
+  <data name="AudioPlayer_LyricsLoading.Text" xml:space="preserve">
+    <value>正在加载歌词…</value>
+  </data>
+  <data name="AudioPlayer_LyricsEmptyTitle.Text" xml:space="preserve">
+    <value>未找到歌词</value>
+  </data>
+  <data name="AudioPlayer_LyricsEmptyDescription.Text" xml:space="preserve">
+    <value>可将同名 .lrc 文件放在音频旁，或使用带内嵌歌词的音频。</value>
+  </data>
+  <data name="AudioPlayer_LyricsSourceSidecar" xml:space="preserve">
+    <value>LRC</value>
+  </data>
+  <data name="AudioPlayer_LyricsSourceEmbedded" xml:space="preserve">
+    <value>内嵌</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_VideoDetails" xml:space="preserve">
+    <value>视频流</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_AudioDetails" xml:space="preserve">
+    <value>音频流</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_ContainerDetails" xml:space="preserve">
+    <value>容器信息</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_MetadataDetails" xml:space="preserve">
+    <value>媒体标签</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_FileDetails" xml:space="preserve">
+    <value>文件信息</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_TracksLabel" xml:space="preserve">
+    <value>媒体流</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_TrackSummary" xml:space="preserve">
+    <value>视频 {0} · 音频 {1} · 字幕 {2}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_VideoKind" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_AudioKind" xml:space="preserve">
+    <value>音频</value>
+  </data>
+  <data name="PlaylistsPage_Title.Text" xml:space="preserve">
+    <value>播放列表</value>
+  </data>
+  <data name="PlaylistsPage_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>更多播放列表操作</value>
+  </data>
+  <data name="PlaylistsPage_MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>更多播放列表操作</value>
+  </data>
+  <data name="PlaylistsPage_Refresh.AutomationProperties.Name" xml:space="preserve">
+    <value>刷新播放列表</value>
+  </data>
+  <data name="PlaylistsPage_SearchPlaceholder.AutomationProperties.Name" xml:space="preserve">
+    <value>搜索播放列表</value>
+  </data>
+  <data name="PlaylistsPage_Loading.Text" xml:space="preserve">
+    <value>正在加载播放列表…</value>
+  </data>
+  <data name="PlaylistsPage_NoResultsTitle.Text" xml:space="preserve">
+    <value>没有匹配的播放列表</value>
+  </data>
+  <data name="PlaylistsPage_NoResultsDescription.Text" xml:space="preserve">
+    <value>请尝试其他关键词，或清除当前搜索。</value>
+  </data>
+  <data name="PlaylistsPage_ClearSearch.Content" xml:space="preserve">
+    <value>清除搜索</value>
+  </data>
+  <data name="PlaylistsPage_RefreshFailed" xml:space="preserve">
+    <value>无法刷新播放列表</value>
+  </data>
+  <data name="PlaylistsPage_NameRequired" xml:space="preserve">
+    <value>请输入播放列表名称。</value>
+  </data>
+  <data name="Common_RetryButton.Content" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="Common_RetryButton.AutomationProperties.Name" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="HomePage_Title.Text" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="HomePage_RecentRefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>刷新最近打开的项目</value>
+  </data>
+  <data name="HomePage_RecentRefreshButton.AutomationProperties.Name" xml:space="preserve">
+    <value>刷新最近打开的项目</value>
+  </data>
+  <data name="HomePage_QuickActionBusy.Text" xml:space="preserve">
+    <value>正在准备媒体…</value>
+  </data>
+  <data name="LibraryPage_AudioTitle" xml:space="preserve">
+    <value>音频库</value>
+  </data>
+  <data name="LibraryPage_VideoTitle" xml:space="preserve">
+    <value>视频库</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_AddToQueue.Text" xml:space="preserve">
+    <value>添加到播放队列</value>
+  </data>
+  <data name="LibraryPage_PlaySelected.Label" xml:space="preserve">
+    <value>播放所选</value>
+  </data>
+  <data name="LibraryPage_PlaySelected.AutomationProperties.Name" xml:space="preserve">
+    <value>播放所选项目</value>
+  </data>
+  <data name="LibraryPage_PlaySelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放所选项目</value>
+  </data>
+  <data name="LibraryPage_QueueSelected.Label" xml:space="preserve">
+    <value>加入队列</value>
+  </data>
+  <data name="LibraryPage_QueueSelected.AutomationProperties.Name" xml:space="preserve">
+    <value>将所选项目加入播放队列</value>
+  </data>
+  <data name="LibraryPage_QueueSelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>将所选项目加入播放队列</value>
+  </data>
+  <data name="LibraryPage_CommandBar_DeleteButton.Label" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="LibraryPage_CommandBar_DeleteButton.AutomationProperties.Name" xml:space="preserve">
+    <value>删除所选项目</value>
+  </data>
+  <data name="LibraryPage_CommandBar_ClearSelectionButton.Label" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="LibraryPage_CommandBar_ClearSelectionButton.AutomationProperties.Name" xml:space="preserve">
+    <value>清除选择</value>
+  </data>
+  <data name="LibraryPage_SelectedCount" xml:space="preserve">
+    <value>已选择 {0} 项</value>
+  </data>
+  <data name="LibraryPage_SelectedCounts.Text" xml:space="preserve">
+    <value>已选择：</value>
+  </data>
+  <data name="LibraryPage_NoResultsTitle.Text" xml:space="preserve">
+    <value>没有匹配的媒体</value>
+  </data>
+  <data name="LibraryPage_NoResultsDescription.Text" xml:space="preserve">
+    <value>请尝试其他关键词，或清除当前搜索。</value>
+  </data>
+  <data name="LibraryPage_ClearSearch.Content" xml:space="preserve">
+    <value>清除搜索</value>
+  </data>
+  <data name="LibraryPage_RefreshFailed" xml:space="preserve">
+    <value>无法刷新媒体库</value>
+  </data>
+  <data name="LibraryPage_DisplayedCounts.Text" xml:space="preserve">
+    <value>已显示：</value>
+  </data>
+  <data name="LibraryPage_DisplayedDuration.Text" xml:space="preserve">
+    <value>已显示时长：</value>
+  </data>
+  <data name="LibraryPage_DisplayedSize.Text" xml:space="preserve">
+    <value>已显示大小：</value>
+  </data>
+  <data name="LibraryPage_DisplayedOfTotal" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_Title" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_AddedTime" xml:space="preserve">
+    <value>添加时间</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_Duration" xml:space="preserve">
+    <value>时长</value>
+  </data>
+  <data name="LibraryPage_SortCurrent_FileSize" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="LibraryPage_Status_PlayingSelected" xml:space="preserve">
+    <value>正在播放所选的 {0} 项</value>
+  </data>
+  <data name="LibraryPage_PlaySelectedFailed" xml:space="preserve">
+    <value>无法播放所选项目</value>
+  </data>
+  <data name="LibraryPage_Status_Queued" xml:space="preserve">
+    <value>已将 {0} 项添加到播放队列</value>
+  </data>
+  <data name="LibraryPage_QueueSelectedFailed" xml:space="preserve">
+    <value>无法将项目添加到播放队列</value>
+  </data>
+  <data name="LibraryPage_KindVideo" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="LibraryPage_KindAudio" xml:space="preserve">
+    <value>音频</value>
+  </data>
+  <data name="LibraryPage_KindImage" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="LibraryPage_KindMedia" xml:space="preserve">
+    <value>媒体</value>
+  </data>
+  <data name="LibraryPage_ServiceUnavailable" xml:space="preserve">
+    <value>媒体库当前不可用。</value>
+  </data>
+  <data name="PlaybackQueueSidebar_ResizeHandle.AutomationProperties.Name" xml:space="preserve">
+    <value>调整播放队列宽度</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CloseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>关闭播放队列</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>关闭播放队列</value>
+  </data>
+  <data name="PlaybackQueueSidebar_List.AutomationProperties.Name" xml:space="preserve">
+    <value>播放队列项目</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CurrentIndicator.AutomationProperties.Name" xml:space="preserve">
+    <value>正在播放</value>
+  </data>
+  <data name="PlaybackQueueSidebar_PlayButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放队列项目</value>
+  </data>
+  <data name="PlaybackQueueSidebar_PlayButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="PlaybackQueueSidebar_RemoveButton.AutomationProperties.Name" xml:space="preserve">
+    <value>移除队列项目</value>
+  </data>
+  <data name="PlaybackQueueSidebar_RemoveButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>从队列移除</value>
+  </data>
+  <data name="PlaybackQueueSidebar_CountFormat" xml:space="preserve">
+    <value>{0} 项</value>
+  </data>
+  <data name="AudioPlayer_More" xml:space="preserve">
+    <value>更多播放选项</value>
+  </data>
+  <data name="AudioPlayer_Seek" xml:space="preserve">
+    <value>播放位置</value>
+  </data>
+  <data name="AudioPlayer_StateOn" xml:space="preserve">
+    <value>已开启</value>
+  </data>
+  <data name="AudioPlayer_StateOff" xml:space="preserve">
+    <value>已关闭</value>
+  </data>
+  <data name="AudioPlayer_RepeatStateAll" xml:space="preserve">
+    <value>列表循环</value>
+  </data>
+  <data name="AudioPlayer_RepeatStateOne" xml:space="preserve">
+    <value>单曲循环</value>
+  </data>
+  <data name="AudioPlayer_PreviousMenuItem.Text" xml:space="preserve">
+    <value>上一项</value>
+  </data>
+  <data name="AudioPlayer_NextMenuItem.Text" xml:space="preserve">
+    <value>下一项</value>
+  </data>
+  <data name="AudioPlayer_ShuffleMenuItem.Text" xml:space="preserve">
+    <value>开启随机播放</value>
+  </data>
+  <data name="AudioPlayer_RepeatMenuItem.Text" xml:space="preserve">
+    <value>开启列表循环</value>
+  </data>
+  <data name="PlayerWindow_Brand.Text" xml:space="preserve">
+    <value>Koukei 播放器</value>
+  </data>
+  <data name="PlayerWindow_DefaultTitle" xml:space="preserve">
+    <value>Koukei 播放器</value>
+  </data>
+  <data name="PlayerWindow_Ready.Text" xml:space="preserve">
+    <value>准备就绪</value>
+  </data>
+  <data name="PlayerWindow_ContextPlayPause.Text" xml:space="preserve">
+    <value>播放 / 暂停</value>
+  </data>
+  <data name="PlayerWindow_ContextFullscreen.Text" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="PlayerWindow_ContextClose.Text" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="PlayerWindow_SeekBar.AutomationProperties.Name" xml:space="preserve">
+    <value>播放位置</value>
+  </data>
+  <data name="PlayerWindow_PlaylistButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlayerWindow_PlaylistButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlayerWindow_PlaylistTitle.Text" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlayerWindow_PlaylistList.AutomationProperties.Name" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlayerWindow_CurrentQueueItemIndicator.AutomationProperties.Name" xml:space="preserve">
+    <value>正在播放</value>
+  </data>
+  <data name="PlayerWindow_RemoveQueueItemButton.Content" xml:space="preserve">
+    <value>移除所选项</value>
+  </data>
+  <data name="PlayerWindow_RemoveQueueItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>从播放队列中移除所选项</value>
+  </data>
+  <data name="PlayerWindow_RemoveQueueItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>移除所选队列项目</value>
+  </data>
+  <data name="PlayerWindow_AudioTrackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>音轨</value>
+  </data>
+  <data name="PlayerWindow_AudioTrackButton.AutomationProperties.Name" xml:space="preserve">
+    <value>音轨</value>
+  </data>
+  <data name="PlayerWindow_SubtitleTrackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>字幕</value>
+  </data>
+  <data name="PlayerWindow_SubtitleTrackButton.AutomationProperties.Name" xml:space="preserve">
+    <value>字幕</value>
+  </data>
+  <data name="PlayerWindow_MediaInfoButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放信息</value>
+  </data>
+  <data name="PlayerWindow_MediaInfoButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放信息</value>
+  </data>
+  <data name="PlayerWindow_MuteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="PlayerWindow_MuteButton.AutomationProperties.Name" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="PlayerWindow_PreviousButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>上一项</value>
+  </data>
+  <data name="PlayerWindow_PreviousButton.AutomationProperties.Name" xml:space="preserve">
+    <value>上一项</value>
+  </data>
+  <data name="PlayerWindow_RewindButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="PlayerWindow_RewindButton.AutomationProperties.Name" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="PlayerWindow_PlayPauseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放 / 暂停</value>
+  </data>
+  <data name="PlayerWindow_PlayPauseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放 / 暂停</value>
+  </data>
+  <data name="PlayerWindow_ForwardButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>前进</value>
+  </data>
+  <data name="PlayerWindow_ForwardButton.AutomationProperties.Name" xml:space="preserve">
+    <value>前进</value>
+  </data>
+  <data name="PlayerWindow_NextButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>下一项</value>
+  </data>
+  <data name="PlayerWindow_NextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>下一项</value>
+  </data>
+  <data name="PlayerWindow_ShuffleButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>随机播放</value>
+  </data>
+  <data name="PlayerWindow_ShuffleButton.AutomationProperties.Name" xml:space="preserve">
+    <value>随机播放</value>
+  </data>
+  <data name="PlayerWindow_RepeatButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>循环播放</value>
+  </data>
+  <data name="PlayerWindow_RepeatButton.AutomationProperties.Name" xml:space="preserve">
+    <value>循环播放</value>
+  </data>
+  <data name="PlayerWindow_SpeedButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放速度</value>
+  </data>
+  <data name="PlayerWindow_SpeedButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放速度</value>
+  </data>
+  <data name="PlayerWindow_ScreenshotButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>截图</value>
+  </data>
+  <data name="PlayerWindow_ScreenshotButton.AutomationProperties.Name" xml:space="preserve">
+    <value>截图</value>
+  </data>
+  <data name="PlayerWindow_PictureInPictureButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>画中画</value>
+  </data>
+  <data name="PlayerWindow_PictureInPictureButton.AutomationProperties.Name" xml:space="preserve">
+    <value>画中画</value>
+  </data>
+  <data name="PlayerWindow_FullScreenButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="PlayerWindow_FullScreenButton.AutomationProperties.Name" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="PlayerWindow_MoreButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>更多播放选项</value>
+  </data>
+  <data name="PlayerWindow_MoreButton.AutomationProperties.Name" xml:space="preserve">
+    <value>更多播放选项</value>
+  </data>
+  <data name="PlayerWindow_MorePlaylist.Text" xml:space="preserve">
+    <value>播放队列</value>
+  </data>
+  <data name="PlayerWindow_MoreAudioTrack.Text" xml:space="preserve">
+    <value>音轨</value>
+  </data>
+  <data name="PlayerWindow_MoreSubtitleTrack.Text" xml:space="preserve">
+    <value>字幕</value>
+  </data>
+  <data name="PlayerWindow_MoreMediaInfo.Text" xml:space="preserve">
+    <value>播放信息</value>
+  </data>
+  <data name="PlayerWindow_MorePrevious.Text" xml:space="preserve">
+    <value>上一项</value>
+  </data>
+  <data name="PlayerWindow_MoreRewind.Text" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="PlayerWindow_MoreForward.Text" xml:space="preserve">
+    <value>前进</value>
+  </data>
+  <data name="PlayerWindow_MoreNext.Text" xml:space="preserve">
+    <value>下一项</value>
+  </data>
+  <data name="PlayerWindow_MoreShuffle.Text" xml:space="preserve">
+    <value>开启随机播放</value>
+  </data>
+  <data name="PlayerWindow_MoreRepeat.Text" xml:space="preserve">
+    <value>开启列表循环</value>
+  </data>
+  <data name="PlayerWindow_MoreSpeed.Text" xml:space="preserve">
+    <value>播放速度</value>
+  </data>
+  <data name="PlayerWindow_MoreScreenshot.Text" xml:space="preserve">
+    <value>截图</value>
+  </data>
+  <data name="PlayerWindow_MorePictureInPicture.Text" xml:space="preserve">
+    <value>画中画</value>
+  </data>
+  <data name="PlayerWindow_MoreFullScreen.Text" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="PlayerWindow_MinimizeButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="PlayerWindow_MinimizeButton.AutomationProperties.Name" xml:space="preserve">
+    <value>最小化窗口</value>
+  </data>
+  <data name="PlayerWindow_MaximizeButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="PlayerWindow_MaximizeButton.AutomationProperties.Name" xml:space="preserve">
+    <value>最大化窗口</value>
+  </data>
+  <data name="PlayerWindow_CloseButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="PlayerWindow_CloseButton.AutomationProperties.Name" xml:space="preserve">
+    <value>关闭播放器窗口</value>
+  </data>
+  <data name="PlayerWindow_LoadingRing.AutomationProperties.Name" xml:space="preserve">
+    <value>正在加载媒体</value>
+  </data>
+  <data name="PlayerWindow_Seek" xml:space="preserve">
+    <value>播放位置</value>
+  </data>
+  <data name="PlayerWindow_More" xml:space="preserve">
+    <value>更多播放选项</value>
+  </data>
+  <data name="PlayerWindow_OpenVolume" xml:space="preserve">
+    <value>打开音量控制</value>
+  </data>
+  <data name="PlayerWindow_StateMuted" xml:space="preserve">
+    <value>已静音</value>
+  </data>
+  <data name="PlayerWindow_StateUnmuted" xml:space="preserve">
+    <value>未静音</value>
+  </data>
+  <data name="PlayerWindow_Play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="PlayerWindow_Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="PlayerWindow_StatePaused" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="PlayerWindow_PauseOverlay.AutomationProperties.Name" xml:space="preserve">
+    <value>视频已暂停</value>
+  </data>
+  <data name="PlayerWindow_StatePlaying" xml:space="preserve">
+    <value>正在播放</value>
+  </data>
+  <data name="PlayerWindow_Shuffle" xml:space="preserve">
+    <value>随机播放</value>
+  </data>
+  <data name="PlayerWindow_ShuffleEnable" xml:space="preserve">
+    <value>开启随机播放</value>
+  </data>
+  <data name="PlayerWindow_ShuffleDisable" xml:space="preserve">
+    <value>关闭随机播放</value>
+  </data>
+  <data name="PlayerWindow_Repeat" xml:space="preserve">
+    <value>循环播放</value>
+  </data>
+  <data name="PlayerWindow_RepeatEnable" xml:space="preserve">
+    <value>开启列表循环</value>
+  </data>
+  <data name="PlayerWindow_RepeatOneEnable" xml:space="preserve">
+    <value>切换到单曲循环</value>
+  </data>
+  <data name="PlayerWindow_RepeatDisable" xml:space="preserve">
+    <value>关闭循环播放</value>
+  </data>
+  <data name="PlayerWindow_StateOn" xml:space="preserve">
+    <value>已开启</value>
+  </data>
+  <data name="PlayerWindow_StateOff" xml:space="preserve">
+    <value>已关闭</value>
+  </data>
+  <data name="PlayerWindow_RepeatStateAll" xml:space="preserve">
+    <value>列表循环</value>
+  </data>
+  <data name="PlayerWindow_RepeatStateOne" xml:space="preserve">
+    <value>单曲循环</value>
+  </data>
+  <data name="PlayerWindow_Mute" xml:space="preserve">
+    <value>静音</value>
+  </data>
+  <data name="PlayerWindow_Unmute" xml:space="preserve">
+    <value>取消静音</value>
+  </data>
+  <data name="PlayerWindow_SpeedFormat" xml:space="preserve">
+    <value>播放速度（{0:0.0}x）</value>
+  </data>
+  <data name="PlayerWindow_RewindFormat" xml:space="preserve">
+    <value>后退 {0:0} 秒</value>
+  </data>
+  <data name="PlayerWindow_ForwardFormat" xml:space="preserve">
+    <value>前进 {0:0} 秒</value>
+  </data>
+  <data name="PlayerWindow_EnterFullScreen" xml:space="preserve">
+    <value>进入全屏</value>
+  </data>
+  <data name="PlayerWindow_ExitFullScreen" xml:space="preserve">
+    <value>退出全屏</value>
+  </data>
+  <data name="PlayerWindow_EnterPictureInPicture" xml:space="preserve">
+    <value>进入画中画</value>
+  </data>
+  <data name="PlayerWindow_ExitPictureInPicture" xml:space="preserve">
+    <value>退出画中画</value>
+  </data>
+  <data name="PlayerWindow_Restore" xml:space="preserve">
+    <value>还原</value>
+  </data>
+  <data name="PlayerWindow_Maximize" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="PlayerWindow_Surface.AutomationProperties.Name" xml:space="preserve">
+    <value>视频播放区域</value>
+  </data>
+  <data name="PlayerWindow_VolumeSlider.AutomationProperties.Name" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="LibraryPage_UnknownFile" xml:space="preserve">
+    <value>未知文件</value>
+  </data>
+  <data name="PlaylistsPage_StatePresenter.RetryText" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="PlaylistsPage_LoadingState" xml:space="preserve">
+    <value>正在加载播放列表</value>
+  </data>
+  <data name="SettingsPage_Scaffold.Title" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_RefreshMetadata.Text" xml:space="preserve">
+    <value>刷新元数据</value>
+  </data>
+  <data name="LibraryPage_RefreshSelectedMetadata.Label" xml:space="preserve">
+    <value>刷新元数据</value>
+  </data>
+  <data name="LibraryPage_RefreshSelectedMetadata.AutomationProperties.Name" xml:space="preserve">
+    <value>刷新所选项目的元数据</value>
+  </data>
+  <data name="LibraryPage_RefreshSelectedMetadata.ToolTipService.ToolTip" xml:space="preserve">
+    <value>刷新所选项目的元数据</value>
+  </data>
+  <data name="LibraryPage_Status_MetadataRefreshed" xml:space="preserve">
+    <value>已刷新 {0} 个项目的元数据</value>
+  </data>
+  <data name="LibraryPage_Status_MetadataRefreshFailed" xml:space="preserve">
+    <value>无法刷新媒体元数据</value>
+  </data>
+  <data name="PlaylistsPage_PlayButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放此播放列表</value>
+  </data>
+  <data name="PlaylistsPage_PlayButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放此播放列表</value>
+  </data>
+  <data name="PlaylistsPage_QueueButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>添加到播放队列</value>
+  </data>
+  <data name="PlaylistsPage_QueueButton.AutomationProperties.Name" xml:space="preserve">
+    <value>将此播放列表添加到播放队列</value>
+  </data>
+  <data name="PlaylistsPage_PreparingPlayback" xml:space="preserve">
+    <value>正在准备“{0}”…</value>
+  </data>
+  <data name="PlaylistsPage_PlaylistNotFound" xml:space="preserve">
+    <value>找不到该播放列表。</value>
+  </data>
+  <data name="PlaylistsPage_NoPlayableItems" xml:space="preserve">
+    <value>该播放列表中没有可播放的项目。</value>
+  </data>
+  <data name="PlaylistsPage_PlayingPlaylist" xml:space="preserve">
+    <value>正在播放“{0}”中的 {1} 个项目</value>
+  </data>
+  <data name="PlaylistsPage_QueuedPlaylist" xml:space="preserve">
+    <value>已将“{0}”中的 {1} 个项目添加到播放队列</value>
+  </data>
+  <data name="PlaylistsPage_FailedToPlayDialog_Title" xml:space="preserve">
+    <value>无法播放播放列表</value>
+  </data>
+  <data name="PlaylistsPage_FailedToQueueDialog_Title" xml:space="preserve">
+    <value>无法添加到播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayItem.Text" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveItem.Text" xml:space="preserve">
+    <value>从播放列表移除</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放项目</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>从播放列表移除</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>从播放列表移除项目</value>
+  </data>
+  <data name="PlaylistDetailPage_UnavailableItem.ToolTipService.ToolTip" xml:space="preserve">
+    <value>媒体文件不可用</value>
+  </data>
+  <data name="PlaylistDetailPage_UnavailableItem.AutomationProperties.Name" xml:space="preserve">
+    <value>媒体文件不可用</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAll.Label" xml:space="preserve">
+    <value>全部播放</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAll.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放全部可用项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAll.AutomationProperties.Name" xml:space="preserve">
+    <value>播放全部可用项目</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAll.Label" xml:space="preserve">
+    <value>全部加入队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAll.ToolTipService.ToolTip" xml:space="preserve">
+    <value>将全部可用项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAll.AutomationProperties.Name" xml:space="preserve">
+    <value>将全部可用项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_Refresh.Label" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="PlaylistDetailPage_Refresh.ToolTipService.ToolTip" xml:space="preserve">
+    <value>刷新播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_Refresh.AutomationProperties.Name" xml:space="preserve">
+    <value>刷新播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_Clear.Label" xml:space="preserve">
+    <value>清空</value>
+  </data>
+  <data name="PlaylistDetailPage_Clear.ToolTipService.ToolTip" xml:space="preserve">
+    <value>清空播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_Clear.AutomationProperties.Name" xml:space="preserve">
+    <value>清空播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_StatePresenter.RetryText" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="PlaylistDetailPage_InvalidPlaylist" xml:space="preserve">
+    <value>无法打开此播放列表。</value>
+  </data>
+  <data name="PlaylistDetailPage_NotFound" xml:space="preserve">
+    <value>此播放列表已不存在。</value>
+  </data>
+  <data name="PlaylistDetailPage_Loading" xml:space="preserve">
+    <value>正在加载播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_LoadFailed" xml:space="preserve">
+    <value>无法加载播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyTitleMessage" xml:space="preserve">
+    <value>此播放列表为空</value>
+  </data>
+  <data name="PlaylistDetailPage_EmptyDescriptionMessage" xml:space="preserve">
+    <value>使用“添加文件”或“添加文件夹”加入音频和视频。</value>
+  </data>
+  <data name="PlaylistDetailPage_Status" xml:space="preserve">
+    <value>共 {0} 个项目，{1} 个可用</value>
+  </data>
+  <data name="PlaylistDetailPage_Playing" xml:space="preserve">
+    <value>正在播放 {0} 个项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayFailed" xml:space="preserve">
+    <value>无法播放此播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_Queued" xml:space="preserve">
+    <value>已将 {0} 个项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueFailed" xml:space="preserve">
+    <value>无法将播放列表加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveFailed" xml:space="preserve">
+    <value>无法移除项目</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearDialogTitle" xml:space="preserve">
+    <value>清空播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearDialogMessage" xml:space="preserve">
+    <value>从此播放列表移除全部项目？</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearButtonText" xml:space="preserve">
+    <value>清空</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearFailed" xml:space="preserve">
+    <value>无法清空播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_ReorderFailed" xml:space="preserve">
+    <value>无法调整播放列表顺序</value>
+  </data>
+  <data name="LibraryPage_MenuFlyout_AddToSavedPlaylist.Text" xml:space="preserve">
+    <value>添加到播放列表</value>
+  </data>
+  <data name="LibraryPage_AddSelectedToSavedPlaylist.Label" xml:space="preserve">
+    <value>添加到播放列表</value>
+  </data>
+  <data name="LibraryPage_AddSelectedToSavedPlaylist.ToolTipService.ToolTip" xml:space="preserve">
+    <value>将所选项目添加到播放列表</value>
+  </data>
+  <data name="LibraryPage_AddSelectedToSavedPlaylist.AutomationProperties.Name" xml:space="preserve">
+    <value>将所选项目添加到播放列表</value>
+  </data>
+  <data name="LibraryPage_Status_AddedToSavedPlaylist" xml:space="preserve">
+    <value>已向“{1}”添加 {0} 个项目；{2} 个已存在</value>
+  </data>
+  <data name="LibraryPage_AddToSavedPlaylistFailed" xml:space="preserve">
+    <value>无法将项目添加到播放列表</value>
+  </data>
+  <data name="PlaylistPicker_ChooseHeader" xml:space="preserve">
+    <value>播放列表</value>
+  </data>
+  <data name="PlaylistPicker_Title" xml:space="preserve">
+    <value>添加到播放列表</value>
+  </data>
+  <data name="PlaylistPicker_AddButton" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="PlaylistPicker_NewButton" xml:space="preserve">
+    <value>新建播放列表</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SaveButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>将队列保存到播放列表</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SaveButton.AutomationProperties.Name" xml:space="preserve">
+    <value>将队列保存到播放列表</value>
+  </data>
+  <data name="PlaybackQueueSidebar_NoLibraryItems" xml:space="preserve">
+    <value>队列中没有可保存的媒体库项目。</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SavedToPlaylist" xml:space="preserve">
+    <value>已向“{1}”添加 {0} 个项目；{2} 个已存在</value>
+  </data>
+  <data name="PlaybackQueueSidebar_SaveFailed" xml:space="preserve">
+    <value>无法保存队列：{0}</value>
+  </data>
+  <data name="PlaylistsPage_Open.Text" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItem.Text" xml:space="preserve">
+    <value>加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>将项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueuedItem" xml:space="preserve">
+    <value>已将“{0}”加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueItemFailed" xml:space="preserve">
+    <value>无法将项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_RefreshFailed" xml:space="preserve">
+    <value>无法刷新播放列表</value>
+  </data>
+  <data name="PlaylistsPage_Status" xml:space="preserve">
+    <value>当前显示 {0} 个，共 {1} 个</value>
+  </data>
+  <data name="PlaylistDetailPage_BackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>返回播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_BackButton.AutomationProperties.Name" xml:space="preserve">
+    <value>返回播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_AddItems.Label" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="PlaylistDetailPage_AddItems.ToolTipService.ToolTip" xml:space="preserve">
+    <value>添加文件或文件夹</value>
+  </data>
+  <data name="PlaylistDetailPage_AddItems.AutomationProperties.Name" xml:space="preserve">
+    <value>添加文件或文件夹</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFiles.Text" xml:space="preserve">
+    <value>添加文件</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFilesFailed" xml:space="preserve">
+    <value>无法将文件添加到播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolderFailed" xml:space="preserve">
+    <value>无法将文件夹添加到播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_NoFilesTitle" xml:space="preserve">
+    <value>没有媒体文件</value>
+  </data>
+  <data name="PlaylistDetailPage_NoFilesMessage" xml:space="preserve">
+    <value>未找到支持的音频或视频文件。</value>
+  </data>
+  <data name="PlaylistDetailPage_ImportProgress" xml:space="preserve">
+    <value>正在处理 {0}/{1}：{2}</value>
+  </data>
+  <data name="PlaylistDetailPage_ImportResult" xml:space="preserve">
+    <value>已添加 {0} 个项目；{1} 个已存在；新导入 {2} 个；失败 {3} 个</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFilesButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>添加媒体文件</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFilesButton.AutomationProperties.Name" xml:space="preserve">
+    <value>将媒体文件添加到播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolderButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>添加媒体文件夹</value>
+  </data>
+  <data name="PlaylistDetailPage_AddFolderButton.AutomationProperties.Name" xml:space="preserve">
+    <value>将媒体文件夹添加到播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_RefreshButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>刷新播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_RefreshButton.AutomationProperties.Name" xml:space="preserve">
+    <value>刷新播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_TotalCounts.Text" xml:space="preserve">
+    <value>项目数 </value>
+  </data>
+  <data name="PlaylistDetailPage_SelectedCounts.Text" xml:space="preserve">
+    <value>已选择 </value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelected.Label" xml:space="preserve">
+    <value>播放已选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelected.AutomationProperties.Name" xml:space="preserve">
+    <value>播放所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelected.Label" xml:space="preserve">
+    <value>已选加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelected.ToolTipService.ToolTip" xml:space="preserve">
+    <value>将所选项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelected.AutomationProperties.Name" xml:space="preserve">
+    <value>将所选项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelected.Label" xml:space="preserve">
+    <value>移除所选</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelected.AutomationProperties.Name" xml:space="preserve">
+    <value>从播放列表移除所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearSelection.Label" xml:space="preserve">
+    <value>清除选择</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearSelection.AutomationProperties.Name" xml:space="preserve">
+    <value>清除选择</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayingSelected" xml:space="preserve">
+    <value>正在播放 {0} 个所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlaySelectedFailed" xml:space="preserve">
+    <value>无法播放所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_QueuedSelected" xml:space="preserve">
+    <value>已将 {0} 个所选项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueSelectedFailed" xml:space="preserve">
+    <value>无法将所选项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_RemovedSelected" xml:space="preserve">
+    <value>已移除 {0} 个所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_RemoveSelectedFailed" xml:space="preserve">
+    <value>无法移除所选项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAllButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>播放此列表中的全部可用项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAllButton.AutomationProperties.Name" xml:space="preserve">
+    <value>播放列表中的全部项目</value>
+  </data>
+  <data name="PlaylistDetailPage_PlayAllText.Text" xml:space="preserve">
+    <value>播放全部项目</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAllButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>将全部可用项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAllButton.AutomationProperties.Name" xml:space="preserve">
+    <value>将全部项目加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_QueueAllText.Text" xml:space="preserve">
+    <value>全部加入播放队列</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>清空播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_ClearButton.AutomationProperties.Name" xml:space="preserve">
+    <value>清空播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_SearchBox.PlaceholderText" xml:space="preserve">
+    <value>搜索此播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_SearchBox.AutomationProperties.Name" xml:space="preserve">
+    <value>搜索此播放列表</value>
+  </data>
+  <data name="PlaylistDetailPage_SortButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>排序播放列表项目</value>
+  </data>
+  <data name="PlaylistDetailPage_SortButton.AutomationProperties.Name" xml:space="preserve">
+    <value>排序播放列表项目</value>
+  </data>
+  <data name="PlaylistDetailPage_SortField_PlaylistOrder.Text" xml:space="preserve">
+    <value>播放列表顺序</value>
+  </data>
+  <data name="PlaylistDetailPage_SortField_Kind.Text" xml:space="preserve">
+    <value>媒体类型</value>
+  </data>
+  <data name="PlaylistDetailPage_SortCurrent_PlaylistOrder" xml:space="preserve">
+    <value>播放列表顺序</value>
+  </data>
+  <data name="PlaylistDetailPage_SortCurrent_Kind" xml:space="preserve">
+    <value>媒体类型</value>
+  </data>
+  <data name="PlaylistDetailPage_NoResultsTitle" xml:space="preserve">
+    <value>没有匹配的项目</value>
+  </data>
+  <data name="PlaylistDetailPage_NoResultsDescription" xml:space="preserve">
+    <value>请尝试其他标题、歌手、专辑、文件名或媒体类型。</value>
+  </data>
+  <data name="PlaylistsPage_SortButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>排序播放列表</value>
+  </data>
+  <data name="PlaylistsPage_SortButton.AutomationProperties.Name" xml:space="preserve">
+    <value>排序播放列表</value>
+  </data>
+  <data name="PlaylistsPage_SortField_Name.Text" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="PlaylistsPage_SortField_Modified.Text" xml:space="preserve">
+    <value>修改时间</value>
+  </data>
+  <data name="PlaylistsPage_SortField_Created.Text" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="PlaylistsPage_SortField_ItemCount.Text" xml:space="preserve">
+    <value>项目数</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_Modified" xml:space="preserve">
+    <value>修改时间</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_Created" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="PlaylistsPage_SortCurrent_ItemCount" xml:space="preserve">
+    <value>项目数</value>
+  </data>
+  <data name="PlaylistsPage_SelectItemCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>选择播放列表</value>
+  </data>
+  <data name="PlaylistsPage_SelectItemCheckBox.AutomationProperties.Name" xml:space="preserve">
+    <value>选择播放列表</value>
+  </data>
+  <data name="PlaylistsPage_StatusWithSelection" xml:space="preserve">
+    <value>当前显示 {0} 个，共 {1} 个，已选择 {2} 个</value>
+  </data>
+  <data name="PlaylistDetailPage_SelectItemCheckBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>选择项目</value>
+  </data>
+  <data name="PlaylistDetailPage_SelectItemCheckBox.AutomationProperties.Name" xml:space="preserve">
+    <value>选择播放列表项目</value>
+  </data>
+  <data name="Common_PageStatus_Loading" xml:space="preserve">
+    <value>正在加载...</value>
+  </data>
+  <data name="Common_PageStatus_Refreshing" xml:space="preserve">
+    <value>正在刷新...</value>
+  </data>
+  <data name="Common_PageStatus_Scanning" xml:space="preserve">
+    <value>正在扫描文件夹...</value>
+  </data>
+  <data name="Common_PageStatus_Working" xml:space="preserve">
+    <value>正在处理...</value>
+  </data>
+  <data name="Common_PageStatus_LoadFailed" xml:space="preserve">
+    <value>加载失败</value>
+  </data>
+  <data name="Common_PageStatus_Empty" xml:space="preserve">
+    <value>共 0 项</value>
+  </data>
+  <data name="Common_PageStatus_Summary" xml:space="preserve">
+    <value>已显示 {0} / 共 {1}</value>
+  </data>
+  <data name="Common_PageStatus_SummaryWithSelection" xml:space="preserve">
+    <value>已显示 {0} / 共 {1} · 已选择 {2}</value>
+  </data>
+  <data name="PlaylistDetailPage_StatusSummary" xml:space="preserve">
+    <value>已显示 {0} / 共 {1} · 可播放 {2}</value>
+  </data>
+  <data name="PlaylistDetailPage_StatusSummaryWithSelection" xml:space="preserve">
+    <value>已显示 {0} / 共 {1} · 可播放 {2} · 已选择 {3}</value>
+  </data>
+  <data name="PlaylistsPage_StatusCreated" xml:space="preserve">
+    <value>已创建“{0}”</value>
+  </data>
+  <data name="PlaylistsPage_StatusUpdated" xml:space="preserve">
+    <value>已更新“{0}”</value>
+  </data>
+  <data name="PlaylistsPage_StatusDeleted" xml:space="preserve">
+    <value>已删除“{0}”</value>
+  </data>
+  <data name="PlaylistDetailPage_RemovedItem" xml:space="preserve">
+    <value>已移除“{0}”</value>
+  </data>
+  <data name="PlaylistDetailPage_Cleared" xml:space="preserve">
+    <value>已清空播放列表</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_SingleMessage" xml:space="preserve">
+    <value>从媒体库移除“{0}”？</value>
+  </data>
+  <data name="LibraryPage_DeleteDialog_MultipleMessage" xml:space="preserve">
+    <value>从媒体库移除 {0} 个项目？</value>
+  </data>
+</root>

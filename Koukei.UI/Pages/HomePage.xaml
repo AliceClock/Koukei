@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Koukei.UI.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:Koukei.UI.Helpers"
+    xmlns:local="using:Koukei.UI.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="HomePage_Loaded"
+    Unloaded="HomePage_Unloaded"
+    Background="{ThemeResource KoukeiPageBackgroundBrush}"
+    mc:Ignorable="d">
+
+    <Grid x:Name="HomeRoot" SizeChanged="HomeRoot_SizeChanged">
+        <ScrollViewer x:Name="HomeScrollViewer" Padding="24">
+            <StackPanel Spacing="{StaticResource KoukeiPageSectionSpacing}">
+                <TextBlock
+                    x:Uid="HomePage_Title"
+                    Style="{StaticResource KoukeiPageTitleTextStyle}" />
+                <StackPanel Spacing="{StaticResource KoukeiPageBlockSpacing}">
+                    <Grid x:Name="RecentHeaderGrid" RowSpacing="12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            x:Uid="HomePage_RecentItemsTitle"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource KoukeiSectionTitleTextStyle}" />
+
+                        <Button
+                            x:Name="RefreshRecentItemsButton"
+                            x:Uid="HomePage_RecentRefreshButton"
+                            Grid.Column="1"
+                            MinHeight="40"
+                            Click="RefreshRecentItemsButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                                <TextBlock x:Uid="HomePage_RecentRefresh" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <ProgressBar
+                        x:Name="RecentRefreshProgressBar"
+                        Height="3"
+                        IsIndeterminate="True"
+                        Visibility="Collapsed" />
+
+                    <Grid MinHeight="152">
+                        <StackPanel
+                            x:Name="RecentContentPanel"
+                            Spacing="{StaticResource KoukeiPageSectionSpacing}"
+                            Visibility="Collapsed">
+                            <StackPanel
+                                x:Name="RecentVideoSection"
+                                Spacing="{StaticResource KoukeiPageRelatedSpacing}"
+                                Visibility="Collapsed">
+                                <TextBlock
+                                    x:Uid="HomePage_RecentVideosTitle"
+                                    FontSize="18"
+                                    FontWeight="SemiBold" />
+
+                                <GridView
+                                    x:Name="RecentVideoItemsGrid"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="RecentItemsGrid_ItemClick"
+                                    ItemsSource="{x:Bind RecentVideoItems}"
+                                    SelectionMode="None"
+                                    SizeChanged="RecentVideoItemsGrid_SizeChanged"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    ScrollViewer.HorizontalScrollMode="Disabled"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                    ScrollViewer.VerticalScrollMode="Disabled">
+                                    <GridView.ItemContainerTransitions>
+                                        <TransitionCollection>
+                                            <RepositionThemeTransition IsStaggeringEnabled="False" />
+                                        </TransitionCollection>
+                                    </GridView.ItemContainerTransitions>
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <ItemsWrapGrid Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                    <GridView.ItemContainerStyle>
+                                        <Style
+                                            TargetType="GridViewItem"
+                                            BasedOn="{StaticResource KoukeiMediaCardItemContainerStyle}">
+                                            <Setter Property="Margin" Value="0,0,12,12" />
+                                            <Setter Property="MinWidth" Value="0" />
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:RecentMediaItemViewModel">
+                                            <Border
+                                                HorizontalAlignment="Stretch"
+                                                AutomationProperties.Name="{x:Bind Title}"
+                                                Style="{StaticResource KoukeiMediaCardStyle}"
+                                                ToolTipService.ToolTip="{x:Bind FilePath}">
+                                                <Grid RowSpacing="8">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="160" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <Border
+                                                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                                        CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
+                                                        <Grid>
+                                                            <Image
+                                                                Opacity="{x:Bind ThumbnailOpacity, Mode=OneWay}"
+                                                                Source="{x:Bind ThumbnailSource, Mode=OneWay}"
+                                                                Stretch="UniformToFill">
+                                                                <Image.OpacityTransition>
+                                                                    <ScalarTransition Duration="0:0:0.12" />
+                                                                </Image.OpacityTransition>
+                                                            </Image>
+                                                            <FontIcon
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="36"
+                                                                Glyph="&#xE714;"
+                                                                Visibility="{x:Bind PlaceholderVisibility, Mode=OneWay}" />
+                                                        </Grid>
+                                                    </Border>
+
+                                                    <TextBlock
+                                                        Grid.Row="1"
+                                                        Margin="4,0"
+                                                        VerticalAlignment="Top"
+                                                        FontWeight="SemiBold"
+                                                        MaxLines="2"
+                                                        Text="{x:Bind Title}"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        TextWrapping="Wrap"
+                                                        helpers:LongTextToolTip.FullText="{x:Bind TitleToolTipText}" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            </StackPanel>
+
+                            <StackPanel
+                                x:Name="RecentAudioSection"
+                                Spacing="{StaticResource KoukeiPageRelatedSpacing}"
+                                Visibility="Collapsed">
+                                <TextBlock
+                                    x:Uid="HomePage_RecentAudioTitle"
+                                    FontSize="18"
+                                    FontWeight="SemiBold" />
+
+                                <GridView
+                                    x:Name="RecentAudioItemsGrid"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="RecentItemsGrid_ItemClick"
+                                    ItemsSource="{x:Bind RecentAudioItems}"
+                                    SelectionMode="None"
+                                    SizeChanged="RecentAudioItemsGrid_SizeChanged"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    ScrollViewer.HorizontalScrollMode="Disabled"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                    ScrollViewer.VerticalScrollMode="Disabled">
+                                    <GridView.ItemContainerTransitions>
+                                        <TransitionCollection>
+                                            <RepositionThemeTransition IsStaggeringEnabled="False" />
+                                        </TransitionCollection>
+                                    </GridView.ItemContainerTransitions>
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <ItemsWrapGrid Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                    <GridView.ItemContainerStyle>
+                                        <Style
+                                            TargetType="GridViewItem"
+                                            BasedOn="{StaticResource KoukeiMediaCardItemContainerStyle}">
+                                            <Setter Property="Margin" Value="0,0,12,12" />
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:RecentMediaItemViewModel">
+                                            <Border
+                                                HorizontalAlignment="Stretch"
+                                                AutomationProperties.Name="{x:Bind Title}"
+                                                Style="{StaticResource KoukeiMediaCardStyle}"
+                                                ToolTipService.ToolTip="{x:Bind FilePath}">
+                                                <StackPanel>
+                                                    <Grid
+                                                        HorizontalAlignment="Stretch"
+                                                        SizeChanged="RecentAudioArtwork_SizeChanged">
+                                                        <Border
+                                                            Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                                            CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
+                                                            <Grid>
+                                                                <Image
+                                                                    Opacity="{x:Bind ThumbnailOpacity, Mode=OneWay}"
+                                                                    Source="{x:Bind ThumbnailSource, Mode=OneWay}"
+                                                                    Stretch="UniformToFill">
+                                                                    <Image.OpacityTransition>
+                                                                        <ScalarTransition Duration="0:0:0.12" />
+                                                                    </Image.OpacityTransition>
+                                                                </Image>
+                                                                <FontIcon
+                                                                    HorizontalAlignment="Center"
+                                                                    VerticalAlignment="Center"
+                                                                    FontSize="44"
+                                                                    Glyph="&#xE8D6;"
+                                                                    Visibility="{x:Bind PlaceholderVisibility, Mode=OneWay}" />
+                                                            </Grid>
+                                                        </Border>
+
+                                                    </Grid>
+
+                                                    <TextBlock
+                                                        Margin="8,8,8,0"
+                                                        FontWeight="SemiBold"
+                                                        MaxLines="1"
+                                                        Text="{x:Bind Title}"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        TextWrapping="NoWrap"
+                                                        helpers:LongTextToolTip.FullText="{x:Bind TitleToolTipText}" />
+                                                    <TextBlock
+                                                        Margin="8,3,8,0"
+                                                        FontSize="12"
+                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                        MaxLines="1"
+                                                        Text="{x:Bind Artist}"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        helpers:LongTextToolTip.FullText="{x:Bind Artist}" />
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel
+                            x:Name="RecentEmptyPanel"
+                            MaxWidth="520"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="{StaticResource KoukeiPageRelatedSpacing}"
+                            Visibility="Collapsed">
+                            <FontIcon
+                                x:Name="RecentEmptyIcon"
+                                FontSize="30"
+                                Glyph="&#xE81C;" />
+                            <TextBlock
+                                x:Name="RecentEmptyTitle"
+                                x:Uid="HomePage_RecentEmptyTitle"
+                                HorizontalAlignment="Center"
+                                AutomationProperties.LiveSetting="Polite"
+                                FontWeight="SemiBold" />
+                            <TextBlock
+                                x:Name="RecentEmptyDescription"
+                                x:Uid="HomePage_RecentEmptyDescription"
+                                HorizontalAlignment="Center"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
+                            <Button
+                                x:Name="RecentRetryButton"
+                                x:Uid="Common_RetryButton"
+                                MinHeight="40"
+                                Click="RefreshRecentItemsButton_Click"
+                                Style="{StaticResource KoukeiAccentButtonStyle}"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+
+                        <ProgressRing
+                            x:Name="RecentItemsProgressRing"
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </Grid>
+
+                    <InfoBar
+                        x:Name="RecentErrorInfoBar"
+                        IsClosable="True"
+                        IsOpen="False"
+                        IsTabStop="True"
+                        Severity="Error"
+                        AutomationProperties.LiveSetting="Polite">
+                        <InfoBar.ActionButton>
+                            <Button
+                                x:Uid="Common_RetryButton"
+                                MinHeight="40"
+                                Click="RefreshRecentItemsButton_Click" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+                </StackPanel>
+
+                <StackPanel Spacing="{StaticResource KoukeiPageBlockSpacing}">
+                    <TextBlock
+                        x:Uid="HomePage_QuickActions"
+                        Style="{StaticResource KoukeiSectionTitleTextStyle}" />
+
+                    <Grid x:Name="QuickActionsGrid" RowSpacing="12" ColumnSpacing="12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            x:Name="OpenFilesButton"
+                            MinHeight="40"
+                            Click="OpenFilesButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon FontSize="16" Glyph="&#xE8A5;" />
+                                <TextBlock x:Uid="HomePage_OpenFilesButton" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button
+                            x:Name="OpenFolderButton"
+                            Grid.Column="1"
+                            MinHeight="40"
+                            Click="OpenFolderButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon FontSize="16" Glyph="&#xE838;" />
+                                <TextBlock x:Uid="HomePage_OpenFolderButton" />
+                            </StackPanel>
+                        </Button>
+
+                        <StackPanel
+                            x:Name="QuickActionBusyPanel"
+                            Grid.Column="2"
+                            Margin="4,0,0,0"
+                            Orientation="Horizontal"
+                            Spacing="8"
+                            VerticalAlignment="Center"
+                            Visibility="Collapsed">
+                            <ProgressRing
+                                x:Name="QuickActionProgressRing"
+                                Width="20"
+                                Height="20"
+                                IsActive="False" />
+                            <TextBlock
+                                x:Name="QuickActionStatusText"
+                                x:Uid="HomePage_QuickActionBusy"
+                                VerticalAlignment="Center"
+                                AutomationProperties.LiveSetting="Polite"
+                                Style="{StaticResource KoukeiMetadataTextStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifier Condition="'$(Platform)' == 'x86'">win-x86</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(Platform)' == 'x64'">win-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(Platform)' == 'ARM64'">win-arm64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <UseAppHost>true</UseAppHost>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Koukei.Audio\Koukei.Audio.csproj" />
+  </ItemGroup>
+
+  <Target Name="RemoveLegacyMpvAudioFallbackArtifacts" AfterTargets="Build">
+    <RemoveDir Directories="$(TargetDir)mpv"
+               Condition="Exists('$(TargetDir)mpv')" />
+    <Delete Files="$(TargetDir)Koukei.Mpv.dll;$(TargetDir)Koukei.Mpv.pdb" />
+  </Target>
+
+</Project>

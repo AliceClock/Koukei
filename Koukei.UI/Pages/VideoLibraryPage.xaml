@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Koukei.UI.Pages.VideoLibraryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Koukei.UI.Pages">
+    <local:MediaLibraryPage LibraryKind="Video" />
+</Page>

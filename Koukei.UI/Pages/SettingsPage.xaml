@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Koukei.UI.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Koukei.UI.Controls"
+    xmlns:local="using:Koukei.UI.Pages"
+    xmlns:ctk="using:CommunityToolkit.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource KoukeiPageBackgroundBrush}"
+    mc:Ignorable="d">
+
+    <controls:PageScaffold
+        x:Name="SettingsRoot"
+        x:Uid="SettingsPage_Scaffold"
+        ContentMaxWidth="840">
+        <controls:PageScaffold.Body>
+        <ScrollViewer HorizontalContentAlignment="Stretch">
+            <StackPanel
+                x:Name="SettingsContent"
+                HorizontalAlignment="Stretch"
+                Spacing="{StaticResource KoukeiPageRelatedSpacing}">
+                <!-- Appearance Settings -->
+                <TextBlock x:Uid="SettingsPage_Appearance"
+                           Style="{StaticResource KoukeiSectionTitleTextStyle}"
+                           Margin="0"/>
+
+                <!-- Theme Settings -->
+                <ctk:SettingsCard x:Uid="SettingsPage_AppTheme">
+                    <ComboBox x:Name="ThemeComboBox"
+                              MinWidth="150"
+                              SelectionChanged="ThemeComboBox_SelectionChanged">
+                        <ComboBoxItem x:Uid="SettingsPage_ThemeComboBox_System" Tag="Default"/>
+                        <ComboBoxItem x:Uid="SettingsPage_ThemeComboBox_Light" Tag="Light"/>
+                        <ComboBoxItem x:Uid="SettingsPage_ThemeComboBox_Dark" Tag="Dark"/>
+                    </ComboBox>
+                </ctk:SettingsCard>
+
+                <!-- Language Settings -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ctk:SettingsCard x:Uid="SettingsPage_AppLanguage" Grid.Row="0">
+                        <ComboBox x:Name="LanguageComboBox"
+                                  MinWidth="150"
+                                  SelectionChanged="LanguageComboBox_SelectionChanged">
+                            <ComboBoxItem Content="English" Tag="en-US"/>
+                            <ComboBoxItem Content="简体中文" Tag="zh-CN"/>
+                        </ComboBox>
+                    </ctk:SettingsCard>
+
+                    <InfoBar
+                        Grid.Row="1"
+                        Margin="0,8,0,0"
+                        x:Uid="LanguageRestartInfo"
+                        IsClosable="False"
+                        IsOpen="{x:Bind Mode=OneWay, Path=LanguageChanged}"
+                        IsTabStop="True"
+                        AutomationProperties.LiveSetting="Polite"
+                        Severity="Informational">
+                        <InfoBar.ActionButton>
+                            <Button x:Uid="LanguageRestartInfoButton" Click="Click_LanguageRestart" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+                </Grid>
+
+                <!-- Data Settings -->
+                <TextBlock x:Uid="SettingsPage_Data"
+                           Style="{StaticResource KoukeiSectionTitleTextStyle}"
+                           Margin="0,16,0,0"/>
+
+                <!-- Data Location -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ctk:SettingsCard x:Name="DataLocationCard"
+                                      x:Uid="SettingsPage_DataLocation"
+                                      Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button
+                                x:Name="ChangeDataLocationButton"
+                                x:Uid="SettingsPage_ChangeDataLocationButton"
+                                MinHeight="40"
+                                Click="ChangeDataLocationButton_Click" />
+                            <ProgressRing
+                                x:Name="DataMigrationProgressRing"
+                                Width="24"
+                                Height="24"
+                                IsActive="False"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </ctk:SettingsCard>
+
+                    <InfoBar
+                        x:Name="DataLocationNotificationBar"
+                        Grid.Row="1"
+                        Margin="0,8,0,0"
+                        IsOpen="False"
+                        IsClosable="True"
+                        AutomationProperties.LiveSetting="Polite" />
+                </Grid>
+
+                <!-- Data Cleanup -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ctk:SettingsCard x:Uid="SettingsPage_DataCleanup" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button
+                                x:Name="ClearCacheButton"
+                                x:Uid="SettingsPage_ClearCacheButton"
+                                MinHeight="40"
+                                Click="ClearCacheButton_Click" />
+                            <ProgressRing
+                                x:Name="CacheCleanupProgressRing"
+                                Width="24"
+                                Height="24"
+                                IsActive="False"
+                                Visibility="Collapsed" />
+                        </StackPanel>
+                    </ctk:SettingsCard>
+
+                    <Grid Grid.Row="1" Margin="0,8,0,0">
+                        <InfoBar
+                            x:Name="ClearCacheConfirmBar"
+                            x:Uid="SettingsPage_ClearCacheConfirm"
+                            IsOpen="False"
+                            IsClosable="True"
+                            Severity="Warning">
+                            <InfoBar.ActionButton>
+                                <Button
+                                    x:Name="ClearCacheConfirmActionButton"
+                                    x:Uid="SettingsPage_ClearCacheConfirmButton"
+                                    MinHeight="40"
+                                    Click="ClearCacheConfirm_Click" />
+                            </InfoBar.ActionButton>
+                        </InfoBar>
+
+                        <InfoBar
+                            x:Name="CacheNotificationBar"
+                            IsOpen="False"
+                            IsClosable="True"
+                            AutomationProperties.LiveSetting="Polite" />
+                    </Grid>
+                </Grid>
+
+                <!-- Reset Settings -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ctk:SettingsCard x:Uid="SettingsPage_ClearSettings" Grid.Row="0">
+                        <Button x:Uid="SettingsPage_ClearSettingsButton"
+                                Click="ClearSettingsButton_Click"/>
+                    </ctk:SettingsCard>
+
+                    <InfoBar
+                        x:Name="ClearSettingsConfirmBar"
+                        Grid.Row="1"
+                        Margin="0,8,0,0"
+                        x:Uid="SettingsPage_ClearSettingsConfirm"
+                        IsOpen="False"
+                        IsClosable="True"
+                        Severity="Warning">
+                        <InfoBar.ActionButton>
+                            <Button x:Uid="SettingsPage_ClearSettingsConfirmButton" Click="ClearSettingsConfirm_Click"/>
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+                </Grid>
+
+                <!-- About -->
+                <TextBlock x:Uid="SettingsPage_About"
+                           Style="{StaticResource KoukeiSectionTitleTextStyle}"
+                           Margin="0,16,0,0"/>
+
+                <!-- Application Info -->
+                <ctk:SettingsCard x:Name="AppInfoCard"
+                                  Header="Koukei">
+                    <HyperlinkButton x:Uid="SettingsPage_SourceCodeButton"
+                                     NavigateUri="https://github.com/DaSameVy/Koukei"/>
+                </ctk:SettingsCard>
+            </StackPanel>
+        </ScrollViewer>
+        </controls:PageScaffold.Body>
+    </controls:PageScaffold>
+</Page>

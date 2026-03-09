@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\NativeRuntimeLocator.cs"
+             Link="Native\NativeRuntimeLocator.cs" />
+    <None Include="$(KoukeiMpvHome)\**\*"
+          Link="mpv\win-x64\%(RecursiveDir)%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          Condition="Exists('$(KoukeiMpvHome)\libmpv-2.dll')" />
+  </ItemGroup>
+
+</Project>
