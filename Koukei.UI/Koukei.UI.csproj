@@ -91,7 +91,8 @@
     <ProjectReference Include="..\Koukei.Audio.Host\Koukei.Audio.Host.csproj"
                       ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Koukei.Audio\Koukei.Audio.csproj" />
-    <ProjectReference Include="..\Koukei.Bus\Koukei.Bus.csproj" />
+    <ProjectReference Include="..\Koukei.Bus\Koukei.Bus.csproj"
+                      AdditionalProperties="WindowsAppSDKSelfContained=false" />
     <ProjectReference Include="..\Koukei.Ffmpeg\Koukei.Ffmpeg.csproj" />
     <ProjectReference Include="..\Koukei.Video\Koukei.Video.csproj" />
   </ItemGroup>

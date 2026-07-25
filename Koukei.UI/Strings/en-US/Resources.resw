@@ -2253,4 +2253,31 @@
   <data name="LibraryPage_DeleteDialog_MultipleMessage" xml:space="preserve">
     <value>Remove {0} items from the library?</value>
   </data>
+  <data name="LibraryPage_PropertiesDialog_Content_LinkedLyrics" xml:space="preserve">
+    <value>Linked lyrics: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_Content_LinkedSubtitle" xml:space="preserve">
+    <value>Linked subtitles: {0}</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_LinkedFileAutomatic" xml:space="preserve">
+    <value>Automatically match files with the same name</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_ChangeLinkedLyricsButton" xml:space="preserve">
+    <value>Change lyrics…</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_ChangeLinkedSubtitleButton" xml:space="preserve">
+    <value>Change subtitles…</value>
+  </data>
+  <data name="LibraryPage_PropertiesDialog_ClearLinkedFileButton" xml:space="preserve">
+    <value>Use automatic matching</value>
+  </data>
+  <data name="LibraryPage_FailedToChangeLinkedFileDialog_Title" xml:space="preserve">
+    <value>Failed to change linked file</value>
+  </data>
+  <data name="LibraryPage_Status_LinkedFileAutomatic" xml:space="preserve">
+    <value>Automatic linked-file matching restored</value>
+  </data>
+  <data name="LibraryPage_Status_LinkedFileChanged" xml:space="preserve">
+    <value>Linked “{0}”</value>
+  </data>
 </root>

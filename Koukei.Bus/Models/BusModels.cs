@@ -62,6 +62,8 @@ public sealed class MediaLibraryPlaybackItem
 
     public string Path { get; init; } = string.Empty;
 
+    public string? LinkedFilePath { get; init; }
+
     public DateTimeOffset DateCreated { get; init; }
 
     public TimeSpan? Duration { get; init; }
@@ -95,6 +97,8 @@ public sealed class MediaLibraryItem
     public string Name { get; init; } = string.Empty;
 
     public string Path { get; init; } = string.Empty;
+
+    public string? LinkedFilePath { get; init; }
 
     public string Extension { get; init; } = string.Empty;
 
@@ -142,6 +146,8 @@ public sealed class NewMediaLibraryItem
     public string Name { get; init; } = string.Empty;
 
     public string Path { get; init; } = string.Empty;
+
+    public string? LinkedFilePath { get; init; }
 
     public string Extension { get; init; } = string.Empty;
 
@@ -264,6 +270,8 @@ public sealed class PlaylistMediaItem
     public string Title { get; init; } = string.Empty;
 
     public string Path { get; init; } = string.Empty;
+
+    public string? LinkedFilePath { get; init; }
 
     public MediaLibraryItemKind Kind { get; init; }
 

@@ -203,6 +203,14 @@ public sealed class MediaLibraryBus(
         return mediaLibrary.SetThumbnailAsync(itemId, thumbnailPath, cancellationToken);
     }
 
+    public Task SetLinkedFilePathAsync(
+        Guid itemId,
+        string? linkedFilePath,
+        CancellationToken cancellationToken = default)
+    {
+        return mediaLibrary.SetLinkedFilePathAsync(itemId, linkedFilePath, cancellationToken);
+    }
+
     public Task<int> ClearThumbnailPathsUnderAsync(
         string rootPath,
         CancellationToken cancellationToken = default)
@@ -267,6 +275,7 @@ public sealed class MediaLibraryBus(
             Id = item.Id,
             Title = item.Name,
             Path = item.Path,
+            LinkedFilePath = item.LinkedFilePath,
             DateCreated = item.DateCreated,
             Duration = item.DurationSeconds is > 0 and var duration
                 ? TimeSpan.FromSeconds(duration)
@@ -302,6 +311,7 @@ public sealed class MediaLibraryBus(
         dataItem.Name = item.Name;
         dataItem.SortName = item.Name;
         dataItem.Path = item.Path;
+        dataItem.LinkedFilePath = NormalizeOptionalText(item.LinkedFilePath);
         dataItem.Container = FirstNonEmptyOrNull(item.ContainerFormat, item.Extension.TrimStart('.'));
         dataItem.FileSize = item.FileSize is >= 0 ? item.FileSize : null;
         dataItem.SourceType = SourceType.FileSystem;
@@ -433,6 +443,7 @@ public sealed class MediaLibraryBus(
             Id = item.Id,
             Name = item.Name,
             Path = path,
+            LinkedFilePath = item.LinkedFilePath,
             Extension = extension,
             ContainerFormat = item.Container,
             FileSize = item.FileSize,

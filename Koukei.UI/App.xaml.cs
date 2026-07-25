@@ -35,6 +35,8 @@ namespace Koukei.UI
     /// </summary>
     public partial class App : Application
     {
+        private const string StartupDiagnosticsEnvironmentVariable =
+            "KOUKEI_UI_STARTUP_DIAGNOSTICS";
         private Window? _window;
 
         /// <summary>
@@ -65,15 +67,27 @@ namespace Koukei.UI
         /// </summary>
         public App()
         {
-#if DEBUG
+            WriteStartupDiagnostic("App constructor started.");
             UnhandledException += (_, e) =>
             {
+#if DEBUG
                 Debug.WriteLine("Unhandled XAML exception:");
                 Debug.WriteLine(e.Exception);
-            };
 #endif
-            LanguageHelper.Initialize();
-            InitializeComponent();
+                WriteStartupDiagnostic("Unhandled XAML exception.", e.Exception);
+            };
+            try
+            {
+                LanguageHelper.Initialize();
+                WriteStartupDiagnostic("Language initialized.");
+                InitializeComponent();
+                WriteStartupDiagnostic("Application XAML initialized.");
+            }
+            catch (Exception ex)
+            {
+                WriteStartupDiagnostic("App constructor failed.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -82,28 +96,43 @@ namespace Koukei.UI
         /// <param name="args">Details about the launch request and process.</param>
         protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            DataLocationHelper.EnsureExists();
-            Services = ConfigureServices();
-
+            WriteStartupDiagnostic("OnLaunched started.");
             try
             {
-                using var scope = Services.CreateScope();
-                var initializer = scope.ServiceProvider.GetRequiredService<IKoukeiDataGateway>();
-                await initializer.EnsureReadyAsync();
+                DataLocationHelper.EnsureExists();
+                WriteStartupDiagnostic("Data directory initialized.");
+                Services = ConfigureServices();
+                WriteStartupDiagnostic("Services configured.");
+
+                try
+                {
+                    using var scope = Services.CreateScope();
+                    var initializer = scope.ServiceProvider.GetRequiredService<IKoukeiDataGateway>();
+                    await initializer.EnsureReadyAsync();
+                    WriteStartupDiagnostic("Data store initialized.");
+                }
+                catch (Exception ex)
+                {
+                    DataInitializationException = ex;
+                    WriteStartupDiagnostic("Data store initialization failed; continuing.", ex);
+                }
+
+                _window = new MainWindow();
+                MainWindow = _window;
+                WriteStartupDiagnostic("Main window created.");
+                ThemeHelper.Initialize();
+                var resolvedTheme = ThemeHelper.RootTheme == ElementTheme.Default
+                    ? ThemeHelper.ActualTheme
+                    : ThemeHelper.RootTheme;
+                TitleBarHelper.ApplySystemThemeToCaptionButtons(_window, resolvedTheme);
+                _window.Activate();
+                WriteStartupDiagnostic("Main window activated.");
             }
             catch (Exception ex)
             {
-                DataInitializationException = ex;
+                WriteStartupDiagnostic("OnLaunched failed.", ex);
+                throw;
             }
-
-            _window = new MainWindow();
-            MainWindow = _window;
-            ThemeHelper.Initialize();
-            var resolvedTheme = ThemeHelper.RootTheme == ElementTheme.Default
-                ? ThemeHelper.ActualTheme
-                : ThemeHelper.RootTheme;
-            TitleBarHelper.ApplySystemThemeToCaptionButtons(_window, resolvedTheme);
-            _window.Activate();
         }
 
         private static ServiceProvider ConfigureServices()
@@ -120,6 +149,31 @@ namespace Koukei.UI
             services.AddSingleton<IVideoThumbnailService, VideoThumbnailService>();
             services.AddSingleton<IVideoMediaInfoService, FfmpegVideoMediaInfoService>();
             return services.BuildServiceProvider();
+        }
+
+        private static void WriteStartupDiagnostic(string message, Exception? exception = null)
+        {
+            var path = Environment.GetEnvironmentVariable(
+                StartupDiagnosticsEnvironmentVariable);
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return;
+            }
+
+            try
+            {
+                var line = $"{DateTimeOffset.Now:O} {message}";
+                if (exception is not null)
+                {
+                    line += Environment.NewLine + exception;
+                }
+
+                File.AppendAllText(path, line + Environment.NewLine);
+            }
+            catch
+            {
+                // Diagnostics must never affect application startup.
+            }
         }
     }
 }

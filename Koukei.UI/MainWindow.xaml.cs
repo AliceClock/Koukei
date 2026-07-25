@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Automation.Peers;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -412,6 +413,10 @@ public sealed partial class MainWindow : Window
         Task.Delay(500).ContinueWith(_ => this.NavigationViewLoaded?.Invoke(), TaskScheduler.FromCurrentSynchronizationContext());
 
         var navigationView = sender as NavigationView;
+        if (navigationView?.SettingsItem is DependencyObject settingsItem)
+        {
+            AutomationProperties.SetAutomationId(settingsItem, "NavSettings");
+        }
         navigationView?.RegisterPropertyChangedCallback(NavigationView.IsPaneOpenProperty, OnIsPaneOpenChanged);
 
         // Load playlists after NavigationView is loaded
@@ -1433,11 +1438,11 @@ public sealed partial class MainWindow : Window
             metadata.FilePath,
             StringComparison.OrdinalIgnoreCase);
         _displayedAudioMediaPath = metadata.FilePath;
-        _ = LoadAudioLyricsAsync(metadata, version);
         var currentQueueItem = _playbackCoordinator.PlaybackQueue.FirstOrDefault(
             item => item.IsCurrent &&
                 item.Kind == MediaLibraryItemKind.Audio &&
                 string.Equals(item.FilePath, metadata.FilePath, StringComparison.OrdinalIgnoreCase));
+        _ = LoadAudioLyricsAsync(metadata, version, currentQueueItem?.LinkedFilePath);
         var unknownArtist = GetAudioPlayerString("AudioPlayer_UnknownArtist", "Unknown artist");
         var artistSource = currentQueueItem?.MediaId is not null
             ? currentQueueItem.Artist
@@ -1740,7 +1745,10 @@ public sealed partial class MainWindow : Window
                 MotionDirection.None));
     }
 
-    private async Task LoadAudioLyricsAsync(AudioMediaMetadata metadata, long metadataVersion)
+    private async Task LoadAudioLyricsAsync(
+        AudioMediaMetadata metadata,
+        long metadataVersion,
+        string? linkedLyricsFilePath)
     {
         if (_isClosed)
         {
@@ -1759,6 +1767,7 @@ public sealed partial class MainWindow : Window
             var document = await AudioLyricsLoader.LoadAsync(
                 metadata.FilePath,
                 metadata.Lyrics,
+                linkedLyricsFilePath,
                 cancellation.Token);
             if (_isClosed ||
                 cancellation.IsCancellationRequested ||
@@ -4142,7 +4151,7 @@ public sealed class PlaybackQueueSidebarItem(
         }
 
         if (_kind != snapshot._kind)
-        {
+    {
             _kind = snapshot._kind;
             RaisePropertyChanged(nameof(KindGlyph));
         }

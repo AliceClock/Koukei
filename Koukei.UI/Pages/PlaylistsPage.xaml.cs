@@ -434,7 +434,8 @@ public sealed partial class PlaylistsPage : Page, INotifyPropertyChanged
                 item.Artist,
                 item.Album,
                 item.ThumbnailPath,
-                item.PlaybackPosition))
+                item.PlaybackPosition,
+                item.LinkedFilePath))
             .ToArray();
     }
 

@@ -44,6 +44,11 @@ public interface IMediaLibraryService
 
     Task SetThumbnailAsync(Guid itemId, string? thumbnailPath, CancellationToken cancellationToken = default);
 
+    Task SetLinkedFilePathAsync(
+        Guid itemId,
+        string? linkedFilePath,
+        CancellationToken cancellationToken = default);
+
     Task<int> ClearThumbnailPathsUnderAsync(
         string rootPath,
         CancellationToken cancellationToken = default);

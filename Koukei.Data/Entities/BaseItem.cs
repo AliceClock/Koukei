@@ -20,6 +20,8 @@ public abstract class BaseItem
 
     public string? NormalizedPath { get; set; }
 
+    public string? LinkedFilePath { get; set; }
+
     public string? Container { get; set; }
 
     public long? FileSize { get; set; }

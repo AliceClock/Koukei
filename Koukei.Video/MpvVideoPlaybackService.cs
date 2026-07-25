@@ -2,6 +2,7 @@ using Koukei.Mpv;
 using Koukei.Mpv.Interop;
 using System.Globalization;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -43,6 +44,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly ConcurrentDictionary<ulong, TaskCompletionSource<MpvError>> _pendingCommands = new();
     private readonly object _chapterLock = new();
+    private readonly object _fileLoadLock = new();
     private readonly object _playbackStateLock = new();
     private readonly object _scriptLoadLock = new();
     private readonly List<string> _bundledScriptPaths = new();
@@ -55,6 +57,9 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
     private bool _areBundledScriptsLoaded;
     private bool _isInitialVideoSizePending;
     private bool _hasRaisedPlaybackEndedForCurrentFile;
+    private TaskCompletionSource<bool>? _fileLoadedCompletion;
+    private bool _isCurrentFileLoaded;
+    private long _fileLoadVersion;
     private int _compositionPixelHeight;
     private int _compositionPixelWidth;
     private int _closeRequestCount;
@@ -96,6 +101,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
             _currentFilePath = filePath;
             _hasRaisedPlaybackEndedForCurrentFile = false;
             ResetPlaybackStateForNewFile();
+            BeginRequestedFileLoad();
             ThrowIfError("mpv loadfile failed", MpvCommandInvoker.Invoke(_handle, "loadfile", filePath, "replace"));
         }, cancellationToken);
     }
@@ -120,6 +126,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
             _currentFilePath = filePath;
             _hasRaisedPlaybackEndedForCurrentFile = false;
             ResetPlaybackStateForNewFile();
+            BeginRequestedFileLoad();
             ThrowIfError("mpv loadfile failed", MpvCommandInvoker.Invoke(_handle, "loadfile", filePath, "replace"));
         }, cancellationToken);
     }
@@ -144,6 +151,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
             _currentFilePath = filePath;
             _hasRaisedPlaybackEndedForCurrentFile = false;
             ResetPlaybackStateForNewFile();
+            BeginRequestedFileLoad();
             ThrowIfError("mpv loadfile failed", MpvCommandInvoker.Invoke(_handle, "loadfile", filePath, "replace"));
             TryNotifyDisplaySwapChainChanged(_handle);
         }, cancellationToken);
@@ -790,6 +798,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
         SetOption("keep-open", "yes");
         SetOption("input-default-bindings", "yes");
         SetOption("input-vo-keyboard", "yes");
+        ConfigureSidecarLoading();
         _ = TrySetOption("border", "no");
         _ = TrySetOption("title-bar", "no");
         ConfigureApplicationOwnedUi();
@@ -816,6 +825,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
             _currentFilePath = filePaths[startIndex];
             _hasRaisedPlaybackEndedForCurrentFile = false;
             ResetPlaybackStateForNewFile();
+            BeginRequestedFileLoad();
             ThrowIfError(
                 "mpv load playlist failed",
                 MpvCommandInvoker.Invoke(_handle, "loadlist", playlistPath, "replace"));
@@ -950,6 +960,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
         SetOption("keep-open", "yes");
         SetOption("input-default-bindings", "yes");
         SetOption("input-vo-keyboard", "no");
+        ConfigureSidecarLoading();
         ConfigureApplicationOwnedUi();
         _ = TrySetOption("load-scripts", "no");
         SetOption("terminal", "no");
@@ -979,6 +990,14 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
         _ = TrySetOption("osd-level", "0");
         _ = TrySetOption("osd-on-seek", "no");
         _ = TrySetOption("load-stats-overlay", "yes");
+    }
+
+    private void ConfigureSidecarLoading()
+    {
+        // Koukei resolves and selects the exact sidecar after FileLoaded. Disable
+        // mpv's parallel subtitle scan so the same file is not added twice.
+        SetOption("autoload-files", "yes");
+        SetOption("sub-auto", "no");
     }
 
     private void SetD3D11CompositionSize(int pixelWidth, int pixelHeight)
@@ -1076,7 +1095,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
         }, cancellationToken);
     }
 
-    private Task AddExternalTrackAsync(
+    private async Task AddExternalTrackAsync(
         string command,
         string filePath,
         CancellationToken cancellationToken)
@@ -1087,12 +1106,122 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
             throw new FileNotFoundException("The external track file does not exist.", filePath);
         }
 
-        return InvokeCommandAsync(
+        await WaitForCurrentFileLoadedAsync(cancellationToken).ConfigureAwait(false);
+        await InvokeCommandAsync(
             $"mpv {command} failed",
             cancellationToken,
             command,
             filePath,
-            "select");
+            "select").ConfigureAwait(false);
+    }
+
+    private Task WaitForCurrentFileLoadedAsync(CancellationToken cancellationToken)
+    {
+        Task pendingLoad;
+        lock (_fileLoadLock)
+        {
+            if (_isCurrentFileLoaded)
+            {
+                return Task.CompletedTask;
+            }
+
+            _fileLoadedCompletion ??= CreateFileLoadedCompletion();
+            pendingLoad = _fileLoadedCompletion.Task;
+        }
+
+        return pendingLoad.WaitAsync(cancellationToken);
+    }
+
+    private void BeginRequestedFileLoad()
+    {
+        lock (_fileLoadLock)
+        {
+            _fileLoadVersion++;
+            _fileLoadedCompletion?.TrySetCanceled();
+            _fileLoadedCompletion = CreateFileLoadedCompletion();
+            _isCurrentFileLoaded = false;
+        }
+    }
+
+    private void MarkNativeFileLoadStarted()
+    {
+        lock (_fileLoadLock)
+        {
+            if (!_isCurrentFileLoaded && _fileLoadedCompletion is not null)
+            {
+                return;
+            }
+
+            _fileLoadVersion++;
+            _fileLoadedCompletion = CreateFileLoadedCompletion();
+            _isCurrentFileLoaded = false;
+        }
+    }
+
+    private long MarkCurrentFileLoaded()
+    {
+        lock (_fileLoadLock)
+        {
+            _isCurrentFileLoaded = true;
+            _fileLoadedCompletion?.TrySetResult(true);
+            return _fileLoadVersion;
+        }
+    }
+
+    private void CancelPendingFileLoad()
+    {
+        lock (_fileLoadLock)
+        {
+            _fileLoadVersion++;
+            _isCurrentFileLoaded = false;
+            _fileLoadedCompletion?.TrySetCanceled();
+            _fileLoadedCompletion = null;
+        }
+    }
+
+    private static TaskCompletionSource<bool> CreateFileLoadedCompletion() =>
+        new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+    private async Task LoadMatchingSubtitleAfterFileLoadedAsync(
+        string loadedFilePath,
+        long fileLoadVersion)
+    {
+        var subtitlePath = VideoSubtitleSidecar.FindMatch(loadedFilePath);
+        if (string.IsNullOrWhiteSpace(subtitlePath))
+        {
+            return;
+        }
+
+        try
+        {
+            await ExecuteAsync(() =>
+            {
+                lock (_fileLoadLock)
+                {
+                    if (!_isCurrentFileLoaded || _fileLoadVersion != fileLoadVersion)
+                    {
+                        return;
+                    }
+                }
+
+                if (!string.Equals(
+                        Path.GetFullPath(_currentFilePath ?? string.Empty),
+                        Path.GetFullPath(loadedFilePath),
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
+                ThrowIfError(
+                    "mpv automatic subtitle load failed",
+                    MpvCommandInvoker.Invoke(_handle, "sub-add", subtitlePath, "select"));
+            }, CancellationToken.None).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(
+                $"Failed to automatically load subtitle '{subtitlePath}': {ex.Message}");
+        }
     }
 
     private IReadOnlyList<VideoTrackInfo> ReadTracksCore()
@@ -1364,6 +1493,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
 
                     if (mpvEvent.EventId == MpvEventId.StartFile)
                     {
+                        MarkNativeFileLoadStarted();
                         _isInitialVideoSizePending = true;
                         _hasRaisedPlaybackEndedForCurrentFile = false;
                         ResetPlaybackStateForFileTransition();
@@ -1383,7 +1513,14 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
 
                     if (mpvEvent.EventId == MpvEventId.FileLoaded)
                     {
+                        var fileLoadVersion = MarkCurrentFileLoaded();
                         UpdateChapters(ReadChapters(handle));
+                        if (!string.IsNullOrWhiteSpace(_currentFilePath))
+                        {
+                            _ = LoadMatchingSubtitleAfterFileLoadedAsync(
+                                _currentFilePath,
+                                fileLoadVersion);
+                        }
                     }
 
                     if (mpvEvent.EventId == MpvEventId.VideoReconfig)
@@ -1873,6 +2010,7 @@ public sealed class MpvVideoPlaybackService : IVideoPlaybackService, IAsyncDispo
         }
 
         CancelPendingCommands();
+        CancelPendingFileLoad();
         StopEventLoop();
 
         if (_handle.Handle != IntPtr.Zero)

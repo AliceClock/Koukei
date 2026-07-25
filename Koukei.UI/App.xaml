@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Resources/DesignTokens.xaml" />
                 <ResourceDictionary Source="Resources/ControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -382,7 +382,10 @@
             Grid.Row="0"
             Padding="24,20,24,0"
             Spacing="{StaticResource KoukeiPageBlockSpacing}">
-            <TextBlock x:Name="LibraryTitleText" Style="{StaticResource KoukeiPageTitleTextStyle}" />
+            <TextBlock
+                x:Name="LibraryTitleText"
+                AutomationProperties.AutomationId="PageMediaLibrary"
+                Style="{StaticResource KoukeiPageTitleTextStyle}" />
 
             <Grid x:Name="CommandArea" RowSpacing="12">
                 <Grid.RowDefinitions>
@@ -434,6 +437,7 @@
                     <AutoSuggestBox
                         x:Name="SearchBox"
                         x:Uid="LibraryPage_CommandBar_SearchBox"
+                        AutomationProperties.AutomationId="LibrarySearchBox"
                         Width="300"
                         MinHeight="40"
                         VerticalContentAlignment="Center"

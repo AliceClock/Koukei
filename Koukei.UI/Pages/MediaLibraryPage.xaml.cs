@@ -8,6 +8,7 @@ using Koukei.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
@@ -47,7 +48,8 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
     private sealed record PreparedMediaItem(
         MediaLibraryItem Item,
         long FileSize,
-        DateTimeOffset? ObservedLastModified);
+        DateTimeOffset? ObservedLastModified,
+        string? LinkedFilePath);
     private sealed record PendingMetadataUpdate(
         MediaItemViewModel Item,
         MediaLibraryMetadataUpdate Update);
@@ -108,6 +110,9 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
         ".mp3", ".mpc", ".oga", ".ogg", ".opus", ".ra", ".tak", ".tta",
         ".wav", ".weba", ".wma", ".wv"
     };
+
+    private static IReadOnlyList<string> LinkedSubtitleExtensions =>
+        VideoSubtitleSidecar.SupportedExtensions;
 
     private readonly List<MediaItemViewModel> _allItems = [];
     private readonly SemaphoreSlim _metadataRefreshGate = new(1, 1);
@@ -268,6 +273,11 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
         LibraryTitleText.Text = _libraryKind == MediaLibraryItemKind.Audio
             ? GetResourceString("LibraryPage_AudioTitle", "Audio library")
             : GetResourceString("LibraryPage_VideoTitle", "Video library");
+        AutomationProperties.SetAutomationId(
+            LibraryTitleText,
+            _libraryKind == MediaLibraryItemKind.Audio
+                ? "PageAudioLibrary"
+                : "PageVideoLibrary");
     }
 
     private void UpdateSortState()
@@ -397,6 +407,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
             var library = scope.ServiceProvider.GetRequiredService<IMediaLibraryBus>();
             var page = await library.SearchAsync(CreateMediaLibraryQuery(skip: 0), loadCts.Token);
             var preparedItems = await PrepareMediaItemsAsync(page.Items, loadCts.Token);
+            await PersistDiscoveredLinkedFilesAsync(library, preparedItems, loadCts.Token);
             loadCts.Token.ThrowIfCancellationRequested();
 
             if (!ReferenceEquals(_loadMediaItemsCts, loadCts) ||
@@ -409,7 +420,8 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                 .Select(item => CreateMediaItemViewModel(
                     item.Item,
                     item.FileSize,
-                    item.ObservedLastModified))
+                    item.ObservedLastModified,
+                    item.LinkedFilePath))
                 .ToList();
             var selectedIds = _selectedItems.Select(item => item.Id).ToHashSet();
             var existingItemsById = _allItems.ToDictionary(item => item.Id);
@@ -731,6 +743,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                 CreateMediaLibraryQuery(_nextMediaItemOffset),
                 loadCts.Token);
             var preparedItems = await PrepareMediaItemsAsync(page.Items, loadCts.Token);
+            await PersistDiscoveredLinkedFilesAsync(library, preparedItems, loadCts.Token);
 
             loadCts.Token.ThrowIfCancellationRequested();
             if (!ReferenceEquals(_loadMediaItemsCts, loadCts) || !_isPageActive)
@@ -742,7 +755,8 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                 .Select(item => CreateMediaItemViewModel(
                     item.Item,
                     item.FileSize,
-                    item.ObservedLastModified))
+                    item.ObservedLastModified,
+                    item.LinkedFilePath))
                 .ToList();
             await AppendLoadedMediaItemsAsync(loadedItems, loadCts.Token);
             _ = PopulateMediaMetadataSafelyAsync(loadedItems, loadCts);
@@ -979,14 +993,50 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var observedLastModified = TryGetLastModified(item.Path);
+                var linkedFilePath = item.LinkedFilePath ??
+                    FindMatchingLinkedFilePath(item.Path, item.Kind);
                 preparedItems.Add(new PreparedMediaItem(
                     item,
                     item.FileSize is >= 0 ? item.FileSize.Value : TryGetFileSize(item.Path),
-                    observedLastModified));
+                    observedLastModified,
+                    linkedFilePath));
             }
 
             return preparedItems;
         }, cancellationToken);
+    }
+
+    private static async Task PersistDiscoveredLinkedFilesAsync(
+        IMediaLibraryBus library,
+        IReadOnlyList<PreparedMediaItem> preparedItems,
+        CancellationToken cancellationToken)
+    {
+        foreach (var preparedItem in preparedItems)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!string.IsNullOrWhiteSpace(preparedItem.Item.LinkedFilePath) ||
+                string.IsNullOrWhiteSpace(preparedItem.LinkedFilePath))
+            {
+                continue;
+            }
+
+            try
+            {
+                await library.SetLinkedFilePathAsync(
+                    preparedItem.Item.Id,
+                    preparedItem.LinkedFilePath,
+                    cancellationToken);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(
+                    $"Failed to persist linked file for '{preparedItem.Item.Path}': {ex.Message}");
+            }
+        }
     }
 
     private static bool NeedsMetadataRefresh(MediaItemViewModel item)
@@ -1649,7 +1699,8 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                                 item.Artist,
                                 item.Album,
                                 item.ThumbnailPath,
-                                item.PlaybackPosition))
+                                item.PlaybackPosition,
+                                item.LinkedFilePath))
                             .ToArray());
                 var persistedByPath = result.AddedItems.ToDictionary(
                     item => item.Path,
@@ -2544,7 +2595,8 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                     displayedItem.Artist,
                     displayedItem.Album,
                     displayedItem.ThumbnailPath,
-                    displayedItem.PlaybackPosition))
+                    displayedItem.PlaybackPosition,
+                    displayedItem.LinkedFilePath))
                 .ToArray();
             var context = await queueBuilder.BuildDisplayedQueueAsync(
                 displayedItems,
@@ -2860,6 +2912,33 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
         var scrollViewerWidth = dialogWidth - 48;
         var contentWidth = Math.Min(632, dialogWidth - 68);
         var contentHeight = Math.Max(160, dialogMaxHeight - 176);
+        var fileDetails = new List<PropertyDetail>
+        {
+            new(
+                GetPropertyLabel("LibraryPage_PropertiesDialog_Content_FileSize", "File size: {0}"),
+                formattedFileSize),
+            new(
+                GetPropertyLabel("LibraryPage_PropertiesDialog_Content_AddedTime", "Added time: {0}"),
+                item.DateAdded.ToLocalTime().ToString("g")),
+            new(
+                GetPropertyLabel("LibraryPage_PropertiesDialog_Content_FileLocation", "File location: {0}"),
+                item.FilePath,
+                Wrap: true),
+            new(
+                GetPropertyLabel(
+                    item.Kind == MediaLibraryItemKind.Audio
+                        ? "LibraryPage_PropertiesDialog_Content_LinkedLyrics"
+                        : "LibraryPage_PropertiesDialog_Content_LinkedSubtitle",
+                    item.Kind == MediaLibraryItemKind.Audio
+                        ? "Linked lyrics: {0}"
+                        : "Linked subtitles: {0}"),
+                string.IsNullOrWhiteSpace(item.LinkedFilePath)
+                    ? GetResourceString(
+                        "LibraryPage_PropertiesDialog_LinkedFileAutomatic",
+                        "Automatic matching")
+                    : $"{Path.GetFileName(item.LinkedFilePath)}{Environment.NewLine}{item.LinkedFilePath}",
+                Wrap: true)
+        };
         var content = CreatePropertiesDialogContent(
             item,
             displayTitle,
@@ -2868,18 +2947,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
             summarySecondaryValue,
             formattedFileSize,
             mediaSections,
-            [
-                new PropertyDetail(
-                    GetPropertyLabel("LibraryPage_PropertiesDialog_Content_FileSize", "File size: {0}"),
-                    formattedFileSize),
-                new PropertyDetail(
-                    GetPropertyLabel("LibraryPage_PropertiesDialog_Content_AddedTime", "Added time: {0}"),
-                    item.DateAdded.ToLocalTime().ToString("g")),
-                new PropertyDetail(
-                    GetPropertyLabel("LibraryPage_PropertiesDialog_Content_FileLocation", "File location: {0}"),
-                    item.FilePath,
-                    Wrap: true)
-            ],
+            fileDetails,
             contentWidth);
 
         var dialog = new ContentDialog
@@ -2893,6 +2961,18 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto
             },
+            PrimaryButtonText = GetResourceString(
+                item.Kind == MediaLibraryItemKind.Audio
+                    ? "LibraryPage_PropertiesDialog_ChangeLinkedLyricsButton"
+                    : "LibraryPage_PropertiesDialog_ChangeLinkedSubtitleButton",
+                item.Kind == MediaLibraryItemKind.Audio
+                    ? "Change lyrics..."
+                    : "Change subtitles..."),
+            SecondaryButtonText = string.IsNullOrWhiteSpace(item.LinkedFilePath)
+                ? string.Empty
+                : GetResourceString(
+                    "LibraryPage_PropertiesDialog_ClearLinkedFileButton",
+                    "Use automatic matching"),
             CloseButtonText = GetResourceString("LibraryPage_Dialog_CloseButton", "Close"),
             XamlRoot = xamlRoot,
             HorizontalContentAlignment = HorizontalAlignment.Stretch,
@@ -2902,7 +2982,83 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
         dialog.Resources["ContentDialogMaxWidth"] = dialogWidth;
         dialog.Resources["ContentDialogMaxHeight"] = dialogMaxHeight;
 
-        await dialog.ShowAsync();
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            await PickAndSetLinkedFileAsync(item);
+        }
+        else if (result == ContentDialogResult.Secondary)
+        {
+            await SetLinkedFilePathAsync(item, linkedFilePath: null);
+        }
+    }
+
+    private async Task PickAndSetLinkedFileAsync(MediaItemViewModel item)
+    {
+        var picker = new FileOpenPicker
+        {
+            ViewMode = PickerViewMode.List,
+            SuggestedStartLocation = item.Kind == MediaLibraryItemKind.Audio
+                ? PickerLocationId.MusicLibrary
+                : PickerLocationId.DocumentsLibrary
+        };
+        var extensions = item.Kind == MediaLibraryItemKind.Audio
+            ? [".lrc"]
+            : LinkedSubtitleExtensions;
+        foreach (var extension in extensions)
+        {
+            picker.FileTypeFilter.Add(extension);
+        }
+
+        if (!TryInitializePickerWithMainWindow(picker, out var pickerError))
+        {
+            await ShowErrorDialog(
+                GetResourceString(
+                    "LibraryPage_FailedToChangeLinkedFileDialog_Title",
+                    "Failed to change linked file"),
+                pickerError);
+            return;
+        }
+
+        var file = await picker.PickSingleFileAsync();
+        if (file is not null)
+        {
+            await SetLinkedFilePathAsync(item, file.Path);
+        }
+    }
+
+    private async Task SetLinkedFilePathAsync(
+        MediaItemViewModel item,
+        string? linkedFilePath)
+    {
+        try
+        {
+            using var scope = App.Services.CreateScope();
+            var library = scope.ServiceProvider.GetRequiredService<IMediaLibraryBus>();
+            await library.SetLinkedFilePathAsync(item.Id, linkedFilePath);
+            item.LinkedFilePath = linkedFilePath;
+            App.Services
+                .GetRequiredService<PlaybackCoordinator>()
+                .UpdateQueueItemLinkedFile(item.Id, linkedFilePath);
+
+            FooterStatusBar.ShowTransient(string.IsNullOrWhiteSpace(linkedFilePath)
+                ? GetResourceString(
+                    "LibraryPage_Status_LinkedFileAutomatic",
+                    "Using automatic linked-file matching")
+                : string.Format(
+                    GetResourceString(
+                        "LibraryPage_Status_LinkedFileChanged",
+                        "Linked file changed to {0}"),
+                    Path.GetFileName(linkedFilePath)));
+        }
+        catch (Exception ex)
+        {
+            await ShowErrorDialog(
+                GetResourceString(
+                    "LibraryPage_FailedToChangeLinkedFileDialog_Title",
+                    "Failed to change linked file"),
+                ex.Message);
+        }
     }
 
     private List<PropertySection> CreatePersistedPropertySections(MediaItemViewModel item)
@@ -3898,6 +4054,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
         {
             Name = item.Title,
             Path = item.FilePath,
+            LinkedFilePath = item.LinkedFilePath,
             Extension = item.Extension,
             ContainerFormat = item.ContainerFormat,
             FileSize = item.FileSize,
@@ -3924,13 +4081,15 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
             item.Artist,
             item.Album,
             item.ThumbnailPath,
-            item.PlaybackPosition);
+            item.PlaybackPosition,
+            item.LinkedFilePath);
     }
 
     private MediaItemViewModel CreateMediaItemViewModel(
         MediaLibraryItem item,
         long fileSize,
-        DateTimeOffset? observedLastModified)
+        DateTimeOffset? observedLastModified,
+        string? linkedFilePath)
     {
         var title = FirstNonEmptyOrNull(
                 item.Name,
@@ -3942,6 +4101,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
             Id = item.Id,
             Title = title,
             FilePath = item.Path,
+            LinkedFilePath = linkedFilePath,
             FileSize = fileSize,
             ContainerFormat = item.ContainerFormat,
             Streams = item.Streams,
@@ -4230,6 +4390,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                     Path.GetFileNameWithoutExtension(info.Name))
                 ?? Path.GetFileNameWithoutExtension(info.Name),
             FilePath = info.FullName,
+            LinkedFilePath = FindMatchingLinkedFilePath(info.FullName, mediaKind),
             FileSize = mediaInfo.FileSize,
             DateAdded = DateTimeOffset.UtcNow,
             Duration = audioMetadata?.Duration ?? mediaInfo.Duration,
@@ -4283,6 +4444,7 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
                     Path.GetFileNameWithoutExtension(fileName))
                 ?? Path.GetFileNameWithoutExtension(fileName),
             FilePath = filePath,
+            LinkedFilePath = FindMatchingLinkedFilePath(filePath, mediaKind),
             FileSize = mediaInfo.FileSize,
             DateAdded = DateTimeOffset.UtcNow,
             Duration = audioMetadata?.Duration ?? mediaInfo.Duration,
@@ -4345,6 +4507,35 @@ public sealed partial class MediaLibraryPage : UserControl, INotifyPropertyChang
         }
 
         return streams;
+    }
+
+    private static string? FindMatchingLinkedFilePath(
+        string mediaFilePath,
+        MediaLibraryItemKind kind)
+    {
+        if (string.IsNullOrWhiteSpace(mediaFilePath))
+        {
+            return null;
+        }
+
+        if (kind == MediaLibraryItemKind.Video)
+        {
+            return VideoSubtitleSidecar.FindMatch(mediaFilePath);
+        }
+
+        string[] extensions = kind == MediaLibraryItemKind.Audio
+            ? [".lrc"]
+            : [];
+        foreach (var extension in extensions)
+        {
+            var candidate = Path.ChangeExtension(mediaFilePath, extension);
+            if (File.Exists(candidate))
+            {
+                return Path.GetFullPath(candidate);
+            }
+        }
+
+        return null;
     }
 
     private static int GetUniqueStreamIndex(long sourceIndex, HashSet<int> usedIndexes)
@@ -4684,6 +4875,7 @@ public sealed class MediaItemViewModel : INotifyPropertyChanged
     private UiBreakpoint _layoutBreakpoint = UiBreakpoint.Expanded;
     private string? _album;
     private string? _artist;
+    private string? _linkedFilePath;
     private string _title = string.Empty;
     private int _rating;
     private string? _thumbnailPath;
@@ -4713,6 +4905,30 @@ public sealed class MediaItemViewModel : INotifyPropertyChanged
     }
 
     public string FilePath { get; set; } = string.Empty;
+
+    public string? LinkedFilePath
+    {
+        get => _linkedFilePath;
+        set
+        {
+            var normalizedValue = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+            if (string.Equals(
+                    _linkedFilePath,
+                    normalizedValue,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            _linkedFilePath = normalizedValue;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(LinkedFileName));
+        }
+    }
+
+    public string? LinkedFileName => string.IsNullOrWhiteSpace(LinkedFilePath)
+        ? null
+        : Path.GetFileName(LinkedFilePath);
 
     public string TitleToolTipText => LongTextToolTip.CreateMediaText(Title, FilePath);
 
@@ -4832,6 +5048,7 @@ public sealed class MediaItemViewModel : INotifyPropertyChanged
         StorageFile = source.StorageFile;
         Title = source.Title;
         FilePath = source.FilePath;
+        LinkedFilePath = source.LinkedFilePath;
         Artist = source.Artist;
         Album = source.Album;
         FileSize = source.FileSize;

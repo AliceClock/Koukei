@@ -203,7 +203,16 @@ public sealed partial class PlayerWindow : Window
     private static readonly TimeSpan PlayerChromeAutoHideDelay = TimeSpan.FromSeconds(2.5);
     private static readonly TimeSpan SeekPreviewDebounceDelay = TimeSpan.FromMilliseconds(150);
     private static readonly TimeSpan InitialVideoSizeProbeTimeout = TimeSpan.FromSeconds(2);
-    private static readonly TimeSpan ForegroundActivationRetryDelay = TimeSpan.FromMilliseconds(120);
+    private static readonly TimeSpan ForegroundActivationSettleDelay =
+        TimeSpan.FromMilliseconds(200);
+    private static readonly TimeSpan[] ForegroundActivationRetrySchedule =
+    [
+        TimeSpan.Zero,
+        TimeSpan.FromMilliseconds(75),
+        TimeSpan.FromMilliseconds(200),
+        TimeSpan.FromMilliseconds(450),
+        TimeSpan.FromMilliseconds(900)
+    ];
     private static readonly TimeSpan LoadingFeedbackDelay = TimeSpan.FromMilliseconds(150);
     private static readonly TimeSpan LoadingFeedbackMinimumVisibleDuration = TimeSpan.FromMilliseconds(180);
     private static readonly TimeSpan VideoVolumeDebounceDelay = TimeSpan.FromMilliseconds(50);
@@ -212,8 +221,8 @@ public sealed partial class PlayerWindow : Window
     private static readonly double[] PlaybackSpeedSteps = [0.5, 0.75, 1, 1.25, 1.5, 2];
     private static readonly string[] ExternalAudioTrackExtensions =
         [".mp3", ".flac", ".aac", ".ogg", ".wav", ".m4a", ".opus", ".wma", ".mka", ".ac3"];
-    private static readonly string[] ExternalSubtitleTrackExtensions =
-        [".srt", ".ass", ".ssa", ".sub", ".idx", ".sup", ".vtt"];
+    private static IReadOnlyList<string> ExternalSubtitleTrackExtensions =>
+        VideoSubtitleSidecar.SupportedExtensions;
 
     private static PlayerWindow? s_current;
     private static readonly SemaphoreSlim s_videoOperationGate = new(1, 1);
@@ -257,7 +266,7 @@ public sealed partial class PlayerWindow : Window
     private bool _isReplacingVideoQueue;
     private bool _isVideoMouseButtonDown;
     private bool _isVideoQueueThumbnailWorkerRunning;
-    private bool _isWindowActive = true;
+    private bool _isWindowActive;
     private bool _shouldApplyInitialVideoSize;
     private bool _hasPendingCompositionResize;
     private bool _isCompositionResizeWorkerRunning;
@@ -273,6 +282,7 @@ public sealed partial class PlayerWindow : Window
     private CancellationTokenSource? _videoQueueThumbnailCancellation;
     private CancellationTokenSource? _loadingFeedbackCancellation;
     private CancellationTokenSource? _videoVolumeCancellation;
+    private CancellationTokenSource? _foregroundActivationCancellation;
     private DateTimeOffset? _loadingFeedbackShownAt;
     private SizeInt32 _lastCompositionPixelSize;
     private SizeInt32 _pendingCompositionPixelSize;
@@ -624,8 +634,10 @@ public sealed partial class PlayerWindow : Window
 
         s_current = window;
         window.SetVideoQueue([(title, filePath)]);
-        await window.PlayAsync(title, filePath);
-        window.RequestForegroundActivation();
+        await window.PlayAsync(
+            title,
+            filePath,
+            activationIntent: PlayerActivationIntent.UserInitiated);
         return window;
     }
 
@@ -701,6 +713,19 @@ public sealed partial class PlayerWindow : Window
     public static Task ShowPlaylistAsync(
         IReadOnlyList<(string Title, string FilePath)> items,
         int startIndex = 0,
+        CancellationToken cancellationToken = default) =>
+        ShowPlaylistAsync(
+            items,
+            startIndex,
+            PlayerActivationIntent.UserInitiated,
+            deferForegroundActivation: false,
+            cancellationToken: cancellationToken);
+
+    internal static Task ShowPlaylistAsync(
+        IReadOnlyList<(string Title, string FilePath)> items,
+        int startIndex,
+        PlayerActivationIntent activationIntent,
+        bool deferForegroundActivation,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(items);
@@ -715,18 +740,30 @@ public sealed partial class PlayerWindow : Window
 
         var queueSnapshot = items.ToArray();
         return RunOnPlayerUiThreadAsync(() =>
-            ShowPlaylistOnUiThreadAsync(queueSnapshot, startIndex, cancellationToken));
+            ShowPlaylistOnUiThreadAsync(
+                queueSnapshot,
+                startIndex,
+                activationIntent,
+                deferForegroundActivation,
+                cancellationToken));
     }
 
     private static async Task ShowPlaylistOnUiThreadAsync(
         IReadOnlyList<(string Title, string FilePath)> items,
         int startIndex,
+        PlayerActivationIntent activationIntent,
+        bool deferForegroundActivation,
         CancellationToken cancellationToken)
     {
         await s_videoOperationGate.WaitAsync(cancellationToken);
         try
         {
-            await ShowPlaylistCoreAsync(items, startIndex, cancellationToken);
+            await ShowPlaylistCoreAsync(
+                items,
+                startIndex,
+                activationIntent,
+                deferForegroundActivation,
+                cancellationToken);
             s_pendingVideoQueue.Clear();
         }
         finally
@@ -738,6 +775,8 @@ public sealed partial class PlayerWindow : Window
     private static async Task<PlayerWindow> ShowPlaylistCoreAsync(
         IReadOnlyList<(string Title, string FilePath)> items,
         int startIndex = 0,
+        PlayerActivationIntent activationIntent = PlayerActivationIntent.UserInitiated,
+        bool deferForegroundActivation = false,
         CancellationToken cancellationToken = default)
     {
         if (startIndex < 0 || startIndex >= items.Count)
@@ -772,6 +811,8 @@ public sealed partial class PlayerWindow : Window
                 selectedItem.FilePath,
                 items.Select(item => item.FilePath).ToArray(),
                 startIndex,
+                activationIntent,
+                deferForegroundActivation,
                 cancellationToken);
             window.SetVideoQueue(items, startIndex);
         }
@@ -779,8 +820,6 @@ public sealed partial class PlayerWindow : Window
         {
             window._isReplacingVideoQueue = false;
         }
-
-        window.RequestForegroundActivation();
         return window;
     }
 
@@ -951,6 +990,19 @@ public sealed partial class PlayerWindow : Window
         return RunOnPlayerUiThreadAsync(CloseCurrentOnUiThreadAsync);
     }
 
+    internal static Task RequestCurrentForegroundActivationAsync()
+    {
+        return RunOnPlayerUiThreadAsync(() =>
+        {
+            if (s_current is { _isClosed: false, _isClosing: false } window)
+            {
+                window.RequestForegroundActivation();
+            }
+
+            return Task.CompletedTask;
+        });
+    }
+
     private static Task CloseCurrentOnUiThreadAsync()
     {
         return s_current is { _isClosed: false } window
@@ -997,6 +1049,8 @@ public sealed partial class PlayerWindow : Window
         string filePath,
         IReadOnlyList<string>? playlistFilePaths = null,
         int playlistStartIndex = 0,
+        PlayerActivationIntent activationIntent = PlayerActivationIntent.UserInitiated,
+        bool deferForegroundActivation = false,
         CancellationToken cancellationToken = default)
     {
         ApplyDisplayedMediaTitle(title, filePath);
@@ -1036,9 +1090,17 @@ public sealed partial class PlayerWindow : Window
             NativeWindowEffects.SetOpacity(_hwnd, 0);
         }
 
-        ActivatePlayerWindow();
-        _isActivated = true;
-        FocusPlayerSurface();
+        if (isFirstActivation &&
+            activationIntent == PlayerActivationIntent.BackgroundContinuation)
+        {
+            AppWindow.Show(false);
+            _isActivated = true;
+        }
+
+        if (activationIntent == PlayerActivationIntent.BackgroundContinuation)
+        {
+            CancelForegroundActivationRequest(stopTaskbarFlash: true);
+        }
 
         var loadingFeedback = BeginLoadingFeedback();
 
@@ -1057,9 +1119,7 @@ public sealed partial class PlayerWindow : Window
             }
 
             NativeWindowEffects.ClearOpacity(_hwnd);
-            ActivatePlayerWindow();
             ResizePlayerSurface();
-            FocusPlayerSurface();
 
             if (_usesD3D11Composition)
             {
@@ -1093,8 +1153,6 @@ public sealed partial class PlayerWindow : Window
             }
 
             await RefreshPlaybackStateAsync();
-            ActivatePlayerWindow();
-            FocusPlayerSurface();
         }
         catch
         {
@@ -1105,6 +1163,12 @@ public sealed partial class PlayerWindow : Window
         finally
         {
             await EndLoadingFeedbackAsync(loadingFeedback);
+        }
+
+        if (activationIntent == PlayerActivationIntent.UserInitiated &&
+            !deferForegroundActivation)
+        {
+            RequestForegroundActivation();
         }
     }
 
@@ -1206,18 +1270,6 @@ public sealed partial class PlayerWindow : Window
         MotionHelper.SetVisibleInstant(LoadingRing, isVisible: false);
     }
 
-    private void ActivatePlayerWindow()
-    {
-        if (_isClosed || _isClosing)
-        {
-            return;
-        }
-
-        AppWindow.Show(true);
-        Activate();
-        NativeWindowEffects.BringToFront(_hwnd);
-    }
-
     private void RequestForegroundActivation()
     {
         if (_isClosed || _isClosing)
@@ -1225,39 +1277,123 @@ public sealed partial class PlayerWindow : Window
             return;
         }
 
-        var requestId = Interlocked.Increment(ref _foregroundActivationRequestId);
-        ActivatePlayerWindow();
-        FocusPlayerSurface();
+        CancelForegroundActivationRequest(stopTaskbarFlash: true);
 
-        _ = RetryForegroundActivationAsync(requestId);
+        var cancellation = new CancellationTokenSource();
+        _foregroundActivationCancellation = cancellation;
+        var requestId = Interlocked.Increment(ref _foregroundActivationRequestId);
+        _ = RetryForegroundActivationAsync(requestId, cancellation);
     }
 
-    private async Task RetryForegroundActivationAsync(long requestId)
+    private async Task RetryForegroundActivationAsync(
+        long requestId,
+        CancellationTokenSource cancellation)
     {
-        await Task.Delay(ForegroundActivationRetryDelay).ConfigureAwait(false);
-        if (_isClosed ||
-            _isClosing ||
-            requestId != Interlocked.Read(ref _foregroundActivationRequestId) ||
-            NativeWindowEffects.IsForegroundWindow(_hwnd) ||
-            !NativeWindowEffects.IsForegroundWindowOwnedByCurrentProcess())
+        var stopwatch = Stopwatch.StartNew();
+        var windowShowRequested = false;
+        try
         {
-            return;
-        }
+            // Let a closing picker finish restoring its owner before the first
+            // foreground attempt, then keep observing through the retry schedule.
+            foreach (var retryAt in ForegroundActivationRetrySchedule)
+            {
+                var delay = retryAt - stopwatch.Elapsed;
+                if (delay > TimeSpan.Zero)
+                {
+                    await Task.Delay(delay, cancellation.Token);
+                }
 
-        _ = DispatcherQueue.TryEnqueue(() =>
-        {
+                cancellation.Token.ThrowIfCancellationRequested();
+                if (_isClosed ||
+                    _isClosing ||
+                    requestId != Interlocked.Read(ref _foregroundActivationRequestId))
+                {
+                    return;
+                }
+
+                if (retryAt < ForegroundActivationSettleDelay)
+                {
+                    if (NativeWindowEffects.IsForegroundWindow(_hwnd))
+                    {
+                        NativeWindowEffects.StopTaskbarFlash(_hwnd);
+                        FocusPlayerSurface();
+                    }
+                    continue;
+                }
+
+                if (!windowShowRequested)
+                {
+                    AppWindow.Show(false);
+                    _isActivated = true;
+                    windowShowRequested = true;
+                }
+
+                if (NativeWindowEffects.IsForegroundWindow(_hwnd))
+                {
+                    NativeWindowEffects.StopTaskbarFlash(_hwnd);
+                    FocusPlayerSurface();
+                    continue;
+                }
+
+                if (!NativeWindowEffects.CanRequestForegroundActivation())
+                {
+                    continue;
+                }
+
+                if (NativeWindowEffects.BringToFront(_hwnd))
+                {
+                    NativeWindowEffects.StopTaskbarFlash(_hwnd);
+                    FocusPlayerSurface();
+                }
+            }
+
             if (_isClosed ||
                 _isClosing ||
-                requestId != Interlocked.Read(ref _foregroundActivationRequestId) ||
-                NativeWindowEffects.IsForegroundWindow(_hwnd) ||
-                !NativeWindowEffects.IsForegroundWindowOwnedByCurrentProcess())
+                requestId != Interlocked.Read(ref _foregroundActivationRequestId))
             {
                 return;
             }
 
-            ActivatePlayerWindow();
-            FocusPlayerSurface();
-        });
+            if (NativeWindowEffects.IsForegroundWindow(_hwnd))
+            {
+                NativeWindowEffects.StopTaskbarFlash(_hwnd);
+                FocusPlayerSurface();
+            }
+            else
+            {
+                NativeWindowEffects.FlashTaskbar(_hwnd);
+            }
+        }
+        catch (OperationCanceledException) when (cancellation.IsCancellationRequested)
+        {
+        }
+        finally
+        {
+            if (ReferenceEquals(_foregroundActivationCancellation, cancellation))
+            {
+                _foregroundActivationCancellation = null;
+            }
+
+            cancellation.Dispose();
+        }
+    }
+
+    private bool CancelForegroundActivationRequest(bool stopTaskbarFlash)
+    {
+        var cancellation = _foregroundActivationCancellation;
+        if (cancellation is not null)
+        {
+            _foregroundActivationCancellation = null;
+            Interlocked.Increment(ref _foregroundActivationRequestId);
+            cancellation.Cancel();
+        }
+
+        if (stopTaskbarFlash)
+        {
+            NativeWindowEffects.StopTaskbarFlash(_hwnd);
+        }
+
+        return cancellation is not null;
     }
 
     private async Task PlayWithD3D11CompositionAsync(string filePath)
@@ -3688,8 +3824,12 @@ public sealed partial class PlayerWindow : Window
         _isWindowActive = args.WindowActivationState != WindowActivationState.Deactivated;
         if (_isWindowActive)
         {
+            var isForegroundRequestPending =
+                _foregroundActivationCancellation is not null;
+            NativeWindowEffects.StopTaskbarFlash(_hwnd);
             NotifyPlayerInteraction();
-            if (args.WindowActivationState == WindowActivationState.CodeActivated)
+            if (isForegroundRequestPending ||
+                args.WindowActivationState == WindowActivationState.CodeActivated)
             {
                 FocusPlayerSurface();
             }
@@ -4604,7 +4744,7 @@ public sealed partial class PlayerWindow : Window
 
         AppWindow.MoveAndResize(new RectInt32(x, y, windowWidth, windowHeight));
         ResizePlayerSurface();
-        if (_isWindowActive)
+        if (NativeWindowEffects.IsForegroundWindow(_hwnd))
         {
             NativeWindowEffects.BringToFront(_hwnd);
             FocusPlayerSurface();
@@ -5073,7 +5213,7 @@ public sealed partial class PlayerWindow : Window
         CancelVideoQueueThumbnailLoading();
         PlaybackSeekBar.CancelSeek();
         _isSeeking = false;
-        Interlocked.Increment(ref _foregroundActivationRequestId);
+        CancelForegroundActivationRequest(stopTaskbarFlash: true);
         ResetSeekPreviewSession();
         _playerChromeAutoHideCancellation?.Cancel();
         _playerChromeAutoHideCancellation?.Dispose();
@@ -5112,6 +5252,7 @@ public sealed partial class PlayerWindow : Window
     private void PlayerWindow_Closed(object sender, WindowEventArgs args)
     {
         _isClosed = true;
+        CancelForegroundActivationRequest(stopTaskbarFlash: true);
         CancelLoadingFeedback();
         CancelVideoQueueThumbnailLoading();
         CancelPendingVideoVolume();

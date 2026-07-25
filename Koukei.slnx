@@ -15,6 +15,12 @@
   <Project Path="Koukei.Ffmpeg/Koukei.Ffmpeg.csproj" />
   <Project Path="Koukei.Mpv/Koukei.Mpv.csproj" />
   <Project Path="Koukei.Video/Koukei.Video.csproj" />
+  <Project Path="tests/Koukei.Core.Tests/Koukei.Core.Tests.csproj" />
+  <Project Path="tests/Koukei.UI.Tests/Koukei.UI.Tests.csproj">
+    <Platform Solution="*|ARM64" Project="x64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x64" />
+  </Project>
   <Project Path="Koukei.UI/Koukei.UI.csproj">
     <Platform Solution="*|ARM64" Project="ARM64" />
     <Platform Solution="*|x64" Project="x64" />

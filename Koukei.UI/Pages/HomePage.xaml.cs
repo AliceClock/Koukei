@@ -545,7 +545,8 @@ public sealed partial class HomePage : Page
                     persistedItem.Artist,
                     persistedItem.Album,
                     persistedItem.ThumbnailPath,
-                    persistedItem.PlaybackPosition));
+                    persistedItem.PlaybackPosition,
+                    persistedItem.LinkedFilePath));
                 continue;
             }
 
@@ -990,7 +991,8 @@ public sealed partial class HomePage : Page
                     item.Artist,
                     item.Album,
                     item.ThumbnailPath,
-                    item.PlaybackPosition));
+                    item.PlaybackPosition,
+                    item.LinkedFilePath));
                 return;
             default:
                 var file = await StorageFile.GetFileFromPathAsync(item.FilePath);
@@ -1182,6 +1184,7 @@ public sealed class RecentMediaItemViewModel : INotifyPropertyChanged
         Album = item.Album;
         ThumbnailPath = item.ThumbnailPath;
         PlaybackPosition = item.PlaybackPosition;
+        LinkedFilePath = item.LinkedFilePath;
         _thumbnailSource = CreateThumbnailSource(item.ThumbnailPath);
         _hasPresentedThumbnail = _thumbnailSource is not null;
     }
@@ -1205,6 +1208,8 @@ public sealed class RecentMediaItemViewModel : INotifyPropertyChanged
     public string? ThumbnailPath { get; private set; }
 
     public TimeSpan? PlaybackPosition { get; }
+
+    public string? LinkedFilePath { get; }
 
     public ImageSource? ThumbnailSource => _thumbnailSource;
 

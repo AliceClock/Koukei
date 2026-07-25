@@ -46,6 +46,7 @@ public sealed class MediaLibraryService(KoukeiDbContext context) : IMediaLibrary
                 Id = item.Id,
                 Name = item.Name,
                 Path = item.Path ?? string.Empty,
+                LinkedFilePath = item.LinkedFilePath,
                 DateCreated = item.DateCreated,
                 DurationSeconds = item.MediaStreams
                     .Where(stream => stream.Duration > 0)
@@ -95,6 +96,7 @@ public sealed class MediaLibraryService(KoukeiDbContext context) : IMediaLibrary
                     Id = item.Id,
                     Name = item.Name,
                     Path = item.Path ?? string.Empty,
+                    LinkedFilePath = item.LinkedFilePath,
                     DateCreated = item.DateCreated,
                     DurationSeconds = item.MediaStreams
                         .Where(stream => stream.Duration > 0)
@@ -490,6 +492,25 @@ public sealed class MediaLibraryService(KoukeiDbContext context) : IMediaLibrary
         await context.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task SetLinkedFilePathAsync(
+        Guid itemId,
+        string? linkedFilePath,
+        CancellationToken cancellationToken = default)
+    {
+        var item = await context.Items.FirstOrDefaultAsync(
+            item => item.Id == itemId,
+            cancellationToken);
+        if (item is null)
+        {
+            throw new InvalidOperationException($"Item '{itemId}' does not exist.");
+        }
+
+        item.LinkedFilePath = string.IsNullOrWhiteSpace(linkedFilePath)
+            ? null
+            : Path.GetFullPath(linkedFilePath.Trim());
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task<int> ClearThumbnailPathsUnderAsync(
         string rootPath,
         CancellationToken cancellationToken = default)
@@ -602,6 +623,9 @@ public sealed class MediaLibraryService(KoukeiDbContext context) : IMediaLibrary
 
         item.Path = Path.GetFullPath(item.Path.Trim());
         item.NormalizedPath = PathNormalizer.Normalize(item.Path);
+        item.LinkedFilePath = string.IsNullOrWhiteSpace(item.LinkedFilePath)
+            ? null
+            : Path.GetFullPath(item.LinkedFilePath.Trim());
         item.Name = string.IsNullOrWhiteSpace(item.Name)
             ? Path.GetFileNameWithoutExtension(item.Path)
             : item.Name.Trim();

@@ -9,6 +9,7 @@ namespace Koukei.UI.Helpers;
 internal static class LanguageHelper
 {
     private const string APP_LANGUAGE_KEY = "AppLanguage";
+    private static string _environmentLanguage = "en-US";
 
     /// <summary>
     /// Gets the language applied to resources for the lifetime of the current process.
@@ -22,8 +23,25 @@ internal static class LanguageHelper
     /// </summary>
     public static string CurrentLanguage
     {
-        get => ApplicationData.Current.LocalSettings.Values[APP_LANGUAGE_KEY] as string ?? "en-US";
-        set => ApplicationData.Current.LocalSettings.Values[APP_LANGUAGE_KEY] = value;
+        get
+        {
+            if (DataLocationHelper.HasEnvironmentOverride)
+            {
+                return _environmentLanguage;
+            }
+
+            return ApplicationData.Current.LocalSettings.Values[APP_LANGUAGE_KEY] as string ?? "en-US";
+        }
+        set
+        {
+            if (DataLocationHelper.HasEnvironmentOverride)
+            {
+                _environmentLanguage = value;
+                return;
+            }
+
+            ApplicationData.Current.LocalSettings.Values[APP_LANGUAGE_KEY] = value;
+        }
     }
 
     /// <summary>
@@ -36,7 +54,11 @@ internal static class LanguageHelper
         var saved = CurrentLanguage;
         if (!string.IsNullOrEmpty(saved))
         {
-            ApplicationLanguages.PrimaryLanguageOverride = saved;
+            if (!DataLocationHelper.HasEnvironmentOverride)
+            {
+                ApplicationLanguages.PrimaryLanguageOverride = saved;
+            }
+
             AppliedLanguage = saved;
         }
     }

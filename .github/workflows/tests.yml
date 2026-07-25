@@ -1,0 +1,72 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      run_ui_automation:
+        description: Run the interactive WinUI navigation smoke test
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  automated-tests:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Run core tests
+        run: dotnet test tests/Koukei.Core.Tests/Koukei.Core.Tests.csproj -c Release --nologo --verbosity:minimal
+
+      - name: Run UI contract tests
+        run: >-
+          dotnet test tests/Koukei.UI.Tests/Koukei.UI.Tests.csproj
+          -m:1
+          -c Release
+          -p:Platform=x64
+          -p:WindowsPackageType=None
+          -p:WindowsAppSDKSelfContained=true
+          --filter "Category!=UIAutomation"
+          --nologo
+          --verbosity:minimal
+
+  ui-navigation-smoke:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_ui_automation
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Run WinUI navigation smoke test
+        run: >-
+          dotnet test tests/Koukei.UI.Tests/Koukei.UI.Tests.csproj
+          -m:1
+          -c Release
+          -p:Platform=x64
+          -p:WindowsPackageType=None
+          -p:WindowsAppSDKSelfContained=true
+          --filter "Category=UIAutomation"
+          --nologo
+          --verbosity:minimal
+
+      - name: Upload UI diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-smoke-diagnostics
+          path: TestResults/ui-smoke
+          if-no-files-found: ignore

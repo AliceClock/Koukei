@@ -16,7 +16,8 @@ internal sealed record PlaybackQueueSelection(
     string? Artist,
     string? Album,
     string? ThumbnailPath,
-    TimeSpan? PlaybackPosition);
+    TimeSpan? PlaybackPosition,
+    string? LinkedFilePath);
 
 internal sealed record PlaybackQueueEntry(
     Guid? MediaId,
@@ -26,7 +27,8 @@ internal sealed record PlaybackQueueEntry(
     string? Artist = null,
     string? Album = null,
     string? ThumbnailPath = null,
-    TimeSpan? PlaybackPosition = null);
+    TimeSpan? PlaybackPosition = null,
+    string? LinkedFilePath = null);
 
 internal sealed record PlaybackQueueMetadataUpdate(
     string FilePath,
@@ -95,7 +97,8 @@ internal sealed class PlaybackQueueBuilder
                 item.Artist,
                 item.Album,
                 item.ThumbnailPath,
-                item.PlaybackPosition));
+                item.PlaybackPosition,
+                item.LinkedFilePath));
         }
 
         if (startIndex < 0)

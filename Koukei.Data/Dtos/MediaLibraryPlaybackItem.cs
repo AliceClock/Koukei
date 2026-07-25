@@ -10,6 +10,8 @@ public sealed class MediaLibraryPlaybackItem
 
     public string Path { get; init; } = string.Empty;
 
+    public string? LinkedFilePath { get; init; }
+
     public DateTimeOffset DateCreated { get; init; }
 
     public double? DurationSeconds { get; init; }

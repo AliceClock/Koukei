@@ -255,6 +255,7 @@
             Spacing="{StaticResource KoukeiPageBlockSpacing}">
             <TextBlock
                 x:Uid="PlaylistsPage_Title"
+                AutomationProperties.AutomationId="PagePlaylists"
                 Style="{StaticResource KoukeiPageTitleTextStyle}" />
 
             <Grid x:Name="CommandArea" RowSpacing="12">
@@ -270,6 +271,7 @@
                 <StackPanel x:Name="PrimaryCommands" Orientation="Horizontal" Spacing="8">
                     <Button
                         x:Name="CreatePlaylistButton"
+                        AutomationProperties.AutomationId="CreatePlaylist"
                         Click="CreatePlaylistButton_Click"
                         MinHeight="40"
                         Style="{StaticResource KoukeiAccentButtonStyle}">

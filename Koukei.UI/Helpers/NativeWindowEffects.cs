@@ -29,12 +29,15 @@ internal static class NativeWindowEffects
     private const long WsThickFrame = 0x00040000L;
     private const uint DwmColorNone = 0xFFFFFFFE;
     private const int LwaAlpha = 0x00000002;
+    private const uint FlashwStop = 0;
+    private const uint FlashwTray = 0x00000002;
+    private const uint FlashwTimerNoForeground = 0x0000000C;
 
-    public static void BringToFront(IntPtr hwnd)
+    public static bool BringToFront(IntPtr hwnd)
     {
         if (hwnd == IntPtr.Zero)
         {
-            return;
+            return false;
         }
 
         var isTopMost = (GetWindowLongPtr(hwnd, GwlExStyle).ToInt64() & WsExTopMost) != 0;
@@ -48,27 +51,57 @@ internal static class NativeWindowEffects
             0,
             SwpNoMove | SwpNoSize | SwpShowWindow);
         _ = BringWindowToTop(hwnd);
-        if (SetForegroundWindow(hwnd))
-        {
-            return;
-        }
-
-        TryActivateAcrossWindowThreads(hwnd);
+        _ = SetForegroundWindow(hwnd);
+        return GetForegroundWindow() == hwnd;
     }
 
     public static bool IsForegroundWindow(IntPtr hwnd) =>
         hwnd != IntPtr.Zero && GetForegroundWindow() == hwnd;
 
-    public static bool IsForegroundWindowOwnedByCurrentProcess()
+    public static bool CanRequestForegroundActivation()
     {
         var foregroundWindow = GetForegroundWindow();
         if (foregroundWindow == IntPtr.Zero)
         {
-            return false;
+            return true;
         }
 
         _ = GetWindowThreadProcessId(foregroundWindow, out var processId);
         return processId == unchecked((uint)Environment.ProcessId);
+    }
+
+    public static void FlashTaskbar(IntPtr hwnd)
+    {
+        if (hwnd == IntPtr.Zero)
+        {
+            return;
+        }
+
+        var info = new FlashWindowInfo
+        {
+            Size = unchecked((uint)Marshal.SizeOf<FlashWindowInfo>()),
+            Window = hwnd,
+            Flags = FlashwTray | FlashwTimerNoForeground,
+            Count = 3,
+            Timeout = 0
+        };
+        _ = FlashWindowEx(ref info);
+    }
+
+    public static void StopTaskbarFlash(IntPtr hwnd)
+    {
+        if (hwnd == IntPtr.Zero)
+        {
+            return;
+        }
+
+        var info = new FlashWindowInfo
+        {
+            Size = unchecked((uint)Marshal.SizeOf<FlashWindowInfo>()),
+            Window = hwnd,
+            Flags = FlashwStop
+        };
+        _ = FlashWindowEx(ref info);
     }
 
     public static void SetTopMost(IntPtr hwnd, bool isTopMost)
@@ -212,76 +245,6 @@ internal static class NativeWindowEffects
     private static void ApplyOpacity(IntPtr hwnd, byte opacity) =>
         _ = SetLayeredWindowAttributes(hwnd, 0, opacity, LwaAlpha);
 
-    private static void TryActivateAcrossWindowThreads(IntPtr hwnd)
-    {
-        var foregroundWindow = GetForegroundWindow();
-        var currentThread = GetCurrentThreadId();
-        var foregroundThread = foregroundWindow == IntPtr.Zero
-            ? 0
-            : GetWindowThreadProcessId(foregroundWindow, out _);
-        var targetThread = GetWindowThreadProcessId(hwnd, out _);
-        var attachedForeground = false;
-        var attachedTarget = false;
-
-        try
-        {
-            if (foregroundThread != 0 && foregroundThread != currentThread)
-            {
-                attachedForeground = AttachThreadInput(currentThread, foregroundThread, true);
-            }
-
-            if (targetThread != 0 && targetThread != currentThread && targetThread != foregroundThread)
-            {
-                attachedTarget = AttachThreadInput(currentThread, targetThread, true);
-            }
-
-            _ = BringWindowToTop(hwnd);
-            _ = SetActiveWindow(hwnd);
-            _ = SetFocus(hwnd);
-            if (SetForegroundWindow(hwnd))
-            {
-                return;
-            }
-
-            // A short topmost pulse keeps the requested window visible when Windows
-            // rejects foreground activation without changing a persistent topmost window.
-            var isTopMost = (GetWindowLongPtr(hwnd, GwlExStyle).ToInt64() & WsExTopMost) != 0;
-            if (!isTopMost)
-            {
-                _ = SetWindowPos(
-                    hwnd,
-                    HwndTopMost,
-                    0,
-                    0,
-                    0,
-                    0,
-                    SwpNoMove | SwpNoSize | SwpShowWindow);
-                _ = SetWindowPos(
-                    hwnd,
-                    HwndNoTopMost,
-                    0,
-                    0,
-                    0,
-                    0,
-                    SwpNoMove | SwpNoSize | SwpShowWindow);
-            }
-
-            _ = SetForegroundWindow(hwnd);
-        }
-        finally
-        {
-            if (attachedTarget)
-            {
-                _ = AttachThreadInput(currentThread, targetThread, false);
-            }
-
-            if (attachedForeground)
-            {
-                _ = AttachThreadInput(currentThread, foregroundThread, false);
-            }
-        }
-    }
-
     private static IntPtr GetWindowLongPtr(IntPtr hwnd, int index)
     {
         return IntPtr.Size == 8
@@ -294,6 +257,16 @@ internal static class NativeWindowEffects
         return IntPtr.Size == 8
             ? SetWindowLongPtr64(hwnd, index, value)
             : new IntPtr(SetWindowLong32(hwnd, index, value.ToInt32()));
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct FlashWindowInfo
+    {
+        public uint Size;
+        public IntPtr Window;
+        public uint Flags;
+        public uint Count;
+        public uint Timeout;
     }
 
     [DllImport("user32.dll", EntryPoint = "GetWindowLongPtrW", SetLastError = true)]
@@ -339,18 +312,9 @@ internal static class NativeWindowEffects
     [DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
 
-    [DllImport("kernel32.dll")]
-    private static extern uint GetCurrentThreadId();
-
     [DllImport("user32.dll", SetLastError = true)]
     private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
 
     [DllImport("user32.dll", SetLastError = true)]
-    private static extern bool AttachThreadInput(uint attachThreadId, uint attachToThreadId, bool attach);
-
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern IntPtr SetActiveWindow(IntPtr hwnd);
-
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern IntPtr SetFocus(IntPtr hwnd);
+    private static extern bool FlashWindowEx(ref FlashWindowInfo flashInfo);
 }

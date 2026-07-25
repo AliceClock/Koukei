@@ -21,6 +21,12 @@ public enum AudioRepeatMode
     One
 }
 
+internal enum PlayerActivationIntent
+{
+    UserInitiated,
+    BackgroundContinuation
+}
+
 internal sealed class PlaybackCoordinator
 {
     private const string AudioShuffleSettingKey = "AudioPlayback_IsShuffleEnabled";
@@ -129,7 +135,8 @@ internal sealed class PlaybackCoordinator
                         item.Artist,
                         item.Album,
                         item.ThumbnailPath,
-                        item.PlaybackPosition))
+                        item.PlaybackPosition,
+                        item.LinkedFilePath))
                     .ToList();
             }
         }
@@ -226,7 +233,8 @@ internal sealed class PlaybackCoordinator
                     Artist = libraryItem.Artist,
                     Album = libraryItem.Album,
                     ThumbnailPath = libraryItem.ThumbnailPath,
-                    PlaybackPosition = libraryItem.PlaybackPosition
+                    PlaybackPosition = libraryItem.PlaybackPosition,
+                    LinkedFilePath = libraryItem.LinkedFilePath
                 };
                 if (replacement != queuedItem)
                 {
@@ -369,6 +377,34 @@ internal sealed class PlaybackCoordinator
         }
     }
 
+    public void UpdateQueueItemLinkedFile(Guid mediaId, string? linkedFilePath)
+    {
+        var changed = false;
+        lock (_queueLock)
+        {
+            for (var index = 0; index < _queue.Count; index++)
+            {
+                var entry = _queue[index];
+                if (entry.MediaId != mediaId)
+                {
+                    continue;
+                }
+
+                var updatedEntry = entry with { LinkedFilePath = linkedFilePath };
+                if (updatedEntry != entry)
+                {
+                    _queue[index] = updatedEntry;
+                    changed = true;
+                }
+            }
+        }
+
+        if (changed)
+        {
+            RaisePlaybackQueueChanged();
+        }
+    }
+
     public PlaybackCoordinator(
         IAudioPlaybackService audioPlaybackService,
         IVideoPlaybackService videoPlaybackService,
@@ -469,7 +505,10 @@ internal sealed class PlaybackCoordinator
             }
 
             RaisePlaybackQueueChanged();
-            await ActivateItemAsync(item, cancellationToken);
+            await ActivateItemAsync(
+                item,
+                PlayerActivationIntent.UserInitiated,
+                cancellationToken);
         }
         finally
         {
@@ -492,7 +531,9 @@ internal sealed class PlaybackCoordinator
         await _playbackGate.WaitAsync(cancellationToken);
         try
         {
-            await ReplayCurrentCoreAsync(cancellationToken);
+            await ReplayCurrentCoreAsync(
+                PlayerActivationIntent.UserInitiated,
+                cancellationToken);
         }
         finally
         {
@@ -589,7 +630,10 @@ internal sealed class PlaybackCoordinator
             }
             else if (replacement is not null)
             {
-                await ActivateItemAsync(replacement, cancellationToken);
+                await ActivateItemAsync(
+                    replacement,
+                    PlayerActivationIntent.UserInitiated,
+                    cancellationToken);
             }
         }
         finally
@@ -701,7 +745,10 @@ internal sealed class PlaybackCoordinator
             }
 
             RaisePlaybackQueueChanged();
-            await ActivateItemAsync(item, cancellationToken);
+            await ActivateItemAsync(
+                item,
+                PlayerActivationIntent.UserInitiated,
+                cancellationToken);
         }
         finally
         {
@@ -753,7 +800,10 @@ internal sealed class PlaybackCoordinator
             }
 
             RaisePlaybackQueueChanged();
-            await ActivateItemAsync(items[startIndex], cancellationToken);
+            await ActivateItemAsync(
+                items[startIndex],
+                PlayerActivationIntent.UserInitiated,
+                cancellationToken);
         }
         finally
         {
@@ -768,7 +818,10 @@ internal sealed class PlaybackCoordinator
         await _playbackGate.WaitAsync(cancellationToken);
         try
         {
-            await NavigateCoreAsync(direction, cancellationToken);
+            await NavigateCoreAsync(
+                direction,
+                PlayerActivationIntent.UserInitiated,
+                cancellationToken);
         }
         finally
         {
@@ -778,6 +831,7 @@ internal sealed class PlaybackCoordinator
 
     private async Task<bool> NavigateCoreAsync(
         PlaybackNavigationDirection direction,
+        PlayerActivationIntent activationIntent,
         CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -802,11 +856,13 @@ internal sealed class PlaybackCoordinator
         {
             RaisePlaybackQueueChanged();
         }
-        await ActivateItemAsync(item, cancellationToken);
+        await ActivateItemAsync(item, activationIntent, cancellationToken);
         return true;
     }
 
-    private async Task<bool> ReplayCurrentCoreAsync(CancellationToken cancellationToken)
+    private async Task<bool> ReplayCurrentCoreAsync(
+        PlayerActivationIntent activationIntent,
+        CancellationToken cancellationToken)
     {
         PlaybackQueueEntry? item = null;
         lock (_queueLock)
@@ -822,12 +878,13 @@ internal sealed class PlaybackCoordinator
         {
             return false;
         }
-        await ActivateItemAsync(item, cancellationToken);
+        await ActivateItemAsync(item, activationIntent, cancellationToken);
         return true;
     }
 
     private async Task ActivateItemAsync(
         PlaybackQueueEntry item,
+        PlayerActivationIntent activationIntent,
         CancellationToken cancellationToken)
     {
         await PersistAndClearActivePlaybackPositionAsync();
@@ -865,21 +922,113 @@ internal sealed class PlaybackCoordinator
         await PlayerWindow.ShowPlaylistAsync(
             [(item.Title, item.FilePath)],
             startIndex: 0,
-            cancellationToken);
-        var videoState = await _videoPlaybackService.GetPlaybackStateAsync(cancellationToken);
-        var resumedVideoPosition = await ApplyResumePositionAsync(
-            item,
-            resumePosition,
-            videoState.Duration,
-            videoState.IsSeekable,
-            cancellationToken);
-        TrackActivatedItem(
-            item,
-            resumePosition,
-            resumedVideoPosition,
-            videoState.Duration,
-            videoState.IsSeekable);
-        await RecordPlaybackStartedAsync(item, resumedVideoPosition);
+            activationIntent: activationIntent,
+            deferForegroundActivation:
+                activationIntent == PlayerActivationIntent.UserInitiated,
+            cancellationToken: cancellationToken);
+        try
+        {
+            await TryLoadLinkedSubtitleAsync(item, cancellationToken);
+            var videoState = await _videoPlaybackService.GetPlaybackStateAsync(cancellationToken);
+            var resumedVideoPosition = await ApplyResumePositionAsync(
+                item,
+                resumePosition,
+                videoState.Duration,
+                videoState.IsSeekable,
+                cancellationToken);
+            TrackActivatedItem(
+                item,
+                resumePosition,
+                resumedVideoPosition,
+                videoState.Duration,
+                videoState.IsSeekable);
+            await RecordPlaybackStartedAsync(item, resumedVideoPosition);
+        }
+        finally
+        {
+            if (activationIntent == PlayerActivationIntent.UserInitiated)
+            {
+                try
+                {
+                    await PlayerWindow.RequestCurrentForegroundActivationAsync();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(
+                        $"Failed to request player foreground activation: {ex.Message}");
+                }
+            }
+        }
+    }
+
+    private async Task TryLoadLinkedSubtitleAsync(
+        PlaybackQueueEntry item,
+        CancellationToken cancellationToken)
+    {
+        var automaticSubtitlePath = VideoSubtitleSidecar.FindMatch(item.FilePath);
+        var linkedSubtitlePath = !string.IsNullOrWhiteSpace(item.LinkedFilePath) &&
+            File.Exists(item.LinkedFilePath)
+                ? Path.GetFullPath(item.LinkedFilePath)
+                : null;
+        if (linkedSubtitlePath is null)
+        {
+            if (automaticSubtitlePath is not null && item.MediaId is { } mediaId)
+            {
+                await PersistDiscoveredLinkedFileAsync(
+                    mediaId,
+                    automaticSubtitlePath,
+                    cancellationToken);
+            }
+            return;
+        }
+
+        if (automaticSubtitlePath is not null &&
+            string.Equals(
+                linkedSubtitlePath,
+                automaticSubtitlePath,
+                StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        try
+        {
+            await _videoPlaybackService.AddSubtitleTrackAsync(
+                linkedSubtitlePath,
+                cancellationToken);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(
+                $"Failed to load linked subtitle '{linkedSubtitlePath}': {ex.Message}");
+        }
+    }
+
+    private async Task PersistDiscoveredLinkedFileAsync(
+        Guid mediaId,
+        string linkedFilePath,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var library = scope.ServiceProvider.GetRequiredService<IMediaLibraryBus>();
+            await library.SetLinkedFilePathAsync(mediaId, linkedFilePath, cancellationToken);
+            UpdateQueueItemLinkedFile(mediaId, linkedFilePath);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(
+                $"Failed to persist linked subtitle '{linkedFilePath}': {ex.Message}");
+        }
     }
 
     private async Task PlayAudioEntryAsync(PlaybackQueueEntry item)
@@ -954,7 +1103,8 @@ internal sealed class PlaybackCoordinator
                 Artist = persistedItem.Artist,
                 Album = persistedItem.Album,
                 ThumbnailPath = persistedItem.ThumbnailPath,
-                PlaybackPosition = persistedItem.PlaybackPosition
+                PlaybackPosition = persistedItem.PlaybackPosition,
+                LinkedFilePath = persistedItem.LinkedFilePath
             };
             ReplaceQueueEntryFromLibrary(item, hydratedItem);
             return hydratedItem;
@@ -993,7 +1143,8 @@ internal sealed class PlaybackCoordinator
                     Artist = hydratedItem.Artist,
                     Album = hydratedItem.Album,
                     ThumbnailPath = hydratedItem.ThumbnailPath,
-                    PlaybackPosition = hydratedItem.PlaybackPosition
+                    PlaybackPosition = hydratedItem.PlaybackPosition,
+                    LinkedFilePath = hydratedItem.LinkedFilePath
                 };
                 if (replacement != queuedItem)
                 {
@@ -1703,12 +1854,15 @@ internal sealed class PlaybackCoordinator
 
             if (repeatCurrent)
             {
-                await ReplayCurrentCoreAsync(CancellationToken.None);
+                await ReplayCurrentCoreAsync(
+                    PlayerActivationIntent.BackgroundContinuation,
+                    CancellationToken.None);
             }
             else
             {
                 await NavigateCoreAsync(
                     PlaybackNavigationDirection.Next,
+                    PlayerActivationIntent.BackgroundContinuation,
                     CancellationToken.None);
             }
         }
@@ -1897,7 +2051,8 @@ public sealed class PlaybackQueueItem(
     string? artist,
     string? album,
     string? thumbnailPath,
-    TimeSpan? playbackPosition)
+    TimeSpan? playbackPosition,
+    string? linkedFilePath)
 {
     public Guid? MediaId { get; } = mediaId;
 
@@ -1918,6 +2073,8 @@ public sealed class PlaybackQueueItem(
     public string? ThumbnailPath { get; } = thumbnailPath;
 
     public TimeSpan? PlaybackPosition { get; } = playbackPosition;
+
+    public string? LinkedFilePath { get; } = linkedFilePath;
 }
 
 // Retained for PlayerWindow's internal mpv playlist bookkeeping. The public

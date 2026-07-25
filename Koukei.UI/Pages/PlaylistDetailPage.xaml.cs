@@ -786,7 +786,8 @@ public sealed partial class PlaylistDetailPage : Page, INotifyPropertyChanged
                                 item.Artist,
                                 item.Album,
                                 item.ThumbnailPath,
-                                item.PlaybackPosition))
+                                item.PlaybackPosition,
+                                item.LinkedFilePath))
                             .ToArray());
             }
 
@@ -894,7 +895,8 @@ public sealed partial class PlaylistDetailPage : Page, INotifyPropertyChanged
             item.Artist,
             item.Album,
             item.ThumbnailPath,
-            item.PlaybackPosition);
+            item.PlaybackPosition,
+            item.LinkedFilePath);
 
     private async Task PlayAsync(PlaylistDetailItemViewModel? startItem)
     {
@@ -1434,6 +1436,7 @@ public sealed class PlaylistDetailItemViewModel : INotifyPropertyChanged
             ? Path.GetFileNameWithoutExtension(item.Path)
             : item.Title;
         FilePath = item.Path;
+        LinkedFilePath = item.LinkedFilePath;
         Kind = item.Kind;
         Duration = item.Duration;
         Artist = item.Artist;
@@ -1452,6 +1455,8 @@ public sealed class PlaylistDetailItemViewModel : INotifyPropertyChanged
     public string Title { get; private set; }
 
     public string FilePath { get; private set; }
+
+    public string? LinkedFilePath { get; private set; }
 
     public MediaLibraryItemKind Kind { get; private set; }
 
@@ -1553,6 +1558,7 @@ public sealed class PlaylistDetailItemViewModel : INotifyPropertyChanged
         MediaId = source.MediaId;
         Title = source.Title;
         FilePath = source.FilePath;
+        LinkedFilePath = source.LinkedFilePath;
         Kind = source.Kind;
         Duration = source.Duration;
         Artist = source.Artist;

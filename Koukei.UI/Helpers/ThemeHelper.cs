@@ -10,6 +10,7 @@ namespace Koukei.UI.Helpers;
 internal static class ThemeHelper
 {
     private const string APP_THEME_KEY = "AppTheme";
+    private static string _environmentTheme = "Default";
 
     public static event EventHandler<AppThemeChangedEventArgs>? ThemeChanged;
 
@@ -59,7 +60,14 @@ internal static class ThemeHelper
             if (App.MainWindow?.Content is FrameworkElement rootElement)
                 rootElement.RequestedTheme = value;
 
-            ApplicationData.Current.LocalSettings.Values[APP_THEME_KEY] = value.ToString();
+            if (DataLocationHelper.HasEnvironmentOverride)
+            {
+                _environmentTheme = value.ToString();
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values[APP_THEME_KEY] = value.ToString();
+            }
 
             if (previousTheme != value)
             {
@@ -76,7 +84,9 @@ internal static class ThemeHelper
     /// </summary>
     public static void Initialize()
     {
-        var saved = ApplicationData.Current.LocalSettings.Values[APP_THEME_KEY] as string ?? "Default";
+        var saved = DataLocationHelper.HasEnvironmentOverride
+            ? _environmentTheme
+            : ApplicationData.Current.LocalSettings.Values[APP_THEME_KEY] as string ?? "Default";
         RootTheme = saved switch
         {
             "Light" => ElementTheme.Light,

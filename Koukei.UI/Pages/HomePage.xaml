@@ -17,6 +17,7 @@
             <StackPanel Spacing="{StaticResource KoukeiPageSectionSpacing}">
                 <TextBlock
                     x:Uid="HomePage_Title"
+                    AutomationProperties.AutomationId="PageHome"
                     Style="{StaticResource KoukeiPageTitleTextStyle}" />
                 <StackPanel Spacing="{StaticResource KoukeiPageBlockSpacing}">
                     <Grid x:Name="RecentHeaderGrid" RowSpacing="12">
@@ -318,6 +319,7 @@
 
                         <Button
                             x:Name="OpenFilesButton"
+                            AutomationProperties.AutomationId="HomeOpenFiles"
                             MinHeight="40"
                             Click="OpenFilesButton_Click">
                             <StackPanel Orientation="Horizontal" Spacing="8">

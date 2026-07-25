@@ -198,6 +198,7 @@ public class KoukeiDbContext(DbContextOptions<KoukeiDbContext> options) : DbCont
         item.Property(entity => entity.Name).HasMaxLength(512).IsRequired();
         item.Property(entity => entity.Path).HasMaxLength(2048);
         item.Property(entity => entity.NormalizedPath).HasMaxLength(2048);
+        item.Property(entity => entity.LinkedFilePath).HasMaxLength(2048);
         item.Property(entity => entity.Container).HasMaxLength(512);
         item.Property(entity => entity.FileSize);
         item.Property(entity => entity.SortName).HasMaxLength(512);

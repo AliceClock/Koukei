@@ -80,6 +80,10 @@ namespace Koukei.Data.Migrations
                     b.Property<long?>("LastModified")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("LinkedFilePath")
+                        .HasMaxLength(2048)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(512)

@@ -72,6 +72,7 @@ public sealed class PlaylistBus(
                         ? item.Item.Name
                         : media.Name,
                     Path = path,
+                    LinkedFilePath = media?.LinkedFilePath ?? item.Item.LinkedFilePath,
                     Kind = ToBusKind(media?.Kind ?? item.Item.Kind),
                     Duration = media?.DurationSeconds is > 0 and var duration
                         ? TimeSpan.FromSeconds(duration)

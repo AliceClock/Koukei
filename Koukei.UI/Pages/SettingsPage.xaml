@@ -23,12 +23,14 @@
                 Spacing="{StaticResource KoukeiPageRelatedSpacing}">
                 <!-- Appearance Settings -->
                 <TextBlock x:Uid="SettingsPage_Appearance"
+                           AutomationProperties.AutomationId="PageSettings"
                            Style="{StaticResource KoukeiSectionTitleTextStyle}"
                            Margin="0"/>
 
                 <!-- Theme Settings -->
                 <ctk:SettingsCard x:Uid="SettingsPage_AppTheme">
                     <ComboBox x:Name="ThemeComboBox"
+                              AutomationProperties.AutomationId="ThemeSelector"
                               MinWidth="150"
                               SelectionChanged="ThemeComboBox_SelectionChanged">
                         <ComboBoxItem x:Uid="SettingsPage_ThemeComboBox_System" Tag="Default"/>

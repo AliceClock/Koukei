@@ -40,13 +40,24 @@ public static partial class AudioLyricsLoader
     public static async Task<AudioLyricsDocument> LoadAsync(
         string filePath,
         string? embeddedLyrics,
+        string? linkedLyricsFilePath = null,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
 
-        var sidecarPath = Path.ChangeExtension(filePath, ".lrc");
-        if (File.Exists(sidecarPath) && new FileInfo(sidecarPath).Length <= MaximumLyricsBytes)
+        var automaticSidecarPath = Path.ChangeExtension(filePath, ".lrc");
+        var sidecarPaths = new[] { linkedLyricsFilePath, automaticSidecarPath }
+            .Where(static path => !string.IsNullOrWhiteSpace(path))
+            .Cast<string>()
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+        foreach (var sidecarPath in sidecarPaths)
         {
+            if (!File.Exists(sidecarPath) ||
+                new FileInfo(sidecarPath).Length > MaximumLyricsBytes)
+            {
+                continue;
+            }
+
             var bytes = await File.ReadAllBytesAsync(sidecarPath, cancellationToken)
                 .ConfigureAwait(false);
             var sidecar = bytes.Length <= MaximumLyricsBytes

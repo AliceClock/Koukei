@@ -17,6 +17,7 @@
 
     <Grid
         x:Name="MainRoot"
+        AutomationProperties.AutomationId="AppShell"
         SizeChanged="MainRoot_SizeChanged">
         <Grid.Resources>
             <ResourceDictionary>
@@ -186,6 +187,7 @@
                 CornerRadius="{StaticResource KoukeiCornerRadiusMedium}">
                 <NavigationView
                     x:Name="NavigationViewControl"
+                    AutomationProperties.AutomationId="PrimaryNavigation"
                     Background="Transparent"
                     DisplayModeChanged="OnPaneDisplayModeChanged"
                     IsBackButtonVisible="Collapsed"
@@ -198,10 +200,12 @@
                     <NavigationViewItem
                         x:Name="Home"
                         x:Uid="MainWindow_Home"
+                        AutomationProperties.AutomationId="NavHome"
                         Icon="Home" />
                     <NavigationViewItem
                         x:Name="MediaLibrary"
                         x:Uid="MainWindow_Library"
+                        AutomationProperties.AutomationId="NavMediaLibrary"
                         IsExpanded="True"
                         SelectsOnInvoked="False">
                         <NavigationViewItem.Icon>
@@ -210,14 +214,16 @@
                         <NavigationViewItem.MenuItems>
                             <NavigationViewItem
                                 x:Name="VideoLibrary"
-                                x:Uid="MainWindow_VideoLibrary">
+                                x:Uid="MainWindow_VideoLibrary"
+                                AutomationProperties.AutomationId="NavVideoLibrary">
                                 <NavigationViewItem.Icon>
                                     <FontIcon Glyph="&#xE8B2;" />
                                 </NavigationViewItem.Icon>
                             </NavigationViewItem>
                             <NavigationViewItem
                                 x:Name="AudioLibrary"
-                                x:Uid="MainWindow_AudioLibrary">
+                                x:Uid="MainWindow_AudioLibrary"
+                                AutomationProperties.AutomationId="NavAudioLibrary">
                                 <NavigationViewItem.Icon>
                                     <FontIcon Glyph="&#xE8D6;" />
                                 </NavigationViewItem.Icon>
@@ -227,6 +233,7 @@
                     <NavigationViewItem
                         x:Name="Playlists"
                         x:Uid="MainWindow_Playlists"
+                        AutomationProperties.AutomationId="NavPlaylists"
                         Icon="Bookmarks"
                         SelectsOnInvoked="True" />
                     </NavigationView.MenuItems>
@@ -234,6 +241,7 @@
                     <NavigationViewItem
                         x:Name="PlaybackQueueNavigationItem"
                         x:Uid="MainWindow_PlaybackQueue"
+                        AutomationProperties.AutomationId="NavPlaybackQueue"
                         KeyDown="PlaybackQueueNavigationItem_KeyDown"
                         SelectsOnInvoked="False"
                         Tapped="PlaybackQueueNavigationItem_Tapped">
@@ -819,7 +827,7 @@
                     BorderBrush="{ThemeResource KoukeiCardStrokeBrush}"
                     BorderThickness="1,0"
                     CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
-                    <Grid>
+    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="72" />
                             <ColumnDefinition Width="*" />

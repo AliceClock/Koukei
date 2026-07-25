@@ -11,6 +11,7 @@ namespace Koukei.UI.Helpers;
 internal static class DataLocationHelper
 {
     private const string USER_DATA_LOCATION_KEY = "UserDataLocation";
+    private const string USER_DATA_LOCATION_ENVIRONMENT_VARIABLE = "KOUKEI_USER_DATA_HOME";
 
     /// <summary>
     /// The fallback path used when no custom location has been saved.
@@ -20,8 +21,21 @@ internal static class DataLocationHelper
     public static readonly string DefaultUserDataLocation =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Koukei");
 
-    public static readonly string CacheLocation =
-        ApplicationData.Current.LocalCacheFolder.Path;
+    internal static bool HasEnvironmentOverride => GetEnvironmentLocation() is not null;
+
+    public static string CacheLocation
+    {
+        get
+        {
+            var environmentLocation = GetEnvironmentLocation();
+            if (environmentLocation is not null)
+            {
+                return Path.Combine(environmentLocation, "Cache");
+            }
+
+            return ApplicationData.Current.LocalCacheFolder.Path;
+        }
+    }
 
     public static string DatabasePath =>
         Path.Combine(UserDataLocation, KoukeiBusDefaults.DefaultDatabaseFileName);
@@ -34,10 +48,25 @@ internal static class DataLocationHelper
     {
         get
         {
+            var environmentLocation = GetEnvironmentLocation();
+            if (environmentLocation is not null)
+            {
+                return environmentLocation;
+            }
+
             var saved = ApplicationData.Current.LocalSettings.Values[USER_DATA_LOCATION_KEY] as string;
             return string.IsNullOrEmpty(saved) ? DefaultUserDataLocation : saved;
         }
-        set => ApplicationData.Current.LocalSettings.Values[USER_DATA_LOCATION_KEY] = value;
+        set
+        {
+            if (HasEnvironmentOverride)
+            {
+                throw new InvalidOperationException(
+                    "The data location cannot be changed while KOUKEI_USER_DATA_HOME is set.");
+            }
+
+            ApplicationData.Current.LocalSettings.Values[USER_DATA_LOCATION_KEY] = value;
+        }
     }
 
     /// <summary>
@@ -47,5 +76,14 @@ internal static class DataLocationHelper
     {
         if (!Directory.Exists(UserDataLocation))
             Directory.CreateDirectory(UserDataLocation);
+    }
+
+    private static string? GetEnvironmentLocation()
+    {
+        var value = Environment.GetEnvironmentVariable(
+            USER_DATA_LOCATION_ENVIRONMENT_VARIABLE);
+        return string.IsNullOrWhiteSpace(value)
+            ? null
+            : Path.GetFullPath(value.Trim());
     }
 }

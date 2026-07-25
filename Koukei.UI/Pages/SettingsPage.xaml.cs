@@ -131,8 +131,16 @@ public sealed partial class SettingsPage : Page, INotifyPropertyChanged
     /// </summary>
     private void LoadAppInfo()
     {
-        var v = Windows.ApplicationModel.Package.Current.Id.Version;
-        AppInfoCard.Description = $"v{v.Major}.{v.Minor}.{v.Build}.{v.Revision}";
+        try
+        {
+            var v = Windows.ApplicationModel.Package.Current.Id.Version;
+            AppInfoCard.Description = $"v{v.Major}.{v.Minor}.{v.Build}.{v.Revision}";
+        }
+        catch
+        {
+            var v = typeof(App).Assembly.GetName().Version ?? new Version(1, 0);
+            AppInfoCard.Description = $"v{v.Major}.{v.Minor}.{v.Build}.{v.Revision}";
+        }
     }
 
     /// <summary>
