@@ -819,7 +819,7 @@
                     BorderBrush="{ThemeResource KoukeiCardStrokeBrush}"
                     BorderThickness="1,0"
                     CornerRadius="{StaticResource KoukeiCornerRadiusSmall}">
-                    <Grid>
+    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="72" />
                             <ColumnDefinition Width="*" />

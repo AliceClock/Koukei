@@ -92,7 +92,7 @@ namespace Koukei.UI
                 await initializer.EnsureReadyAsync();
             }
             catch (Exception ex)
-            {
+        {
                 DataInitializationException = ex;
             }
 
